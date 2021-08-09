@@ -181,7 +181,7 @@ class Snap2 extends CI_Controller {
             $ecash2 = $persen2 * $harga2;
 
              $data = [
-                        'kode_user' => $this->session->kode_user,
+                        'kode_user' => $this->input->post('kode_user'),
                         'jml_cash' => $ecash2
                         ,
                  ];
@@ -261,7 +261,7 @@ class Snap2 extends CI_Controller {
                 }
                 
             }elseif ($jm_arr == 1) {
-                $jm = 3;
+                // $jm = 3;
 
                 for ($i=0; $i < 1 ; $i++) { 
                    
@@ -332,134 +332,41 @@ class Snap2 extends CI_Controller {
                 }
             }
 
-    		redirect('ebunga/invoices');
+            $this->bonus2($this->input->post('kode_user'));
+
+    		redirect('ptberkah/invoice');
     	}else {
 
-    		echo "gagal";
+            $this->session->set_flashdata('message', 'swal("Anda gagal mendaftarkan sponsor ", "mohon coba beberapa saat lagi", "error");');
+            redirect('pptberkah/add-member');
     	}
 
 
     }
 
-    function bonusSponsor(){
-         $kode_user = 'Ebunga-71098';
+    
 
-        $user = $this->db->get_where('tbl_register',['kode_user' => $kode_user])->row_array();
+    function bonus2($kode_user){
+            // mengambil data sponsor yang di daftarkan
+            $kode_sponsor = $kode_user;
+            $user = $this->db->get_where('tbl_register',['kode_user' => $kode_sponsor])->row_array();
+           // end
 
-        $produk = $this->db->get_where('tbl_produk',['jenis_voucher' => $user['jenis_voucher']])->row_array();
+           // mengambil data user yang mendaftarkan
 
-        $harga = $produk['harga'];
-        $persen = $user['bonus_sponsor'] / 100 ;
-        $hasil_bonus = $persen * $harga;
-
-
-        $data = [
-            'kode_user' => $user['kode_rule'],
-            'jml_bonus' => $hasil_bonus,
-        ];
-
-        $input1 = $this->db->insert('tbl_bonus_sponsor', $data);
-        if ($input1) {
-            echo "berhasil";
-        }
-
-        $kode_addmember = 'Ebunga-49023';
-        $bonus_member = $this->db->get_where('tbl_register',['kode_user' => 
-        $kode_addmember])->row_array();
-
-        $jaringan = $bonus_member['kode_jaringan'];
-        $arr = explode (" ",$jaringan);
-
-       
-        foreach ($arr as $data) {
-           
-            $user = $this->db->get_where('tbl_register',['kode_user' => $data])->row_array();
-            echo $user['bonus_sponsor'];
-
-
-           
-
-            
-        }
-
-       
-
-
-    }
-
-    function bonus(){
-
-        $kode_user = 'Ebunga-71098';
-        $user = $this->db->get_where('tbl_register',['kode_user' => $kode_user])->row_array();
-        $produk = $this->db->get_where('tbl_produk',['jenis_voucher' => $user['jenis_voucher']])->row_array();
-
-        $kode_addmember = 'Ebunga-71098';
-        $bonus_member = $this->db->get_where('tbl_register',['kode_user' => 
-        $kode_addmember])->row_array();
-
-        $jaringan = $bonus_member['kode_jaringan'];
-        $arr = explode (" ",$jaringan);
-        
-
-        $bonus = 0 ;
-
-        foreach ($arr as $data) {
-            $user = $this->db->get_where('tbl_register',['kode_user' => $data])->row_array();
-            // echo $user['bonus_sponsor']; echo '<br> ';
-
-            $harga = $produk['harga'];
-            $persen = $user['bonus_sponsor'] / 100 ;
-            $hasil_bonus = $persen * $harga;
-
-            // $data = [
-            //     'kode_user' => $data,
-            //     'jml_bonus' => $hasil_bonus
-            // ];
-
-           
-
-            // echo $user['bonus_sponsor'] - $bonus;
-            // if ($user['bonus_sponsor'] == 9) {
-            //     break;
-            // } 
-            // $bonus = $user['bonus_sponsor'];
-
-
-
-
-
-
-            // $input1 = $this->db->insert('tbl_bonus_sponsor', $data);
-
-
-        }
-
-        $jm = count($arr);
-        for ($i=0; $i <$jm ; $i++) { 
-             $user = $this->db->get_where('tbl_register',['kode_user' => $arr[$i]], 2)->row_array();
-
-                 echo $user['bonus_sponsor'];
-
-                
-        
-
-        }
-
-
-
-    }
-
-    function bonus2(){
-            $kode_sponsor = 'Ebunga-71098';
-           $user = $this->db->get_where('tbl_register',['kode_user' => $kode_sponsor])->row_array();
+           $user_pembawa = $this->db->get_where('tbl_register',['kode_user' => $user['kode_rule']])->row_array();
             // echo $user['jenis_voucher'];
 
+            // mengambil data produk yang di beli oleh sponsor
             $produk = $this->db->get_where('tbl_produk',['jenis_voucher' => $user['jenis_voucher']])->row_array();
 
+            // mencari jumlah nilai bonus yang di berikan terhadap user yang mendaptarkan
             $harga = $produk['harga'];
-            $persen = $user['bonus_sponsor'] / 100 ;
+            $persen = $user_pembawa['bonus_sponsor'] / 100 ;
             $hasil_bonus = $persen * $harga;
 
+
+            // menyinpan data user yang mendaptarkan ke tbl_bonus_sponsor
             $data = [
 
                 'kode_user' => $user['kode_rule'],
@@ -468,28 +375,32 @@ class Snap2 extends CI_Controller {
             ];
 
            $input =  $this->db->insert('tbl_bonus_sponsor', $data);
+
+           // mengecek apakah data brhasil di input
            if ($input) {
-                
+                // jik berhasil maka akan mengambil data-data di atas user yang mendatarkan
                 $sponsor = $this->db->get_where('tbl_register',['kode_user' => $user['kode_rule']])->row_array();
 
+                // mengconversi data tersebut ke array
                 $jaringan = $sponsor['kode_jaringan'];
                 $arr = explode (" ",$jaringan);
 
-                $bonus = $user['bonus_sponsor']  ;
+                // $bonus = $user['bonus_sponsor'];
 
-
-                $bonus = 5;
-                $rule = 5;
+                $bonus = $sponsor['bonus_sponsor'];
 
                 foreach ($arr as $data) {
                     $get_bonus = $this->db->get_where('tbl_register',['kode_user'=> $data])->row_array();
 
                     
+                    // jika data bonus sponsor yang di atas sponsor sama dengan user yang mendaptarkan maka perulangan berhenti
 
                     if ($sponsor['bonus_sponsor'] == $get_bonus['bonus_sponsor']) {   
 
                         break;
-                    }elseif ($get_bonus['bonus_sponsor'] == 9) {
+                    }
+                    // jika bonus sponsor sudah sama dengan sembilan maka berhenti
+                    elseif ($get_bonus['bonus_sponsor'] == 9) {
 
                         $ml =  $get_bonus['bonus_sponsor'] - $bonus ;
 
@@ -532,7 +443,7 @@ class Snap2 extends CI_Controller {
 
                     $bonus = $get_bonus['bonus_sponsor'];
 
-                    echo$rule = $get_bonus['bonus_sponsor'];
+                    // echo$rule = $get_bonus['bonus_sponsor'];
 
                 }
                 

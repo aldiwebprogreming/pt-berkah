@@ -23,66 +23,72 @@
                   <div class="card-body">
                     
           				<div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md- col-lg-3">Kode Produk : </label>
+                      <label class="col-form-label text-md-right col-12 col-md- col-lg-3">Kode Produk :  </label>
                       <div class="col-sm-12 col-md-7">
-                        
+                          <?= $produk_anda['kode_produk'] ?>
                       </div>
                     </div>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Judul Produk :</label>
                       <div class="col-sm-12 col-md-7">
-                        
+                        <?= $produk_anda['judul_produk'] ?>
                       </div>
                     </div>
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Keterangan :</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Keterangan : </label>
                       <div class="col-sm-12 col-md-7">
-                       	
+                       	<?= $produk_anda['keterangan_produk'] ?>
                     </div>
                   </div>
 
 
                      <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Harga:</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Harga : </label>
                       <div class="col-sm-12 col-md-7">
-                       	
+
+                        <?= "Rp " . number_format($produk_anda['harga'],0,',','.')?>
+                       
                       </div>
                     </div>
 
                      <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jenis Produk :</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jenis Produk : </label>
                       <div class="col-sm-12 col-md-7">
-                       	
+                       	 <?= $produk_anda['jenis_produk'] ?>
                       </div>
                     </div>
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jenis Voucher :</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jenis Voucher : </label>
                       <div class="col-sm-12 col-md-7">
-                       	
+                       	<?= $produk_anda['jenis_voucher'] ?>
                       </div>
                     </div>
                      <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Bonus Sponsor :</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Bonus Sponsor : </label>
                       <div class="col-sm-12 col-md-7">
-                       	
+                       	  <?= $produk_anda['bonus_sponsor'] ?>%
                       </div>
                     </div>
 
                      <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jumlah Voucher :</label>
                       <div class="col-sm-12 col-md-7">
-                       	
+                       	 <?= $produk_anda['jumlah_voucher'] ?> voucher
+                      </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nilai Voucher :</label>
+                      <div class="col-sm-12 col-md-7">
+                          <?= "Rp " . number_format($produk_anda['nilai_voucher'],0,',','.')?> /vcr
+                        
                       </div>
                     </div>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-6 col-md-3 col-lg-3">
-                      	<button class="btn btn-primary">Edit Profil <i class="fas fa-arrow-right"></i> </button>
+                      	<a href="<?= base_url('ptberkah/paket') ?>" class="btn btn-primary">Kembali <i class="fas fa-arrow-right"></i> </a>
                       </label>
-                      <div class="col-sm-12 col-md-7 col-6">
-                        <figure class="avatar mr-2  ">
-                      <img src="<?= base_url() ?>/assets_user/img/avatar/avatar-1.png" alt="...">
-                    </figure>
-                      </div>
+                      
                     </div>
 		              	
 		           

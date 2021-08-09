@@ -34,15 +34,15 @@
 		                  		
 		                  		<div class="col-sm-4">
 		                  			<small>Jumlah Vocher</small>
-		                    		<h2 class="text-primary">14 voucher</h2>
+		                    		<h2 class="text-primary"><?= $produk_anda['jumlah_voucher'] ?> voucher</h2>
 		                  		</div>
 		                  		<div class="col-sm-4">
 		                  			<small>Bonus Sponsor</small>
-		                    		<h2 class="text-primary">9%</h2>
+		                    		<h2 class="text-primary"><?= $produk_anda['bonus_sponsor'] ?>%</h2>
 		                  		</div>
 		                  		<div class="col-sm-4">
 		                  			<small>Nilai Vocher</small>
-		                    		<h3 class="text-primary">1000000 /vcr</h3>
+		                    		<h3 class="text-primary"><?= "Rp " . number_format($produk_anda['nilai_voucher'],0,',','.')?> /vcr</h3>
 		                  		</div>
 		                  	</div>
 		                  	

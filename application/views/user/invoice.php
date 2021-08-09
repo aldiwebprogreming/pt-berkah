@@ -31,10 +31,10 @@
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Total Orders</h4>
+                    <h4>Total Sponsor</h4>
                   </div>
                   <div class="card-body">
-                    59
+                    <?= $jml_sp ?>
                   </div>
                 </div>
               </div>

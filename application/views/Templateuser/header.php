@@ -57,7 +57,7 @@
           <ul class="sidebar-menu">
 
               <li class="menu-header">Home</li>
-                <li class=""><a class="nav-link" href="<?= base_url('dashboard/home') ?>"><i class="fas fa-fire"></i> <span>Home</span></a></li>
+                <li class=""><a class="nav-link" href="<?= base_url('ptberkah/home') ?>"><i class="fas fa-fire"></i> <span>Home</span></a></li>
               </li>
 
               
@@ -72,6 +72,8 @@
 
                <li class="menu-header">Paket Anda</li>
                 <li class=""><a class="nav-link" href="<?= base_url('ptberkah/paket') ?>"><i class="fas fa-credit-card"></i> <span>Paket Anda</span></a></li>
+
+                <li class=""><a class="nav-link" href="<?= base_url('ptberkah/invoice') ?>"><i class="fas fa-receipt"></i> <span>Invocie</span></a></li>
               </li>
 
                <li class="menu-header">Profil</li>

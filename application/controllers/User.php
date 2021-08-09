@@ -12,6 +12,8 @@
 			if ($this->session->userdata('name') == NULL) {
                 redirect('ptberkah/login');
             }
+
+            $this->load->model('m_data');
 		}
 
 		function index(){
@@ -89,6 +91,8 @@
         $kode_user = $this->session->kode_user;
         $data['invo'] = $this->db->get_where('tbl_transaksi',['kode_user' => $kode_user])->result_array();
 
+        $data['jml_sp'] = $this->db->get_where('tbl_register',['kode_rule' => $kode_user])->num_rows();
+
          $this->load->view('templateuser/header');
          $this->load->view('user/invoice', $data);
          $this->load->view('templateuser/footer');
@@ -126,22 +130,39 @@
 
     function bonus(){
 
+        $kode_user = $this->session->kode_user;
+
+        $data['cash'] = $this->db->query("SELECT SUM(jml_cash) AS total_cash FROM tbl_cash WHERE kode_user = '$kode_user';")->row_array();
+
+        $data['spnsor'] = $this->db->query("SELECT SUM(jml_bonus) AS total_bonus FROM tbl_bonus_sponsor WHERE kode_user = '$kode_user';")->row_array();
+
+        $data['lider'] = $this->db->query("SELECT SUM(jml_bonus) AS total_bonus_lider FROM tbl_bonus_lider WHERE kode_user = '$kode_user';")->row_array();
+
+
+
          $this->load->view('templateuser/header');
-         $this->load->view('user/bonus');
+         $this->load->view('user/bonus', $data);
          $this->load->view('templateuser/footer');
     }
 
     function paket(){
-
+        $kode_user = $this->session->kode_user;
+        $user['user'] = $this->m_data->get_user('tbl_register', $kode_user);
+        $data['produk_anda'] = $this->m_data->get_produk($user['user']['bonus_sponsor']);
+       
          $this->load->view('templateuser/header');
-         $this->load->view('user/paket');
+         $this->load->view('user/paket', $data);
          $this->load->view('templateuser/footer');
     }
 
     function detail_paket(){
 
+        $kode_user = $this->session->kode_user;
+        $user['user'] = $this->m_data->get_user('tbl_register', $kode_user);
+        $data['produk_anda'] = $this->m_data->get_produk($user['user']['bonus_sponsor']);
+
          $this->load->view('templateuser/header');
-         $this->load->view('user/detail_paket');
+         $this->load->view('user/detail_paket', $data);
          $this->load->view('templateuser/footer');
     }
 

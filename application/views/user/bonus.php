@@ -29,7 +29,7 @@
 		                    <h4 class="text-primary">Bonus Ecash</h4>
 		                  </div>
 		                  <div class="card-body">
-		                    <h2 class="text-primary">0</h2>
+		                    <h5 class="text-primary"><?=  "Rp " . number_format($cash['total_cash'],2,',','.')?></h5>
 		                   <hr>
 		                  </div>
 		                </div>
@@ -40,7 +40,7 @@
 		                    <h4 class="text-success">Bonus Sponsor</h4>
 		                  </div>
 		                  <div class="card-body">
-		                    <h2 class="text-success">0</h2>
+		                    <h5 class="text-success"><?= "Rp " . number_format($spnsor['total_bonus'],2,',','.')?></h5>
 		                   <hr>
 		                  </div>
 		                </div>
@@ -52,7 +52,7 @@
 		                    <h4 class="text-danger">Bonus Lider</h4>
 		                  </div>
 		                  <div class="card-body">
-		                    <h2 class="text-danger">0</h2>
+		                    <h5 class="text-success"><?= "Rp " . number_format($lider['total_bonus_lider'],2,',','.')?></h5>
 		                   <hr>
 		                  </div>
 		                </div>
@@ -60,10 +60,18 @@
 		              <div class="col-12 col-md-6 col-lg-3">
 		                <div class="card card-warning shadow-warning">
 		                  <div class="card-header">
-		                    <h4 class="text-warning">Total Bonus</h4>
+		                    <h6 class="text-warning">Total Seluruh Bonus</h6>
 		                  </div>
 		                  <div class="card-body">
-		                   <h2 class="text-warning">0</h2>
+		                   <h5 class="text-warning">
+		                   	<?php 
+
+		                   		$total_bonus = $cash['total_cash'] + $spnsor['total_bonus'] + $lider['total_bonus_lider'];
+
+		                   		echo "Rp " . number_format($total_bonus,2,',','.');
+
+		                   	 ?>
+		                   </h5>
 		                   <hr>
 		                  </div>
 		                </div>
