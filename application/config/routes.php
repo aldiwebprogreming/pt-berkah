@@ -126,6 +126,8 @@ $route['ptberkah/profil'] = 'user/profil';
 $route['ptberkah/bonus'] = 'user/bonus';
 $route['ptberkah/paket'] = 'user/paket';
 $route['ptberkah/detail-paket'] = 'user/detail_paket';
+$route['ptberkah/data-jaringan'] = 'user/data_jaringan';
+
 
 
 

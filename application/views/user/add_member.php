@@ -185,7 +185,7 @@
                               <i class="fas fa-box-open"></i>
                             </div>
                             <div class="wizard-step-label">
-                              Create an App
+                              Buy Vouchers
                             </div>
                           </div>
                           <!-- <div class="wizard-step wizard-step-active">

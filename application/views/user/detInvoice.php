@@ -130,7 +130,7 @@
                        
                       </div>
                     </a>
-                    <a href="<?= base_url('ptberkah/invoice') ?>" class="ticket-item ticket-more">
+                    <a href="<?= base_url('ptberkah/invoice') ?>" class="btn btn-primary ticket-item ticket-more">
                       Kembali <i class="fas fa-chevron-right"></i>
                     </a>
                   </div>

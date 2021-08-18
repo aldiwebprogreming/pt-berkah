@@ -107,9 +107,6 @@
 
      $data['user'] = $this->db->get_where('tbl_register',['kode_user' => $invo['kode_user_member']])->row_array();
 
-
-
-
          $this->load->view('templateuser/header');
          $this->load->view('user/detInvoice', $data);
          $this->load->view('templateuser/footer');
@@ -163,6 +160,14 @@
 
          $this->load->view('templateuser/header');
          $this->load->view('user/detail_paket', $data);
+         $this->load->view('templateuser/footer');
+    }
+
+
+    function data_jaringan(){
+
+         $this->load->view('templateuser/header');
+         $this->load->view('user/data_jaringan');
          $this->load->view('templateuser/footer');
     }
 

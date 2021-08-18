@@ -175,46 +175,47 @@ class Snap2 extends CI_Controller {
 
 
             // input cashbeack 5%, 10%,
-            $cashb = 5; 
-            $harga2 = $result['gross_amount'];
-            $persen2 = $cashb / 100;
-            $ecash2 = $persen2 * $harga2;
+            // $cashb = 5; 
+            // $harga2 = $result['gross_amount'];
+            // $persen2 = $cashb / 100;
+            // $ecash2 = $persen2 * $harga2;
 
-             $data = [
-                        'kode_user' => $this->input->post('kode_user'),
-                        'jml_cash' => $ecash2
-                        ,
-                 ];
+            //  $data = [
+            //             'kode_user' => $this->input->post('kode_user'),
+            //             'jml_cash' => $ecash2
+            //             ,
+            //      ];
 
-            $this->db->insert('tbl_cash', $data);
+            // $this->db->insert('tbl_cash', $data);
             // end
 
             // input bonus lider
-            $lider = $this->db->get_where('tbl_lider')->row_array();
-            $persen_lider = $lider['bonus'] / 100;
-            $bonus_lider = $persen_lider * $harga2;
+            
+            // $lider = $this->db->get_where('tbl_lider')->row_array();
+            // $persen_lider = $lider['bonus'] / 100;
+            // $bonus_lider = $persen_lider * $harga2;
 
-            $data_lider = $this->db->get('tbl_lider')->result_array();
-            foreach ($data_lider as $lider) {
-                $data = [
-                    'kode_user' => $lider['kode_user'],
-                    'jml_bonus' => $bonus_lider,
-                ];
+            // $data_lider = $this->db->get('tbl_lider')->result_array();
+            // foreach ($data_lider as $lider) {
+            //     $data = [
+            //         'kode_user' => $lider['kode_user'],
+            //         'jml_bonus' => $bonus_lider,
+            //     ];
 
-                $input_lider = $this->db->insert('tbl_bonus_lider', $data);
-            }
+            //     $input_lider = $this->db->insert('tbl_bonus_lider', $data);
+            // }
             
             // end
 
 
             // bonus vendor 0,2 setiap pembelian produk, persen bersifat dinamis dapat di ganti2
-            $vendor = $this->db->get('tbl_register', 1)->row_array();
-            $persen3 = 0.2 / 100;
-            $data = [
-                'kode_user' => $vendor['kode_user'],
-                'jml_cash' => $persen3 * $result['gross_amount'],
-            ];
-            $this->db->insert('tbl_cash', $data);
+            // $vendor = $this->db->get('tbl_register', 1)->row_array();
+            // $persen3 = 0.2 / 100;
+            // $data = [
+            //     'kode_user' => $vendor['kode_user'],
+            //     'jml_cash' => $persen3 * $result['gross_amount'],
+            // ];
+            // $this->db->insert('tbl_cash', $data);
             // end
 
 
@@ -427,7 +428,7 @@ class Snap2 extends CI_Controller {
                         $hasil_bonus = $persen * $harga;
 
 
-                        if ($hasil_bonus == 0) {
+                        if ($hasil_bonus <= 0) {
                             break;
                         }
 

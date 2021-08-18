@@ -62,8 +62,11 @@
 
               
 
-              <li class="menu-header">Add Member</li>
-                <li class=""><a class="nav-link" href="<?= base_url('ptberkah/add-member') ?>"><i class="fas fa-users"></i> <span>Add Member</span></a></li>
+              <li class="menu-header">Member</li>
+                <li class=""><a class="nav-link" href="<?= base_url('ptberkah/add-member') ?>"><i class="fas fa-user-tie"></i> <span>Tambah Member</span></a></li>
+              </li>
+
+              <li class=""><a class="nav-link" href="<?= base_url('ptberkah/data-jaringan') ?>"><i class="fas fa-users"></i> <span>Data Jaringan</span></a></li>
               </li>
 
               <li class="menu-header">Bonus</li>
