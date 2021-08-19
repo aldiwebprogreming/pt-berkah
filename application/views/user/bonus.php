@@ -26,7 +26,7 @@
 		              <div class="col-12 col-md-6 col-lg-3">
 		                <div class="card card-primary shadow-primary">
 		                  <div class="card-header">
-		                    <h4 class="text-primary">Bonus Ecash</h4>
+		                    <h4 class="text-primary">Bonus Referral</h4>
 		                  </div>
 		                  <div class="card-body">
 		                    <h5 class="text-primary"><?=  "Rp " . number_format($cash['total_cash'],2,',','.')?></h5>
@@ -52,7 +52,7 @@
 		                    <h4 class="text-danger">Bonus Lider</h4>
 		                  </div>
 		                  <div class="card-body">
-		                    <h5 class="text-success"><?= "Rp " . number_format($lider['total_bonus_lider'],2,',','.')?></h5>
+		                    <h5 class="text-danger"><?= "Rp " . number_format($lider['total_bonus_lider'],2,',','.')?></h5>
 		                   <hr>
 		                  </div>
 		                </div>
