@@ -27,19 +27,24 @@
                       <div class="col-sm-12 col-md-7">
                           <?= $produk_anda['kode_produk'] ?>
                       </div>
+
                     </div>
+                    <hr>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Judul Produk :</label>
                       <div class="col-sm-12 col-md-7">
                         <?= $produk_anda['judul_produk'] ?>
                       </div>
                     </div>
+                    <hr>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Keterangan : </label>
                       <div class="col-sm-12 col-md-7">
                        	<?= $produk_anda['keterangan_produk'] ?>
                     </div>
                   </div>
+
+                   <hr>
 
 
                      <div class="form-group row mb-4">
@@ -51,24 +56,29 @@
                       </div>
                     </div>
 
+                     <hr>
+
                      <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jenis Produk : </label>
                       <div class="col-sm-12 col-md-7">
                        	 <?= $produk_anda['jenis_produk'] ?>
                       </div>
                     </div>
+                     <hr>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jenis Voucher : </label>
                       <div class="col-sm-12 col-md-7">
                        	<?= $produk_anda['jenis_voucher'] ?>
                       </div>
                     </div>
+                     <hr>
                      <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Bonus Sponsor : </label>
                       <div class="col-sm-12 col-md-7">
                        	  <?= $produk_anda['bonus_sponsor'] ?>%
                       </div>
                     </div>
+                     <hr>
 
                      <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jumlah Voucher :</label>
@@ -76,6 +86,7 @@
                        	 <?= $produk_anda['jumlah_voucher'] ?> voucher
                       </div>
                     </div>
+                     <hr>
 
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nilai Voucher :</label>
@@ -84,12 +95,14 @@
                         
                       </div>
                     </div>
+                    <hr>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-6 col-md-3 col-lg-3">
                       	<a href="<?= base_url('ptberkah/paket') ?>" class="btn btn-primary">Kembali <i class="fas fa-arrow-right"></i> </a>
                       </label>
                       
                     </div>
+
 		              	
 		           
 
