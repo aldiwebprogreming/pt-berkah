@@ -115,6 +115,7 @@
                   <input type="hidden" name="email" id="email" value="<?= $this->session->email  ?>">
                   <input type="hidden" name="kode_produk" value="<?= $detProduk['kode_produk'] ?>">
                   <input type="hidden" name="nama_produk" id="nama_produk" value="<?= $detProduk['judul_produk'] ?>">
+                   <input type="hidden" name="jenis_voucher" id="jenis_voucher" value="<?= $detProduk['jenis_voucher'] ?>">
                   <input type="hidden" name="harga" id="harga" value="<?= $detProduk['harga'] ?>">
                   <input type="hidden" name="cashback" id="cashback" value="<?= $detProduk['bonus'] ?>">
                   <input type="hidden" name="kode_user" id="kode_user" value="<?= $user['kode_user'] ?>">
@@ -176,6 +177,7 @@
 
 
     var nama_produk = $('#nama_produk').val();
+    var jenis_voucher = $('#jenis_voucher').val();
     var harga = $('#harga').val();
     var name = $('#name').val();
     var email = $('#email').val();
@@ -189,6 +191,7 @@
       data: {
         harga: harga,
         nama_produk: nama_produk,
+        jenis_voucher: jenis_voucher,
         name: name,
         email: email,
       },

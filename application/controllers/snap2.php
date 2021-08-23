@@ -37,8 +37,10 @@ class Snap2 extends CI_Controller {
     {
 		
 		// Required
+
 		$harga = $this->input->post('harga');
 		$nama_produk = $this->input->post('nama_produk');
+        $jenis_voucher = $this->input->post('jenis_voucher');
 		$name = $this->input->post('name');
 		$email = $this->input->post('email');
 		
@@ -52,7 +54,7 @@ class Snap2 extends CI_Controller {
 		  'id' => 'a1',
 		  'price' => $harga,
 		  'quantity' => 1,
-		  'name' =>$nama_produk,
+		  'name' =>$jenis_voucher,
 		);
 
 		

@@ -16,7 +16,7 @@
                     <h4>Total Ecash</h4>
                   </div>
                   <div class="card-body">
-                    10
+                    <?= "Rp " . number_format($spnsor['total_bonus'],2,',','.')?>
                   </div>
                 </div>
               </div>
@@ -31,7 +31,7 @@
                     <h4>Total Member Anda</h4>
                   </div>
                   <div class="card-body">
-                    42
+                   <?= $member ?>
                   </div>
                 </div>
               </div>
@@ -46,7 +46,7 @@
                     <h4>Produk Anda</h4>
                   </div>
                   <div class="card-body">
-                    1
+                      <?= $produk['jenis_voucher'] ?>
                   </div>
                 </div>
               </div>
@@ -58,10 +58,14 @@
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Bonus</h4>
+                    <h4>Bonus Lider</h4>
                   </div>
                   <div class="card-body">
-                    47
+                    <?php 
+                      if ($lider['total_bonus_lider'] == null) {
+                        echo "0";
+                      }
+                     ?>
                   </div>
                 </div>
               </div>

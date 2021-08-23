@@ -17,8 +17,21 @@
 		}
 
 		function index(){
+
+         $kode_user = $this->session->kode_user;
+
+        // $data['cash'] = $this->db->query("SELECT SUM(jml_cash) AS total_cash FROM tbl_cash WHERE kode_user = '$kode_user';")->row_array();
+
+        $data['spnsor'] = $this->db->query("SELECT SUM(jml_bonus) AS total_bonus FROM tbl_bonus_sponsor WHERE kode_user = '$kode_user';")->row_array();
+
+        $data['lider'] = $this->db->query("SELECT SUM(jml_bonus) AS total_bonus_lider FROM tbl_bonus_lider WHERE kode_user = '$kode_user';")->row_array();
+
+        $data['produk'] = $this->db->get_where('tbl_register',['kode_user' => $kode_user])->row_array();
+
+         $data['member'] = $this->db->get_where('tbl_register',['kode_rule' => $kode_user])->num_rows();
+
 			$this->load->view('Templateuser/header');
-			$this->load->view('user/index');
+			$this->load->view('user/index', $data);
 			$this->load->view('Templateuser/footer');
 		}
 

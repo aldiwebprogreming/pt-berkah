@@ -161,7 +161,7 @@
               </div>
             </div>
           </div> -->
-            <div class="row">
+            <div class="row" id="app">
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
@@ -172,7 +172,7 @@
                       <div class="col-12 col-lg-8 offset-lg-2">
 
                         <div class="wizard-steps">
-                          <div class="wizard-step wizard-step-active">
+                          <div class="wizard-step" v-bind:class="{'wizard-step-active': step == 1 }">
                             <div class="wizard-step-icon">
                               <i class="far fa-user"></i>
                             </div>
@@ -180,7 +180,7 @@
                               User Account
                             </div>
                           </div>
-                          <div class="wizard-step">
+                          <div class="wizard-step" v-bind:class="{'wizard-step-active': step == 2 }">
                             <div class="wizard-step-icon">
                               <i class="fas fa-box-open"></i>
                             </div>
@@ -199,10 +199,13 @@
                         </div>
                       </div>
                     </div>
-
-                    <div id="app">
+                    
+                    <div id="">
+                      <div class="static"></div>
                       <section v-if="step == 1">
+                      <!--   <h4>{{errors}}</h4> -->
                       <div class="wizard-pane">
+
                         
                         <div class="form-group row align-items-center">
                           <label class="col-md-4 text-md-right text-left">Kode Vendor</label>
@@ -221,18 +224,22 @@
                           <label class="col-md-4 text-md-right text-left">Name</label>
                           <div class="col-lg-4 col-md-6">
                             <input type="text" name="name" v-model="name" class="form-control">
+                            <small v-if = "!name" class="text-danger">Form nama tidak boleh kosong</small>
                           </div>
+
                         </div>
                         <div class="form-group row align-items-center">
                           <label class="col-md-4 text-md-right text-left">Username</label>
                           <div class="col-lg-4 col-md-6"> 
                             <input type="text" name="username"  v-model="username"  class="form-control">
+                             <small v-if = "!username" class="text-danger">Form username tidak boleh kosong</small>
                           </div>
                         </div>
                         <div class="form-group row align-items-center">
                           <label class="col-md-4 text-md-right text-left">Email</label>
                           <div class="col-lg-4 col-md-6">
                             <input type="email" name="email"  v-model="email"  class="form-control">
+                            <small v-if = "!username" class="text-danger">Form email tidak boleh kosong</small>
                           </div>
                         </div>
                         <div class="form-group row align-items-center">
@@ -340,45 +347,40 @@
             pass1 : '',
             pass2 : '',
             kode_user : "<?= $kode_user ?>",
-
-            val : ''
-            // message: {
-            //   nam : '',
-            //   hp : '',
-            //   pesan : '',
-
-            // }
+            val : '',
+            errors :'',
+        
           },
           methods: {
             nextStep : function(){
-              // if (this.step == 1) {
-              //   if (!this.name) {
-              //     this.errors="Nama masih kosong";
-              //     return false;
-              //   }
-              //   if (!this.username) {
-              //     this.errors="Username masih kosong";
-              //     return false;
-              //   }
-              //   if (!this.email) {
-              //     this.errors="email masih kosong";
-              //     return false;
-              //   }
+              if (this.step == 1) {
+                if (!this.name) {
+                  this.errors="Nama masih kosong";
+                  return false;
+                }
+                if (!this.username) {
+                  this.errors="Username masih kosong";
+                  return false;
+                }
+                if (!this.email) {
+                  this.errors="email masih kosong";
+                  return false;
+                }
 
-              //   if (!this.nohp) {
-              //     this.errors="No telp masih kosong";
-              //     return false;
-              //   }
+                if (!this.nohp) {
+                  this.errors="No telp masih kosong";
+                  return false;
+                }
 
-              //   if (!this.pass1) {
-              //     this.errors="Password masih kosong";
-              //     return false;
-              //   }
-              //   if (!this.pass2) {
-              //     this.errors="konfirmasi password masih kosong";
-              //     return false;
-              //   }
-              // }
+                // if (!this.pass1) {
+                //   this.errors="Password masih kosong";
+                //   return false;
+                // }
+                // if (!this.pass2) {
+                //   this.errors="konfirmasi password masih kosong";
+                //   return false;
+                // }
+              }
               this.step++;
             },
             prevtStep: function(){
@@ -397,7 +399,7 @@
 
               var url2 = "<?= base_url('user/get_produk?id=') ?>"+a+"&name="+name+"&username="+username+"&email="+email+"&nohp="+nohp+"&pass1="+pass1+"&pass2="+pass2+"&kode_user="+kode_user;
               $("#vc").load(url2);
-            }
+            },
           }
         })
      </script>
