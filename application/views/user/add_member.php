@@ -239,13 +239,14 @@
                           <label class="col-md-4 text-md-right text-left">Email</label>
                           <div class="col-lg-4 col-md-6">
                             <input type="email" name="email"  v-model="email"  class="form-control">
-                            <small v-if = "!username" class="text-danger">Form email tidak boleh kosong</small>
+                            <small v-if = "!email" class="text-danger">Form email tidak boleh kosong</small>
                           </div>
                         </div>
                         <div class="form-group row align-items-center">
                           <label class="col-md-4 text-md-right text-left">No Telp</label>
                           <div class="col-lg-4 col-md-6">
                             <input type="number" name="nohp" v-model="nohp" class="form-control">
+                            <small v-if = "!nohp" class="text-danger">Form no telp tidak boleh kosong</small>
                           </div>
                         </div>
                        <!--  <div class="form-group row">
