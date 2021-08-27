@@ -17,51 +17,10 @@
             <div class="invoice">
               <div class="invoice-print">
                 <div class="row">
-                  <!-- <div class="col-lg-12">
-                    <div class="invoice-title">
-                      <h2>Detail</h2>
-                      <div class="invoice-number">Order</div>
-                    </div>
-                    <hr> -->
+                 
                     <div class="row">
 
-                      <!-- <table class="table table-bordered table-md">
-                        <tr>
-                          <td>Judul Produk</td>
-                          <td>:</td>
-                          <td><strong><?= $detProduk['judul_produk'] ?></strong></td>
-                        </tr>
-                        <tr>
-                          <td>Keterangan Produk</td>
-                          <td>:</td>
-                          <td><strong><?= $detProduk['keterangan_produk'] ?></strong></td>
-                        </tr>
-                        <tr>
-                          <td>Harga</td>
-                          <td>:</td>
-                          <td><strong><?= $detProduk['harga'] ?></strong></td>
-                        </tr>
-                        <tr>
-                          <td>Paket Voucher</td>
-                          <td>:</td>
-                          <td><strong><?= $detProduk['jenis_voucher'] ?></strong></td>
-                        </tr>
-                        <tr>
-                          <td>Paket Produk</td>
-                          <td>:</td>
-                          <td><strong><?= $detProduk['jenis_produk'] ?></strong></td>
-                        </tr>
-                        <tr>
-                          <td>Jumlah Voucher</td>
-                          <td>:</td>
-                          <td><strong><?= $detProduk['jumlah_voucher'] ?> Lembar</strong></td>
-                        </tr>
-                         <tr>
-                          <td>Nilai Pervocuher</td>
-                          <td>:</td>
-                          <td><strong>Rp.<?= $detProduk['nilai_voucher'] ?> /Lembar</strong></td>
-                        </tr>
-                      </table> -->
+                     
                     </div>
                   </div>
                 </div>
@@ -201,55 +160,34 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row mt-4">
-                    <!--   <div class="col-lg-8">
-                        <div class="section-title">Payment Method</div>
-                        <p class="section-lead">The payment method that we provide is to make it easier for you to pay invoices.</p>
-                        <div class="d-flex">
-                          <div class="mr-2 bg-visa" data-width="61" data-height="38"></div>
-                          <div class="mr-2 bg-jcb" data-width="61" data-height="38"></div>
-                          <div class="mr-2 bg-mastercard" data-width="61" data-height="38"></div>
-                          <div class="bg-paypal" data-width="61" data-height="38"></div>
-                        </div>
-                      </div> -->
-                      <div class="col-lg-4 text-right">
 
               <form id="payment-form" method="post" action="<?=site_url()?>/snap2/finish">
                   <input type="hidden" name="result_type" id="result-type" value=""></div>
                   <input type="hidden" name="result_data" id="result-data" value=""></div>
                   <input type="hidden" name="name" id="name" value="<?= $this->session->username  ?>">
+
+                   <input type="hidden" name="upgrade" id="upgrade" value="<?= $kode_user ?>">
                   
                   <input type="hidden" name="email" id="email" value="<?= $this->session->email  ?>">
-                  <input type="hidden" name="kode_produk" value="<?= $detProduk['kode_produk'] ?>">
+                 <!--  <input type="hidden" name="kode_produk" value="<?= $detProduk['kode_produk'] ?>"> -->
+
                   <input type="hidden" name="nama_produk" id="nama_produk" value="<?= $detProduk['judul_produk'] ?>">
+
                    <input type="hidden" name="jenis_voucher" id="jenis_voucher" value="<?= $detProduk['jenis_voucher'] ?>">
+
+                    <input type="hidden" name="bonus_sponsor" id="bonus_sponsor" value="<?= $detProduk['bonus_sponsor'] ?>">
+
+                  <input type="hidden" name="jenis_produk" id="jenis_produk" value="<?= $detProduk['jenis_produk'] ?>">
+
+                   <input type="hidden" name="bonus_point" id="bonus_point" value="<?= $detProduk['bonus_point'] ?>">
+
                   <input type="hidden" name="harga" id="harga" value="<?= $detProduk['harga'] ?>">
-                    <input type="hidden" name="jenis_paket" id="cashback" value="<?= $detProduk['jenis_produk'] ?>">
+                
 
-                  <input type="hidden" name="cashback" id="cashback" value="<?= $detProduk['bonus_point'] ?>">
-
-                  <input type="hidden" name="kode_user" id="kode_user" value="<?= $user['kode_user'] ?>">
-
-                  <input type="hidden" name="name2" id="name2" value="<?= $user['name'] ?>">
-                  <input type="hidden" name="nohp" id="nohp"  value="<?= $user['nohp'] ?>">
-                  <input type="hidden" name="username" id="username"  value="<?= $user['username'] ?>">
-                  <input type="hidden" name="email2" id="email2"  value="<?= $user['email'] ?>">
-                  <input type="hidden" name="kode_jaringan" id="kode_jaringan"  value="<?= $jr['kode_jaringan'] ?>">
-                  <input type="hidden" name="jenis_voucher" id="jenis_voucher"  value="<?= $user['jenis_voucher'] ?>">
-                  <input type="hidden" name="bonus_sponsor" id="bonus_sponsor"  value="<?= $user['bonus_sponsor'] ?>">
-
-                   <input type="hidden" name="bonus_point" id="bonus_point"  value="<?= $detProduk['bonus_point'] ?>">
-
+                
 
                   </form>
-                        <!-- <div class="invoice-detail-item">
-                          <div class="invoice-detail-name">Subtotal</div>
-                          <div class="invoice-detail-value">$670.99</div>
-                        </div> -->
-                        <!-- <div class="invoice-detail-item">
-                          <div class="invoice-detail-name">Shipping</div>
-                          <div class="invoice-detail-value">$15</div>
-                        </div> -->
+                      
                         
                       </div>
                     </div>

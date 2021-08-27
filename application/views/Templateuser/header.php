@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Admin PT.Berkah</title>
+  <title>PT.Berkah</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -24,13 +24,43 @@
 
 <body>
   <div id="app">
+    <?php 
+
+    $kode_user = $this->session->kode_user;
+    $data = $this->db->get_where('tbl_register',['kode_user' => $kode_user])->row_array();
+
+    if ($data['jenis_voucher']  == 'Platinum') {
+
+     ?>
     <div class="main-wrapper" style="">
-      <div class="navbar-bg bg-success"></div>
-      <nav class="navbar navbar-expand-lg main-navbar bg-success">
+      <div class="navbar-bg" style="background-color: #732edb"></div>
+      <nav class="navbar navbar-expand-lg main-navbar" style="background-color: #732edb;">
         <form class="form-inline mr-auto">
           
         </form>
-        <ul class="navbar-nav navbar-right bg-success">
+        <ul class="navbar-nav navbar-right" style="background-color: #732edb">
+
+    <?php }elseif ($data['jenis_voucher']  == 'Gold') { ?>
+    <div class="main-wrapper" style="">
+      <div class="navbar-bg" style="background-color: #ae973d"></div>
+      <nav class="navbar navbar-expand-lg main-navbar" style="background-color: #ae973d;">
+        <form class="form-inline mr-auto">
+          
+        </form>
+        <ul class="navbar-nav navbar-right" style="background-color: #ae973d">
+
+        <?php }else{ ?>
+
+        <div class="main-wrapper" style="">
+          <div class="navbar-bg" style="background-color: #bebcb4"></div>
+          <nav class="navbar navbar-expand-lg main-navbar" style="background-color: #bebcb4;">
+            <form class="form-inline mr-auto">
+              
+            </form>
+            <ul class="navbar-nav navbar-right" style="background-color: #bebcb4">
+
+
+        <?php } ?>
         
           
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
@@ -69,12 +99,25 @@
               <li class=""><a class="nav-link" href="<?= base_url('ptberkah/data-jaringan') ?>"><i class="fas fa-users"></i> <span>Data Jaringan</span></a></li>
               </li>
 
+               <li class=""><a class="nav-link" href="<?= base_url('ptberkah/data-member') ?>"><i class="fas fa-list"></i> <span>Data Member Ada</span></a></li>
+              </li>
+
               <li class="menu-header">Bonus</li>
                 <li class=""><a class="nav-link" href="<?= base_url('ptberkah/bonus') ?>"><i class="fas fa-credit-card"></i> <span>Bonus</span></a></li>
               </li>
 
                <li class="menu-header">Paket Anda</li>
                 <li class=""><a class="nav-link" href="<?= base_url('ptberkah/paket') ?>"><i class="fas fa-credit-card"></i> <span>Paket Anda</span></a></li>
+
+                <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-sync-alt"></i> <span>Upgrade</span></a>
+                <ul class="dropdown-menu" style="display: none;">
+                  <li><a class="nav-link" href="<?= base_url('ptberkah/upgrade-paket') ?>">Paket Anda</a></li>
+                  <li><a class="nav-link" href="<?= base_url('produk/data-member') ?>">Paket Member</a></li>
+                 
+                </ul>
+              </li>
+                
 
                 <li class=""><a class="nav-link" href="<?= base_url('ptberkah/invoice') ?>"><i class="fas fa-receipt"></i> <span>Invocie</span></a></li>
               </li>

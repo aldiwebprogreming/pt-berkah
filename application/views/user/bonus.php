@@ -57,6 +57,17 @@
 		                  </div>
 		                </div>
 		              </div>
+		               <div class="col-12 col-md-6 col-lg-3">
+		                <div class="card card-info shadow-info">
+		                  <div class="card-header">
+		                    <h4 class="text-info">Bonus Point</h4>
+		                  </div>
+		                  <div class="card-body">
+		                    <h5 class="text-info"><?= $point['bonus_point']  ?></h5>
+		                   <hr>
+		                  </div>
+		                </div>
+		              </div>
 		              <div class="col-12 col-md-6 col-lg-3">
 		                <div class="card card-warning shadow-warning">
 		                  <div class="card-header">

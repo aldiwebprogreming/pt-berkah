@@ -120,11 +120,19 @@ $route['ptberkah/home'] = 'user/index';
 $route['ptberkah/add-member'] = 'user/add_member';
 $route['ptberkah/login'] = 'login_user/index';
 $route['produk/detail-produk/(:any)'] = 'user/produkDet/$1';
+$route['produk/detail-produk-upgrade/(:any)'] = 'user/produkDetUpgrade/$1';
+$route['produk/detail-produk-upgrade-member/(:any)/(:any)'] = 'user/produkDetUpgradeMember/$1/$2';
+$route['produk/data-member'] = 'user/data_member';
+$route['ptberkah/detail-member/(:any)'] = 'user/detail_member/$1';
+
 $route['ptberkah/invoice'] = 'user/invoice';
 $route['ptberkah/detail-invoice/(:any)'] = 'user/detail_invo/$1';
 $route['ptberkah/profil'] = 'user/profil';
 $route['ptberkah/bonus'] = 'user/bonus';
 $route['ptberkah/paket'] = 'user/paket';
+$route['ptberkah/upgrade-paket'] = 'user/upgrade_paket';
+$route['ptberkah/upgrade-paket-member/(:any)'] = 'user/upgrade_paketMember/$1';
+
 $route['ptberkah/detail-paket'] = 'user/detail_paket';
 $route['ptberkah/data-jaringan'] = 'user/data_jaringan';
 

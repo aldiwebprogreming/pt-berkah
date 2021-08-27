@@ -22,44 +22,10 @@
                   </div>
                   <div class="card-body">
                     
-          				<div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md- col-lg-3">Kode Produk :  </label>
-                      <div class="col-sm-12 col-md-7">
-                          <?= $produk_anda['kode_produk'] ?>
-                      </div>
-
-                    </div>
-                    <hr>
-                    <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Judul Produk :</label>
-                      <div class="col-sm-12 col-md-7">
-                        <?= $produk_anda['judul_produk'] ?>
-                      </div>
-                    </div>
-                    <hr>
-                    <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Keterangan : </label>
-                      <div class="col-sm-12 col-md-7">
-                       	<?= $produk_anda['keterangan_produk'] ?>
-                    </div>
-                  </div>
-
-                   <hr>
-
+          				
 
                      <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Harga : </label>
-                      <div class="col-sm-12 col-md-7">
-
-                        <?= "Rp " . number_format($produk_anda['harga'],0,',','.')?>
-                       
-                      </div>
-                    </div>
-
-                     <hr>
-
-                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jenis Produk : </label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jenis Paket Voucher : </label>
                       <div class="col-sm-12 col-md-7">
                        	 <?= $produk_anda['jenis_produk'] ?>
                       </div>
@@ -81,6 +47,14 @@
                      <hr>
 
                      <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Bonus Point : </label>
+                      <div class="col-sm-12 col-md-7">
+                        <?= $produk_anda['bonus_point'] ?>
+                      </div>
+                    </div>
+                     <hr>
+
+                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jumlah Voucher :</label>
                       <div class="col-sm-12 col-md-7">
                        	 <?= $produk_anda['jumlah_voucher'] ?> voucher
@@ -96,9 +70,16 @@
                       </div>
                     </div>
                     <hr>
+
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Harga Voucher : </label>
+                      <div class="col-sm-12 col-md-7"> <?= "Rp " . number_format($produk_anda['harga'],0,',','.')?>
+                      </div>
+                    </div>
+                     <hr>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-6 col-md-3 col-lg-3">
-                      	<a href="<?= base_url('ptberkah/paket') ?>" class="btn btn-primary">Kembali <i class="fas fa-arrow-right"></i> </a>
+                      	<a href="<?= base_url('ptberkah/paket') ?>" class="btn btn-primary"> <i class="fas fa-arrow-left"></i> Kembali  </a>
                       </label>
                       
                     </div>

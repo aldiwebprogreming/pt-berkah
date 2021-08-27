@@ -30,6 +30,8 @@
 
          $data['member'] = $this->db->get_where('tbl_register',['kode_rule' => $kode_user])->num_rows();
 
+         $data['point'] = $this->db->get_where('tbl_bonus_point', ['kode_member' => $kode_user])->row_array();
+
 			$this->load->view('Templateuser/header');
 			$this->load->view('user/index', $data);
 			$this->load->view('Templateuser/footer');
@@ -74,6 +76,22 @@
     	$this->load->view('user/getProduk', $data);
     }
 
+    function get_produk_upgrade(){
+
+         $id = $this->input->get('id');
+        $data['getProduk'] = $this->db->get_where('tbl_produk', ['jenis_voucher' => $id])->result_array();
+
+        $this->load->view('user/getProdukupgrade', $data);
+    }
+
+     function get_produk_upgrade_member(){
+
+         $id = $this->input->get('id');
+        $data['getProduk'] = $this->db->get_where('tbl_produk', ['jenis_voucher' => $id])->result_array();
+
+        $this->load->view('user/getProdukupgradeMember', $data);
+    }
+
      function produkDet($kode){
 
     	$data['user'] = [
@@ -99,6 +117,31 @@
 
 
     }
+
+     function produkDetUpgrade($kode){
+
+        $data['status'] ='upgrade';
+        $data['detProduk'] = $this->db->get_where('tbl_produk',['kode_produk' => $kode])->row_array();
+         $data['jr'] = $this->db->get_where('tbl_register',['kode_user' => $this->session->kode_user])->row_array();
+        $this->load->view('Templateuser/header');
+        $this->load->view('user/detPayUpgrade', $data);
+        $this->load->view('Templateuser/footer');
+
+
+    }
+
+     function produkDetUpgradeMember($kode1, $kode2){
+        $data['kode_user'] = $kode2;
+        $data['status'] ='upgrade';
+        $data['detProduk'] = $this->db->get_where('tbl_produk',['kode_produk' => $kode1])->row_array();
+         $data['jr'] = $this->db->get_where('tbl_register',['kode_user' => $this->session->kode_user])->row_array();
+        $this->load->view('Templateuser/header');
+        $this->load->view('user/detPayUpgradeMember', $data);
+        $this->load->view('Templateuser/footer');
+
+
+    }
+
 
     function invoice(){
         $kode_user = $this->session->kode_user;
@@ -148,6 +191,7 @@
 
         $data['lider'] = $this->db->query("SELECT SUM(jml_bonus) AS total_bonus_lider FROM tbl_bonus_lider WHERE kode_user = '$kode_user';")->row_array();
 
+        $data['point'] = $this->db->get_where('tbl_bonus_point',['kode_member' => $kode_user])->row_array();
 
 
          $this->load->view('templateuser/header');
@@ -157,8 +201,10 @@
 
     function paket(){
         $kode_user = $this->session->kode_user;
-        $user['user'] = $this->m_data->get_user('tbl_register', $kode_user);
-        $data['produk_anda'] = $this->m_data->get_produk($user['user']['bonus_sponsor']);
+        $user = $this->m_data->get_user('tbl_register', $kode_user);
+        $data['produk_anda'] = $this->db->get_where('tbl_produk',['jenis_produk' => $user['jenis_paket']])->row_array();
+
+       
        
          $this->load->view('templateuser/header');
          $this->load->view('user/paket', $data);
@@ -169,7 +215,7 @@
 
         $kode_user = $this->session->kode_user;
         $user['user'] = $this->m_data->get_user('tbl_register', $kode_user);
-        $data['produk_anda'] = $this->m_data->get_produk($user['user']['bonus_sponsor']);
+        $data['produk_anda'] = $this->db->get_where('tbl_produk', ['jenis_produk' => $user['user']['jenis_paket']])->row_array();
 
          $this->load->view('templateuser/header');
          $this->load->view('user/detail_paket', $data);
@@ -185,6 +231,56 @@
     }
 
 
+    function upgrade_paket(){
+
+        $kode_user = $this->session->kode_user;
+
+        $data['paket'] = $this->db->get_where('tbl_register', ['kode_user' => $kode_user])->row_array();  
+        $data['voucher'] = $this->db->get('tbl_voucher')->result_array();
+
+         $this->load->view('templateuser/header');
+         $this->load->view('user/upgrade', $data);
+         $this->load->view('templateuser/footer');
+
+    }
+
+
+    function data_member(){
+        $kode_user = $this->session->kode_user;
+        $data['member'] = $this->db->get_where('tbl_register',['kode_rule' => $kode_user])->result_array();
+
+        $data['jml_member'] = $this->db->get_where('tbl_register',['kode_rule' => $kode_user])->num_rows();
+        // var_dump($data);
+         $this->load->view('templateuser/header');
+         $this->load->view('user/data_member', $data);
+         $this->load->view('templateuser/footer');
+
+    }
+
+
+    function detail_member($kode_member){
+        $data['det'] = $this->db->get_where('tbl_register',['kode_user' => $kode_member])->row_array();
+        $data['produk'] = $this->db->get_where('tbl_produk',['jenis_produk' => $data['det']['jenis_paket']])->row_array();
+
+         $this->load->view('templateuser/header');
+         $this->load->view('user/detail_member', $data);
+         $this->load->view('templateuser/footer');
+
+    }
+
+
+    function upgrade_paketMember($kode_member){
+
+
+        $data['kode_member'] = $kode_member;
+        $data['paket'] = $this->db->get_where('tbl_register', ['kode_user' => $kode_member])->row_array();  
+        $data['voucher'] = $this->db->get('tbl_voucher')->result_array();
+
+         $this->load->view('templateuser/header');
+         $this->load->view('user/upgrade_member', $data);
+         $this->load->view('templateuser/footer');
+
+    }
 
 
 	}

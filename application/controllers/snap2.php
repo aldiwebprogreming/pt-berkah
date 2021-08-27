@@ -121,8 +121,98 @@ class Snap2 extends CI_Controller {
     }
 
        public function finish()
-    {
+    {   
 
+        $kode_produk = $this->input->post('kode_produk');
+        $prdk = $this->db->get_where('tbl_produk',['kode_produk' => $kode_produk])->row_array();
+        // var_dump($prdk);
+
+        $tgl   = date("d-m-Y");
+        $tgl_terbit = mktime(0,0,0,date("n"),date("j")+365,date("Y"));
+        $tgl_batasterbit = date("d-m-Y", $tgl_terbit);
+     
+         // prosese update paket vouhcer
+        // jika ada inputan upgrade maka akan dijalankan
+
+        $upgrade = $this->input->post('upgrade');
+
+        if (isset($upgrade)) {
+
+            $data = [
+
+                'jenis_voucher' => $this->input->post('jenis_voucher'),
+                'bonus_sponsor' => $this->input->post('bonus_sponsor'),
+                'jenis_paket' =>  $this->input->post('jenis_produk'),
+                'update_date' => date_default_timezone_get(),             
+            ];
+
+            $this->db->where('kode_user', $upgrade);
+            $this->db->update('tbl_register', $data);
+
+            $this->db->where('kode_member', $upgrade);
+            $this->db->delete('tbl_list_voucherproduk');
+
+              for ($i=1; $i <= $prdk['jumlah_voucher']  ; $i++) { 
+
+                $kode = rand(1, 100000);
+                $kode_vc = "VCR-".$kode;
+                  $data = [
+                  'kode_member' => $upgrade,
+                  'kode_produk' => $prdk['kode_produk'],
+                  'name_voucher' => $prdk['jenis_voucher'], 
+                  'nilai_voucher' => $prdk['nilai_voucher'],
+                  'kode_voucher' => $kode_vc,
+                  'tgl_terbit' => $tgl,
+                  'tgl_batasterbit' => $tgl_batasterbit,  
+                ];
+
+                  $input_voucher = $this->db->insert('tbl_list_voucherproduk', $data);    
+                  
+              }
+
+
+
+            
+            $cek_point = $this->db->get_where('tbl_bonus_point',['kode_member' => $upgrade])->row_array();
+
+            if ($cek_point == true) {
+
+                $data = [
+
+                    'bonus_point' => $this->input->post('bonus_point'),
+                ];
+                
+                $this->db->where('kode_member', $upgrade);
+                $this->db->update('tbl_bonus_point', $data);
+            }
+
+
+            $this->session->set_flashdata('message', 'swal("Sukses!!", "Paket voucher anda berhasil diupgrade", "success");');
+            redirect('ptberkah/paket');
+            
+
+        }else{
+
+         for ($i=1; $i <= $prdk['jumlah_voucher']  ; $i++) { 
+
+        $kode = rand(1, 100000);
+        $kode_vc = "VCR-".$kode;
+          $data = [
+          'kode_member' => $this->input->post('kode_user'),
+          'kode_produk' => $prdk['kode_produk'],
+          'name_voucher' => $prdk['jenis_voucher'], 
+          'nilai_voucher' => $prdk['nilai_voucher'],
+          'kode_voucher' => $kode_vc,
+          'tgl_terbit' => $tgl,
+          'tgl_batasterbit' => $tgl_batasterbit,  
+        ];
+
+          $input_voucher = $this->db->insert('tbl_list_voucherproduk', $data);    
+          
+      }
+
+        // jika tidak ada inputan upgrade maka terindakasi sebagai member baru yg mendaftar
+    
     	$name = $this->input->post('name');
     	$email = $this->input->post('email');
     	$nama_produk = $this->input->post('nama_produk');
@@ -166,12 +256,31 @@ class Snap2 extends CI_Controller {
             'kode_rule' => $this->session->kode_user,
             'lider' => '',
             'jenis_voucher' => $this->input->post('jenis_voucher'),
+            'jenis_paket' => $this->input->post('jenis_paket'),
             'bonus_sponsor' => $this->input->post('bonus_sponsor'),
 
 
         ];
 
         $aa = $this->db->insert('tbl_register', $data);
+
+
+
+
+      
+
+
+        // input bonus point
+
+        $data = [
+
+            'kode_member' => $this->input->post('kode_user'),
+            'kode_rule_member' =>$this->session->kode_user,
+            'bonus_point' => $this->input->post('bonus_point'),
+
+        ];
+
+          $input_point = $this->db->insert('tbl_bonus_point', $data);
 
     	if ($input) {
 
@@ -344,6 +453,8 @@ class Snap2 extends CI_Controller {
             redirect('pptberkah/add-member');
     	}
 
+
+    }
 
     }
 

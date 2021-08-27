@@ -18,7 +18,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Paket</h4>
+                    <h3 class="text-primary"><?= $produk_anda['jenis_produk'] ?></h3>
                   </div>
                   <div class="card-body">
                     
@@ -27,28 +27,35 @@
 		                <div class="card card-primary shadow-primary">
 		                  <div class="card-header">
 
-		                    <h4 class="text-primary">Paket Voucher Platinum</h4>
+		                    <h4 class="text-primary">Voucher <?= $produk_anda['jenis_voucher'] ?></h4>
 		                  </div>
 		                  <div class="card-body">
 		                  	<div class="row">
 		                  		
-		                  		<div class="col-sm-4">
+		                  		<div class="col-sm-3">
 		                  			<small>Jumlah Vocher</small>
 		                    		<h2 class="text-primary"><?= $produk_anda['jumlah_voucher'] ?> voucher</h2>
 		                  		</div>
-		                  		<div class="col-sm-4">
+		                  		<div class="col-sm-3">
 		                  			<small>Bonus Sponsor</small>
 		                    		<h2 class="text-primary"><?= $produk_anda['bonus_sponsor'] ?>%</h2>
 		                  		</div>
-		                  		<div class="col-sm-4">
+
+		                  		<div class="col-sm-3">
+		                  			<small>Bonus Point</small>
+		                    		<h2 class="text-primary"><?= $produk_anda['bonus_point'] ?></h2>
+		                  		</div>
+		                  		<div class="col-sm-3">
 		                  			<small>Nilai Vocher</small>
-		                    		<h3 class="text-primary"><?= "Rp " . number_format($produk_anda['nilai_voucher'],0,',','.')?> /vcr</h3>
+		                    		<h4 class="text-primary"><?= "Rp " . number_format($produk_anda['nilai_voucher'],0,',','.')?> /vcr</h4>
 		                  		</div>
 		                  	</div>
 		                  	
 		                    
 		                   <hr>
-		                   <a href="<?= base_url() ?>ptberkah/detail-paket" class="btn btn-primary float-">Detail paket <i class="fas fa-arrow-right"> </i> </a>
+		                   <a href="<?= base_url() ?>ptberkah/detail-paket" class="btn btn-primary float-">Detail Paket Voucher <i class="fas fa-arrow-right"> </i> </a>
+
+		                   <a href="<?= base_url() ?>/ptberkah/upgrade-paket" class="btn btn-primary float-">Upgrade Paket Voucher Anda <i class="fas fa-sync-alt"> </i> </a>
 		                  </div>
 		                </div>
 		              </div>
