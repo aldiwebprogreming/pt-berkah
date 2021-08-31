@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Total Ecash</h4>
+                    <h4>Total Bonus Sponsor</h4>
                   </div>
                   <div class="card-body">
                     <?= "Rp " . number_format($spnsor['total_bonus'],2,',','.')?>
@@ -96,9 +96,122 @@
               </div>
             </div>
           </div>
-          
-          
-          
-          
         </section>
       </div>
+
+
+<?php 
+    if ($profil['status_update'] == 0) {
+ ?>
+          
+  
+<button type="button" class="btn btn-primary but" data-toggle="modal" data-target="#exampleModal" style="display: none">
+ Modal
+</button> 
+
+<?php } ?>
+
+
+ <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h5 class="modal-title" id="exampleModalLabel">Ubah profil anda untuk mengamankan akun anda.</h5>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        
+         <hr>
+          <form method="post" action="<?= base_url('user/edit_profil') ?>">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Nama Lengkap</label>
+              <input type="text" class="form-control" placeholder="Masukan nama lengkap" name="nama_lengkap" required="" value="<?= $profil['name'] ?>">
+             
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Username</label>
+              <input type="text" class="form-control" placeholder="Masukan username" name="username" required="" value="<?= $profil['username'] ?>">
+              <small id="emailHelp" class="form-text text-muted">Masukan usrname anda untuk login akun.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email</label>
+              <input type="email" class="form-control" placeholder="Masukan akun email" required="" value="<?= $profil['email'] ?>" name="email">
+              <small id="emailHelp" class="form-text text-muted">Masukan akaun email anda yang benar.</small>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Nomor Telp</label>
+              <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan nomor telp" name="no_telp" required="" value="<?= $profil['no_telp'] ?>">
+             
+            </div>
+            <div id="aldi">
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password Baru</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="pass1" required=""  v-model="pass1">
+            </div>
+            <div class="form-group">
+             <label for="exampleInputPassword1">Ulangi Passsword</label>
+              <input type="password" class="form-control" v-bind:class="{'is-valid': alert == true}"   id="exampleInputPassword1" placeholder="Ulangi password" name="pass2" required="" v-model="pass2" v-on:keyup="cekPass">
+
+              <small id="emailHelp" class="form-text text-danger" >{{message}}</small>
+            </div>
+
+            </div>
+            
+
+
+           
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" name="edit">Save changes</button>
+       </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.but').trigger('click');
+    })
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+<script>
+  var app = new Vue({
+  el: '#aldi',
+  data: {
+    message: '',
+    pass1 : '',
+    pass2 : '',
+    alert : '',
+
+  },
+
+methods : {
+
+    cekPass : function(){
+      if (this.pass1 != this.pass2) {
+       this.message = 'Password anda tidak sama';
+       this.alert = false;
+       // this.alert = 'is-invalid';
+      }else{
+
+        this.message = '';
+        this.alert= true;
+      }
+    }
+
+  }
+})
+</script>

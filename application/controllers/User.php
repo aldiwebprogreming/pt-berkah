@@ -14,6 +14,7 @@
             }
 
             $this->load->model('m_data');
+            $this->load->library('form_validation');
 		}
 
 		function index(){
@@ -32,9 +33,17 @@
 
          $data['point'] = $this->db->get_where('tbl_bonus_point', ['kode_member' => $kode_user])->row_array();
 
-			$this->load->view('Templateuser/header');
-			$this->load->view('user/index', $data);
-			$this->load->view('Templateuser/footer');
+         $data['profil'] =  $this->db->get_where('tbl_register', ['kode_user' => $kode_user])->row_array();
+       
+             
+            $this->load->view('Templateuser/header');
+            $this->load->view('user/index', $data);
+            $this->load->view('Templateuser/footer');
+
+           
+         
+
+
 		}
 
 		function add_member(){
@@ -225,8 +234,11 @@
 
     function data_jaringan(){
 
+        $kode_user = $this->session->kode_user;
+        $data['user'] = $this->db->get_where('tbl_register',['kode_user' => $kode_user])->row_array();
+        $data['jaringan'] = $this->db->get_where('tbl_register',['kode_rule' => $kode_user])->result_array();
          $this->load->view('templateuser/header');
-         $this->load->view('user/data_jaringan');
+         $this->load->view('user/data_jaringan', $data);
          $this->load->view('templateuser/footer');
     }
 
@@ -281,6 +293,42 @@
          $this->load->view('templateuser/footer');
 
     }
+
+
+
+    function edit_profil(){
+
+        $kode_user = $this->session->kode_user;
+
+         $data = [
+
+                'username' => $this->input->post('username'),
+                'name' => $this->input->post('nama_lengkap'),
+                'email' => $this->input->post('email'),
+                'no_telp' => $this->input->post('no_telp'),
+                'password' => password_hash($this->input->post('pass1'), PASSWORD_DEFAULT),
+                'status_update' => 1,
+            ];
+
+           $this->db->where('kode_user', $kode_user);
+           $this->db->update('tbl_register', $data);
+
+            $this->session->set_flashdata('message', 'swal("Sukses!", "Profil anda berhasil diedit", "success");');
+            redirect('ptberkah/home');
+                
+            
+    }
+
+    function voucher_anda(){
+        $kode_user = $this->session->kode_user;
+        $data['voucher'] = $this->db->get_where('tbl_list_voucherproduk', ['kode_member' => $kode_user])->result_array();
+         $data['vcr'] = $this->db->get_where('tbl_list_voucherproduk', ['kode_member' => $kode_user])->num_rows();
+        $this->load->view('templateuser/header');
+         $this->load->view('user/data_voucher_anda', $data);
+         $this->load->view('templateuser/footer');
+
+    }
+
 
 
     

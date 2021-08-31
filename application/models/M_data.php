@@ -30,6 +30,12 @@
 
 			return $data;
 		}
+
+
+		function jaringan($kode_user){
+
+			return $this->db->get_where('tbl_register',['kode_rule' => $kode_user])->result_array();
+		}
 	}
 
  ?>

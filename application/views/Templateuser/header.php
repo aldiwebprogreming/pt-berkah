@@ -13,13 +13,18 @@
   <script type="text/javascript"
             src="https://app.sandbox.midtrans.com/snap/snap.js"
             data-client-key="SB-Mid-client-BggmMsnPGVAR9waz"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
   <!-- CSS Libraries -->
+
+  <link rel="stylesheet" href="<?= base_url() ?>assets_user/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?= base_url() ?>assets_user/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="<?= base_url() ?>assets_user/css/style.css">
   <link rel="stylesheet" href="<?= base_url() ?>assets_user/css/components.css">
+
+  <link href="https://unpkg.com/treeflex/dist/css/treeflex.css" rel="stylesheet">
 </head>
 
 <body>
@@ -104,6 +109,8 @@
 
               <li class="menu-header">Bonus</li>
                 <li class=""><a class="nav-link" href="<?= base_url('ptberkah/bonus') ?>"><i class="fas fa-credit-card"></i> <span>Bonus</span></a></li>
+              </li>
+               <li class=""><a class="nav-link" href="<?= base_url('ptberkah/voucher-anda') ?>"><i class="fas fa-id-card"></i> <span>Voucher Anda</span></a></li>
               </li>
 
                <li class="menu-header">Paket Anda</li>

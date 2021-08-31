@@ -135,6 +135,7 @@ $route['ptberkah/upgrade-paket-member/(:any)'] = 'user/upgrade_paketMember/$1';
 
 $route['ptberkah/detail-paket'] = 'user/detail_paket';
 $route['ptberkah/data-jaringan'] = 'user/data_jaringan';
+$route['ptberkah/voucher-anda'] = 'user/voucher_anda';
 
 
 

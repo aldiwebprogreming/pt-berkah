@@ -19,6 +19,9 @@
   <script src="<?= base_url() ?>assets_user/js/stisla.js"></script>
 
   <!-- JS Libraies -->
+  <script src="<?= base_url() ?>assets_user/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="<?= base_url() ?>assets_user/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="<?= base_url() ?>assets_user/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 
   <!-- Template JS File -->
   <script src="<?= base_url() ?>assets_user/js/scripts.js"></script>
@@ -27,6 +30,25 @@
   <script src="<?= base_url()  ?>assets_user/alert.js"></script>
   <script src="<?= base_url()  ?>assets_user/js/page/forms-advanced-forms.js"></script>
     <?php echo "<script>".$this->session->flashdata('message')."</script>"?>
+
+
+    <script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
 
   <!-- Page Specific JS File -->
 </body>

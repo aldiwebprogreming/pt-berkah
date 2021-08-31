@@ -193,23 +193,74 @@ class Snap2 extends CI_Controller {
 
         }else{
 
-         for ($i=1; $i <= $prdk['jumlah_voucher']  ; $i++) { 
+            if ($this->input->post('jenis_paket') == 'Paket Reseller Platinum') {
+                for ($i=1; $i <= $prdk['jumlah_voucher']  ; $i++) { 
+                $kode = rand(1, 100000);
+                $kode_vc = "VCR-".$kode;
+                  $data = [
+                  'kode_member' => $this->input->post('kode_user'),
+                  'kode_produk' => $prdk['kode_produk'],
+                  'name_voucher' => $prdk['jenis_voucher'], 
+                  'nilai_voucher' => $prdk['nilai_voucher'],
+                  'kode_voucher' => $kode_vc,
+                  'tgl_terbit' => $tgl,
+                  'tgl_batasterbit' => $tgl_batasterbit,  
+                ];
 
-        $kode = rand(1, 100000);
-        $kode_vc = "VCR-".$kode;
-          $data = [
-          'kode_member' => $this->input->post('kode_user'),
-          'kode_produk' => $prdk['kode_produk'],
-          'name_voucher' => $prdk['jenis_voucher'], 
-          'nilai_voucher' => $prdk['nilai_voucher'],
-          'kode_voucher' => $kode_vc,
-          'tgl_terbit' => $tgl,
-          'tgl_batasterbit' => $tgl_batasterbit,  
-        ];
+                  $input_voucher = $this->db->insert('tbl_list_voucherproduk', $data);    
+                  
+              }
 
-          $input_voucher = $this->db->insert('tbl_list_voucherproduk', $data);    
-          
-      }
+            }elseif ($this->input->post('jenis_paket') == 'Paket Reseller Gold') {
+                for ($i=1; $i <= $prdk['jumlah_voucher']  ; $i++) { 
+                $kode = rand(1, 100000);
+                $kode_vc = "VCR-".$kode;
+                  $data = [
+                  'kode_member' => $this->input->post('kode_user'),
+                  'kode_produk' => $prdk['kode_produk'],
+                  'name_voucher' => $prdk['jenis_voucher'], 
+                  'nilai_voucher' => $prdk['nilai_voucher'],
+                  'kode_voucher' => $kode_vc,
+                  'tgl_terbit' => $tgl,
+                  'tgl_batasterbit' => $tgl_batasterbit,  
+                ];
+
+                  $input_voucher = $this->db->insert('tbl_list_voucherproduk', $data);    
+                  
+              }
+               
+            }elseif ($this->input->post('jenis_paket') == 'Paket Reseller Silver') {
+                for ($i=1; $i <= $prdk['jumlah_voucher']  ; $i++) { 
+                $kode = rand(1, 100000);
+                $kode_vc = "VCR-".$kode;
+                  $data = [
+                  'kode_member' => $this->input->post('kode_user'),
+                  'kode_produk' => $prdk['kode_produk'],
+                  'name_voucher' => $prdk['jenis_voucher'], 
+                  'nilai_voucher' => $prdk['nilai_voucher'],
+                  'kode_voucher' => $kode_vc,
+                  'tgl_terbit' => $tgl,
+                  'tgl_batasterbit' => $tgl_batasterbit,  
+                ];
+
+                  $input_voucher = $this->db->insert('tbl_list_voucherproduk', $data);    
+                  
+              }
+            
+            }else{
+
+                $get_set = $this->db->get_where('tbl_setvoucher',['nama_paket' => $this->input->post('jenis_produk')])->row_array();
+                $kode_user = $this->input->post('kode_user');
+                $kode_produk = $prdk['kode_produk'];
+                $voucher = $prdk['jenis_voucher'];
+                $nilai_voucher = $prdk['nilai_voucher'];
+                $jenis_paket = $this->input->post('jenis_paket');
+
+                $this->voucher($kode_user, $kode_produk, $voucher, $nilai_voucher, $jenis_paket);
+
+            }
+
+    
 
         // jika tidak ada inputan upgrade maka terindakasi sebagai member baru yg mendaftar
     
@@ -640,9 +691,9 @@ class Snap2 extends CI_Controller {
     }
 
 
-    function bonus_baru(){
+    function bonus_baru($kode_user){
 
-        $kode_user = 'Ebunga-41805';
+        $kode_user = $kode_user;
 
         $data_rule = $this->db->get_where('tbl_register',['kode_user' => $kode_user])->row_array();
        $jaringan = $data_rule['kode_jaringan'];
@@ -677,6 +728,7 @@ class Snap2 extends CI_Controller {
              $sponsor = $data['bonus_sponsor'];
              $persen = $data['bonus_sponsor'];
 
+         
             $jml =$bonuspushup/100;
             $hasil = $jml * $produk['harga'];
             $inputBonus = [
@@ -691,6 +743,281 @@ class Snap2 extends CI_Controller {
 
              
         }
+
+
+    }
+
+
+
+    function bonus_baru3(){
+
+        $kode_user = 'Ebunga-74087';
+
+        $data_rule = $this->db->get_where('tbl_register',['kode_user' => $kode_user])->row_array();
+       $jaringan = $data_rule['kode_jaringan'];
+        $array = explode (" ",$jaringan);
+
+        $produk = $this->db->get_where('tbl_produk',['jenis_produk' => $data_rule['jenis_paket']])->row_array();
+
+
+        $sponsor = 0;
+        $persen = 0;
+
+        foreach ($array as $cek_bonus) {
+            
+            $data = $this->db->get_where('tbl_register',['kode_user' => $cek_bonus])->row_array();
+
+             $cek_persen = $data['bonus_sponsor'] - $persen;
+             if ($cek_persen < 0) {
+                 continue;
+             } elseif ($data['bonus_sponsor'] == $sponsor ) {
+
+
+                
+                continue;
+
+
+               
+            }
+
+            echo $data['name'].", ". $data['bonus_sponsor'] - $persen. "<br>";
+            $bonuspushup = $data['bonus_sponsor'] - $persen;
+
+             $sponsor = $data['bonus_sponsor'];
+             $persen = $data['bonus_sponsor'];
+
+         
+            // $jml =$bonuspushup/100;
+            // $hasil = $jml * $produk['harga'];
+            // $inputBonus = [
+
+            //     'kode_user' => $data['kode_user'],
+            //     'jml_bonus' => $hasil,
+            // ];
+
+            // $this->db->insert('tbl_bonus_sponsor', $inputBonus);
+
+            
+
+             
+        }
+
+
+    }
+
+
+    function voucher($kode_user, $kode_produk, $voucher, $nilai_voucher, $jenis_paket){
+
+     
+
+        $paket = $jenis_paket;
+        $data = $this->db->get_where('tbl_setvoucher',['nama_paket' => $paket])->row_array();
+
+        $tahun1 = $data['tahun_1'];
+
+        $tgl   = date("Y-m-d");
+        $tgl_terbit = mktime(0,0,0,date("n"),date("j")+360,date("Y"));
+        $tgl_batasterbit = date("Y-m-d", $tgl_terbit);
+
+        for ($i=1; $i <= $tahun1 ; $i++) { 
+           
+            // echo $i. "/ ".  $tgl." | ".$tgl_batasterbit."<br>";
+            $kode = rand(1, 100000);
+             $kode_vc = "VCR-".$kode;
+            $data = [
+              'kode_member' => $kode_user,
+              'kode_produk' => $kode_produk,
+              'name_voucher' => $voucher, 
+              'nilai_voucher' => $nilai_voucher,
+              'kode_voucher' => $kode_vc,
+              'tgl_terbit' => $tgl,
+              'tgl_batasterbit' => $tgl_batasterbit,  
+            ];
+
+          $input_voucher = $this->db->insert('tbl_list_voucherproduk', $data);   
+        }
+
+       
+         $paket = $jenis_paket;
+         $data = $this->db->get_where('tbl_setvoucher',['nama_paket' => $paket])->row_array();
+         $tahun2 = $data['tahun_2'];
+
+        $tgl2   = $tgl_batasterbit;
+        $tgl_terbit2 = mktime(0,0,0,date("n"),date("j")+730,date("Y"));
+        $tgl_batasterbit2 = date("Y-m-d", $tgl_terbit2);
+
+         for ($i=1; $i <= $tahun2 ; $i++) { 
+            // echo $i. "/ ".  $tgl2." | ".$tgl_batasterbit2."<br>";
+             $kode = rand(1, 100000);
+             $kode_vc = "VCR-".$kode;
+            $data = [
+              'kode_member' => $kode_user,
+              'kode_produk' => $kode_produk,
+              'name_voucher' => $voucher, 
+              'nilai_voucher' => $nilai_voucher,
+              'kode_voucher' => $kode_vc,
+              'tgl_terbit' => $tgl2,
+              'tgl_batasterbit' => $tgl_batasterbit2,  
+            ];
+
+          $input_voucher = $this->db->insert('tbl_list_voucherproduk', $data);   
+        }
+
+     
+         $paket = $jenis_paket;
+         $data = $this->db->get_where('tbl_setvoucher',['nama_paket' => $paket])->row_array();
+         $tahun3 = $data['tahun_3'];
+
+        $tgl3   = $tgl_batasterbit2;
+        $tgl_terbit3 = mktime(0,0,0,date("n"),date("j")+1095,date("Y"));
+        $tgl_batasterbit3 = date("Y-m-d", $tgl_terbit3);
+
+         for ($i=1; $i <= $tahun3 ; $i++) { 
+            // echo $i. "/ ".  $tgl3." | ".$tgl_batasterbit3."<br>";
+            $kode = rand(1, 100000);
+             $kode_vc = "VCR-".$kode;
+            $data = [
+              'kode_member' => $kode_user,
+              'kode_produk' => $kode_produk,
+              'name_voucher' => $voucher, 
+              'nilai_voucher' => $nilai_voucher,
+              'kode_voucher' => $kode_vc,
+              'tgl_terbit' => $tgl3,
+              'tgl_batasterbit' => $tgl_batasterbit3,  
+            ];
+
+          $input_voucher = $this->db->insert('tbl_list_voucherproduk', $data);   
+        }
+
+
+         $paket = $jenis_paket;
+         $data = $this->db->get_where('tbl_setvoucher',['nama_paket' => $paket])->row_array();
+         $tahun4 = $data['tahun_4'];
+
+        $tgl4   = $tgl_batasterbit3;
+        $tgl_terbit4 = mktime(0,0,0,date("n"),date("j")+1460,date("Y"));
+        $tgl_batasterbit4 = date("Y-m-d", $tgl_terbit4);
+
+         for ($i=1; $i <= $tahun4 ; $i++) { 
+            // echo $i. "/ ".  $tgl4." | ".$tgl_batasterbit4."<br>";
+            $kode = rand(1, 100000);
+             $kode_vc = "VCR-".$kode;
+            $data = [
+              'kode_member' => $kode_user,
+              'kode_produk' => $kode_produk,
+              'name_voucher' => $voucher, 
+              'nilai_voucher' => $nilai_voucher,
+              'kode_voucher' => $kode_vc,
+              'tgl_terbit' => $tgl4,
+              'tgl_batasterbit' => $tgl_batasterbit4,  
+            ];
+
+          $input_voucher = $this->db->insert('tbl_list_voucherproduk', $data);   
+        }
+
+
+         $paket = $jenis_paket;
+         $data = $this->db->get_where('tbl_setvoucher',['nama_paket' => $paket])->row_array();
+         $tahun5 = $data['tahun_5'];
+
+        $tgl5   = $tgl_batasterbit4;
+        $tgl_terbit5 = mktime(0,0,0,date("n"),date("j")+1825,date("Y"));
+        $tgl_batasterbit5 = date("Y-m-d", $tgl_terbit5);
+
+         for ($i=1; $i <= $tahun5 ; $i++) { 
+            // echo $i. "/ ".  $tgl5." | ".$tgl_batasterbit5."<br>";
+            $kode = rand(1, 100000);
+             $kode_vc = "VCR-".$kode;
+            $data = [
+              'kode_member' => $kode_user,
+              'kode_produk' => $kode_produk,
+              'name_voucher' => $voucher, 
+              'nilai_voucher' => $nilai_voucher,
+              'kode_voucher' => $kode_vc,
+              'tgl_terbit' => $tgl5,
+              'tgl_batasterbit' => $tgl_batasterbit5,  
+            ];
+
+          $input_voucher = $this->db->insert('tbl_list_voucherproduk', $data);   
+        }
+
+
+
+
+    }
+
+
+     function voucher2(){
+
+     
+
+        $paket = 'Paket Agen Silver';
+        $data = $this->db->get_where('tbl_setvoucher',['nama_paket' => $paket])->row_array();
+
+        $tahun1 = $data['tahun_1'];
+
+        $tgl   = date("Y-m-d");
+        $tgl_terbit = mktime(0,0,0,date("n"),date("j")+360,date("Y"));
+        $tgl_batasterbit = date("Y-m-d", $tgl_terbit);
+
+        for ($i=1; $i <= $tahun1 ; $i++) { 
+           
+            echo $i. "/ ".  $tgl." | ".$tgl_batasterbit."<br>";
+           
+        }
+
+        echo"<hr>";
+       
+        
+        $tahun2 = $data['tahun_2'];
+        $tgl2   = $tgl_batasterbit;
+        $tgl_terbit2 = mktime(0,0,0,date("n"),date("j")+730,date("Y"));
+        $tgl_batasterbit2 = date("Y-m-d", $tgl_terbit2);
+
+         for ($i=1; $i <= $tahun2 ; $i++) { 
+            echo $i. "/ ".  $tgl2." | ".$tgl_batasterbit2."<br>";
+            
+        }
+
+             echo"<hr>";
+        
+        $tahun3 = $data['tahun_3'];
+        $tgl3   = $tgl_batasterbit2;
+        $tgl_terbit3 = mktime(0,0,0,date("n"),date("j")+1095,date("Y"));
+        $tgl_batasterbit3 = date("Y-m-d", $tgl_terbit3);
+
+         for ($i=1; $i <= $tahun3 ; $i++) { 
+            echo $i. "/ ".  $tgl3." | ".$tgl_batasterbit3."<br>";
+           
+        }
+
+        echo"<hr>";
+       
+         $tahun4 = $data['tahun_4'];
+
+        $tgl4   = $tgl_batasterbit3;
+        $tgl_terbit4 = mktime(0,0,0,date("n"),date("j")+1460,date("Y"));
+        $tgl_batasterbit4 = date("Y-m-d", $tgl_terbit4);
+
+         for ($i=1; $i <= $tahun4 ; $i++) { 
+            echo $i. "/ ".  $tgl4." | ".$tgl_batasterbit4."<br>";
+           
+        }
+
+        echo"<hr>";
+      
+         $tahun5 = $data['tahun_5'];
+
+        $tgl5   = $tgl_batasterbit4;
+        $tgl_terbit5 = mktime(0,0,0,date("n"),date("j")+1825,date("Y"));
+        $tgl_batasterbit5 = date("Y-m-d", $tgl_terbit5);
+
+         for ($i=1; $i <= $tahun5 ; $i++) { 
+            echo $i. "/ ".  $tgl5." | ".$tgl_batasterbit5."<br>";
+            
+        }
+
+
 
 
     }
