@@ -11,8 +11,11 @@
       </div>
 
       <div class="section-body">
-            <h2 class="section-title">Profil Sponsor</h2>
+            <h2 class="section-title">Profil Memeber</h2>
            <!--  <p class="section-lead">WYSIWYG editor and code editor.</p> -->
+
+
+          
 
             <div class="row">
               <div class="col-12">
@@ -21,6 +24,19 @@
                     <h4>Detail</h4>
                   </div>
                   <div class="card-body">
+
+                    <?php 
+
+                      if ($profil == false) { ?>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                      <strong>Hello <?= $this->session->username ?>.</strong> Profil data diri anda belum tersedia, mohon isi profil anda.
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                      <a href="<?= base_url() ?>ptberkah/home" class="btn btn-primary"><i class="fas fa-user"></i> Isi profil anda</a>
+                    <?php }else{ ?>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md- col-lg-3">Kode User : </label>
                       <div class="col-sm-12 col-md-7">
@@ -28,28 +44,37 @@
                       </div>
                     </div>
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name :</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Lengkap :</label>
                       <div class="col-sm-12 col-md-7">
-                        <?= $profil['name'] ?>
+                        <?= $profil['nama_lengkap'] ?>
                       </div>
                     </div>
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Username :</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alamat Lengkap :</label>
                       <div class="col-sm-12 col-md-7">
-                       	<?= $profil['username'] ?>
+                       	<?= $profil['alamat_lengkap'] ?>
                       </div>
                     </div>
                      <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email :</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tgl Lahir : </label>
                       <div class="col-sm-12 col-md-7">
-                       	<?= $profil['email'] ?>
+                       	<?= $profil['tgl_lahir'] ?>
+                      </div>
+                    </div>
+
+                    
+
+                     <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jenis Kelamin :</label>
+                      <div class="col-sm-12 col-md-7">
+                        <?= $profil['jenis_kelamin'] ?>
                       </div>
                     </div>
 
                      <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">No Telp :</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">No KTP  : </label>
                       <div class="col-sm-12 col-md-7">
-                       	<?= $profil['no_telp'] ?>
+                        <?= $profil['no_ktp'] ?>
                       </div>
                     </div>
                     <div class="form-group row mb-4">
@@ -63,9 +88,13 @@
                       </div>
                     </div>
                   </div>
+
+                <?php } ?>
                 </div>
               </div>
             </div>
+
+
 
             
 

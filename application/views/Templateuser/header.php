@@ -129,8 +129,19 @@
                 <li class=""><a class="nav-link" href="<?= base_url('ptberkah/invoice') ?>"><i class="fas fa-receipt"></i> <span>Invocie</span></a></li>
               </li>
 
-               <li class="menu-header">Profil</li>
-                <li class=""><a class="nav-link" href="<?= base_url('ptberkah/profil') ?>"><i class="fas fa-user"></i> <span>Profil</span></a></li>
+              <li class="menu-header">Profil</li>
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-sync-alt"></i> <span>Profil</span></a>
+                <ul class="dropdown-menu" style="display: none;">
+                   <li class=""><a class="nav-link" href="<?= base_url('ptberkah/profil') ?>"> <span>Data Profil</span></a></li>
+
+                   <li class=""><a class="nav-link" href="<?= base_url('ptberkah/ubah-password') ?>"> <span>Ubah Password</span></a></li>
+
+                   <li class=""><a class="nav-link" href="<?= base_url('ptberkah/ubah-security-code') ?>"> <span>Ubah Security Code</span></a></li>
+
+                  
+                 
+                </ul>
               </li>
 
 

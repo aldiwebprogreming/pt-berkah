@@ -17,10 +17,51 @@
             <div class="invoice">
               <div class="invoice-print">
                 <div class="row">
-                 
+                  <!-- <div class="col-lg-12">
+                    <div class="invoice-title">
+                      <h2>Detail</h2>
+                      <div class="invoice-number">Order</div>
+                    </div>
+                    <hr> -->
                     <div class="row">
 
-                     
+                      <!-- <table class="table table-bordered table-md">
+                        <tr>
+                          <td>Judul Produk</td>
+                          <td>:</td>
+                          <td><strong><?= $detProduk['judul_produk'] ?></strong></td>
+                        </tr>
+                        <tr>
+                          <td>Keterangan Produk</td>
+                          <td>:</td>
+                          <td><strong><?= $detProduk['keterangan_produk'] ?></strong></td>
+                        </tr>
+                        <tr>
+                          <td>Harga</td>
+                          <td>:</td>
+                          <td><strong><?= $detProduk['harga'] ?></strong></td>
+                        </tr>
+                        <tr>
+                          <td>Paket Voucher</td>
+                          <td>:</td>
+                          <td><strong><?= $detProduk['jenis_voucher'] ?></strong></td>
+                        </tr>
+                        <tr>
+                          <td>Paket Produk</td>
+                          <td>:</td>
+                          <td><strong><?= $detProduk['jenis_produk'] ?></strong></td>
+                        </tr>
+                        <tr>
+                          <td>Jumlah Voucher</td>
+                          <td>:</td>
+                          <td><strong><?= $detProduk['jumlah_voucher'] ?> Lembar</strong></td>
+                        </tr>
+                         <tr>
+                          <td>Nilai Pervocuher</td>
+                          <td>:</td>
+                          <td><strong>Rp.<?= $detProduk['nilai_voucher'] ?> /Lembar</strong></td>
+                        </tr>
+                      </table> -->
                     </div>
                   </div>
                 </div>
@@ -34,7 +75,9 @@
                         <div class="col-sm-6">
                           
                           <div class="row">
-                          <div class="col-sm-6">
+
+                            <!-- MITRANS -->
+                          <!-- <div class="col-sm-6">
                             <div class="card card-primary shadow" id="midtrans">
                               <div class="card-body">
                                 <i id="cekM" class="fas fa-check-circle" style="font-size: 30px; display: none"></i>
@@ -44,11 +87,11 @@
                                  
                               </div>
                             </div>
-                          </div>
+                          </div> -->
 
 
 
-                          <div class="col-sm-6">
+                          <div class="col-sm-12">
                             <div class="card card-success shadow" id="transfer">
                               <div class="card-body">
                                 <i id="cekT" class="fas fa-check-circle" style="font-size: 30px; display: none"></i>
@@ -96,7 +139,14 @@
                               <li style="list-style-type: disc;">Pesanan akan dibatalkan secara otomatis jika Anda tidak melakukan pembayaran.</li>
                             </ul>
 
-                            <button id="tranpser" @click="post_transper" type="submit" class="btn btn-warning btn-block btn-lg text-center bayarmanual m-t-30"><b>KONFIRMASI PEMBAYARAN</b> &nbsp;<i class="fa fa-chevron-circle-right"></i></button>
+                         <!--    <button id="tranpser" @click="post_transper" type="submit" class="btn btn-warning btn-block btn-lg text-center bayarmanual m-t-30"><b>MENYETUJUI PEMBAYARAN INI</b> &nbsp;</button>
+ -->
+                            <button type="button" class="btn btn-warning btn-block btn-lg text-center bayarmanual m-t-30" data-toggle="modal" data-target="#exampleModalCenter">
+                              <b>MENYETUJUI PEMBAYARAN INI <i class="fa fa-chevron-circle-right"></i></b>
+                            </button>
+
+                            <!-- Modal -->
+                            
                           </div>
 
 
@@ -160,37 +210,25 @@
                         </div>
                       </div>
                     </div>
+                    <div class="row mt-4">
+                    <!--   <div class="col-lg-8">
+                        <div class="section-title">Payment Method</div>
+                        <p class="section-lead">The payment method that we provide is to make it easier for you to pay invoices.</p>
+                        <div class="d-flex">
+                          <div class="mr-2 bg-visa" data-width="61" data-height="38"></div>
+                          <div class="mr-2 bg-jcb" data-width="61" data-height="38"></div>
+                          <div class="mr-2 bg-mastercard" data-width="61" data-height="38"></div>
+                          <div class="bg-paypal" data-width="61" data-height="38"></div>
+                        </div>
+                      </div> -->
+                      <div class="col-lg-4 text-right">
 
-              <form id="payment-form" method="post" action="<?=site_url()?>/snap2/finish">
-                  <input type="hidden" name="result_type" id="result-type" value=""></div>
-                  <input type="hidden" name="result_data" id="result-data" value=""></div>
-                  <input type="hidden" name="name" id="name" value="<?= $this->session->username  ?>">
-
-                   <input type="hidden" name="upgrade" id="upgrade" value="<?= $this->session->kode_user  ?>">
-                  
-                  <input type="hidden" name="email" id="email" value="<?= $this->session->email  ?>">
-                 <!--  <input type="hidden" name="kode_produk" value="<?= $detProduk['kode_produk'] ?>"> -->
-
-                  <input type="hidden" name="nama_produk" id="nama_produk" value="<?= $detProduk['judul_produk'] ?>">
-
-                   <input type="hidden" name="jenis_voucher" id="jenis_voucher" value="<?= $detProduk['jenis_voucher'] ?>">
-
-                    <input type="hidden" name="bonus_sponsor" id="bonus_sponsor" value="<?= $detProduk['bonus_sponsor'] ?>">
-
-                  <input type="hidden" name="jenis_produk" id="jenis_produk" value="<?= $detProduk['jenis_produk'] ?>">
-
-                   <input type="hidden" name="bonus_point" id="bonus_point" value="<?= $detProduk['bonus_point'] ?>">
-
-                   <input type="hidden" name="kode_produk" id="kode_produk" value="<?= $detProduk['kode_produk'] ?>">
-
-                  <input type="hidden" name="harga" id="harga" value="<?= $detProduk['harga'] ?>">
-                
-
-                
-
-                  </form>
-                      
-                        
+                        <form id="payment-form" method="post" action="<?=site_url()?>/snap2/finish">
+                            <input type="hidden" name="result_type" id="result-type" value=""></div>
+                            <input type="hidden" name="result_data" id="result-data" value=""></div>
+                            <input type="hidden" name="name" id="name" value="<?= $this->session->username  ?>">
+                        </form>
+                    
                       </div>
                     </div>
                   </div>
@@ -199,93 +237,83 @@
               <hr>
               <div class="text-md-right">
                 <div class="float-lg-left mb-lg-0 mb-3">
-
-                  
-
-              <!-- <button type="button" id="pay-button" data-amount="800" class="btn btn-primary btn-lg btn-block">Pay!</button> -->
-
-                  
-               
-             
-              </div>
-              
-            </div>
           </div>
         </section>
       </div>
 
+      <div id="app">
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Masukan Security Code</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          <input type="text" name="sc_code" class="form-control" placeholder="Masukan security code anda" required="" v-model="cek_sc" v-on:keyup="cek">
+            <p>{{pesan}}</p>
+            <center>
+            <div class="spinner-border text-primary" v-if="loading == true" role="status">
+              <span class="sr-only">Loading...</span>
+              </center>
+            </div>
+              <form method="post" action="<?= base_url() ?>user/keranjang_upgrade">
+               
+                <input type="hidden" name="kode_produk" value="<?= $detProduk['kode_produk'] ?>">
+                <input id="but" type="submit" name="klik" value="Kirim" class="btn btn-danger" style="display: none;">
+
+              </form>
+
+           
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+       sc_code: "<?= $sc_code['sc_code'] ?>",
+       cek_sc : '',
+       pesan : '',
+       loading : false,
+      },
+
+      methods : {
+        cek : function(){
+            if (this.sc_code != this.cek_sc) {
+              this.pesan = "security code anda salah";
+            }else if (this.cek_sc == this.sc_code) {
+              this.pesan = 'security code benar';
+              this.loading = true;
+              setTimeout(function(){ 
+               $('#but').trigger('click');
+              }, 3000);
+              
+            }
+            else{
+              this.pesan = "mohon isi form security code";
+            }
+        }
+      }
+    })
+  </script>
+
+
   
      
 
-     <script type="text/javascript">
-  
-    $("#pay-button").click(function (event) {
-      // var gross =  $(this).data('amount');
-      // var nama = $(this).data('nama');
-      event.preventDefault();
-      $(this).attr("disabled", "disabled");
-
-
-    var nama_produk = $('#nama_produk').val();
-    var jenis_voucher = $('#jenis_voucher').val();
-    var harga = $('#harga').val();
-    var name = $('#name').val();
-    var email = $('#email').val();
-
     
-    $.ajax({
-      type:'POST',
-      url: '<?=base_url()?>/snap2/token',
-      cache: false,
-
-      data: {
-        harga: harga,
-        nama_produk: nama_produk,
-        jenis_voucher: jenis_voucher,
-        name: name,
-        email: email,
-      },
-
-      success: function(data) {
-        //location = data;
-
-        console.log('token = '+data);
-        
-        var resultType = document.getElementById('result-type');
-        var resultData = document.getElementById('result-data');
-
-        function changeResult(type,data){
-          $("#result-type").val(type);
-          $("#result-data").val(JSON.stringify(data));
-          // resultType.innerHTML = type;
-          // resultData.innerHTML = JSON.stringify(data);
-        }
-
-        snap.pay(data, {
-          
-          onSuccess: function(result){
-            changeResult('success', result);
-            console.log(result.status_message);
-            console.log(result);
-            $("#payment-form").submit();
-          },
-          onPending: function(result){
-            changeResult('pending', result);
-            console.log(result.status_message);
-            $("#payment-form").submit();
-          },
-          onError: function(result){
-            changeResult('error', result);
-            console.log(result.status_message);
-            $("#payment-form").submit();
-          }
-        });
-      }
-    });
-  });
-
-  </script>
-
 
   <script>
     
@@ -314,4 +342,7 @@
     })
 
   </script>
+
+
+  
   

@@ -306,6 +306,7 @@ class Snap2 extends CI_Controller {
             'kode_jaringan' => $this->session->kode_user." ".$this->input->post('kode_jaringan') ,
             'kode_rule' => $this->session->kode_user,
             'lider' => '',
+            'kode_produk' => $this->input->post('kode_produk'),
             'jenis_voucher' => $this->input->post('jenis_voucher'),
             'jenis_paket' => $this->input->post('jenis_paket'),
             'bonus_sponsor' => $this->input->post('bonus_sponsor'),

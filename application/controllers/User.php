@@ -120,6 +120,9 @@
 
     	$data['detProduk'] = $this->db->get_where('tbl_produk',['kode_produk' => $kode])->row_array();
          $data['jr'] = $this->db->get_where('tbl_register',['kode_user' => $this->session->kode_user])->row_array();
+
+         $data['sc_code'] = $this->db->get_where('tbl_register',['kode_user' => $this->session->kode_user])->row_array();
+
     	$this->load->view('Templateuser/header');
     	$this->load->view('user/detPay', $data);
     	$this->load->view('Templateuser/footer');
@@ -128,10 +131,23 @@
     }
 
      function produkDetUpgrade($kode){
+            $data['user'] = [
+            'kode_user' => $this->input->post('kodeuser'),
+            'username' => $this->input->post('username'),
+            'name' => $this->input->post('name'),
+            'email' => $this->input->post('email'),
+            'nohp' => $this->input->post('nohp'),
+            'pass1' => $this->input->post('pass1'),
+            'jenis_voucher' => $this->input->post('jenis_voucher'),
+            'bonus_sponsor' => $this->input->post('bonus_sponsor'),
+        ];
 
-        $data['status'] ='upgrade';
-        $data['detProduk'] = $this->db->get_where('tbl_produk',['kode_produk' => $kode])->row_array();
+       $data['detProduk'] = $this->db->get_where('tbl_produk',['kode_produk' => $kode])->row_array();
          $data['jr'] = $this->db->get_where('tbl_register',['kode_user' => $this->session->kode_user])->row_array();
+
+         $data['sc_code'] = $this->db->get_where('tbl_register',['kode_user' => $this->session->kode_user])->row_array();
+
+
         $this->load->view('Templateuser/header');
         $this->load->view('user/detPayUpgrade', $data);
         $this->load->view('Templateuser/footer');
@@ -182,7 +198,7 @@
     function profil(){
 
         $kode_user = $this->session->kode_user;
-        $data['profil'] = $this->db->get_where('tbl_register', ['kode_user' => $kode_user])->row_array();
+        $data['profil'] = $this->db->get_where('tbl_profil', ['kode_user' => $kode_user])->row_array();
 
          $this->load->view('templateuser/header');
          $this->load->view('user/profil', $data);
@@ -211,7 +227,7 @@
     function paket(){
         $kode_user = $this->session->kode_user;
         $user = $this->m_data->get_user('tbl_register', $kode_user);
-        $data['produk_anda'] = $this->db->get_where('tbl_produk',['jenis_produk' => $user['jenis_paket']])->row_array();
+        $data['produk_anda'] = $this->db->get_where('tbl_produk',['kode_produk' => $user['kode_produk']])->row_array();
 
        
        
@@ -223,9 +239,8 @@
     function detail_paket(){
 
         $kode_user = $this->session->kode_user;
-        $user['user'] = $this->m_data->get_user('tbl_register', $kode_user);
-        $data['produk_anda'] = $this->db->get_where('tbl_produk', ['jenis_produk' => $user['user']['jenis_paket']])->row_array();
-
+        $user= $this->m_data->get_user('tbl_register', $kode_user);
+        $data['produk_anda'] = $this->db->get_where('tbl_produk',['kode_produk' => $user['kode_produk']])->row_array();
          $this->load->view('templateuser/header');
          $this->load->view('user/detail_paket', $data);
          $this->load->view('templateuser/footer');
@@ -301,18 +316,18 @@
         $kode_user = $this->session->kode_user;
 
          $data = [
-
-                'username' => $this->input->post('username'),
-                'name' => $this->input->post('nama_lengkap'),
-                'email' => $this->input->post('email'),
-                'no_telp' => $this->input->post('no_telp'),
-                'password' => password_hash($this->input->post('pass1'), PASSWORD_DEFAULT),
-                'status_update' => 1,
+                'kode_user' => $kode_user,
+                'nama_lengkap' => $this->input->post('nama_lengkap'),
+                'alamat_lengkap' => $this->input->post('alamat_lengkap'),
+                'tgl_lahir' => $this->input->post('tgl_lahir'),
+                'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+                'no_ktp' =>$this->input->post('no_ktp'),
             ];
 
            $this->db->where('kode_user', $kode_user);
-           $this->db->update('tbl_register', $data);
+           $this->db->update('tbl_register', ['status_update' => 1]);
 
+           $input = $this->db->insert('tbl_profil',$data);
             $this->session->set_flashdata('message', 'swal("Sukses!", "Profil anda berhasil diedit", "success");');
             redirect('ptberkah/home');
                 
@@ -322,10 +337,226 @@
     function voucher_anda(){
         $kode_user = $this->session->kode_user;
         $data['voucher'] = $this->db->get_where('tbl_list_voucherproduk', ['kode_member' => $kode_user])->result_array();
-         $data['vcr'] = $this->db->get_where('tbl_list_voucherproduk', ['kode_member' => $kode_user])->num_rows();
-        $this->load->view('templateuser/header');
+        $data['vcr'] = $this->db->get_where('tbl_list_voucherproduk', ['kode_member' => $kode_user])->num_rows();
+        $data['nilai_voucher'] = $this->db->query("SELECT SUM(nilai_voucher) AS total_nilai_voucher FROM tbl_list_voucherproduk WHERE kode_member = '$kode_user';")->row_array();
+
+         $this->load->view('templateuser/header');
          $this->load->view('user/data_voucher_anda', $data);
          $this->load->view('templateuser/footer');
+
+    }
+
+
+    function keranjang(){
+
+         $karakter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789';
+         $sec_code  = substr(str_shuffle($karakter), 0, 8);
+                
+    
+        $data = [
+            'kode_user' => $this->input->post('kode_user'),
+            'name' => $this->input->post('name2'),
+            'username' => $this->input->post('username'),
+            'email' => $this->input->post('email2'),
+            'no_telp' => $this->input->post('nohp'),
+            'password' => password_hash('aldi123', PASSWORD_DEFAULT),
+            'status' => 0,
+            'kode_jaringan' => $this->session->kode_user." ".$this->input->post('kode_jaringan') ,
+            'kode_rule' => $this->session->kode_user,
+            'lider' => '',
+            'kode_produk' => $this->input->post('kode_produk'),
+            'jenis_voucher' => $this->input->post('jenis_voucher'),
+            'jenis_paket' => $this->input->post('jenis_paket'),
+            'bonus_sponsor' => $this->input->post('bonus_sponsor'),
+            'sc_code' => $sec_code,
+
+
+        ];
+
+        $keranjang = $this->db->insert('tbl_keranjang', $data);
+         $this->session->set_flashdata('message', 'swal("Sukses!!", "Produk berhasil di masukan dikeranjang", "success" );');
+         redirect('user/keranjang_belanja');
+    }
+
+
+
+    function keranjang_upgrade(){
+        $kode_produk = $this->input->post('kode_produk');
+        $user = $this->db->get_where('tbl_register',['kode_user' => $this->session->kode_user])->row_array();
+
+
+        $data = [
+
+            'kode_user' => $user['kode_user'],
+            'name' => $user['name'],
+            'username' => $user['username'],
+            'email' => $user['email'],
+            'no_telp' => $user['no_telp'],
+            'kode_produk' =>$kode_produk,
+            
+        ];
+
+        $this->db->insert('tbl_keranjang_upgrade', $data);
+
+         $this->session->set_flashdata('message', 'swal("Sukses!!", "Produk berhasil di masukan dikeranjang upgrade", "success" );');
+        redirect('user/keranjang_belanja_upgrade');
+
+
+    }
+
+
+    function keranjang_belanja(){ 
+       $kode_user = $this->session->kode_user;
+        $data['keranjang'] = $this->db->query("SELECT * FROM tbl_keranjang WHERE kode_rule = '$kode_user' ")->result_array();
+       
+        $data['jml'] = $this->db->get_where('tbl_keranjang',['kode_rule' => $this->session->kode_user])->num_rows();
+
+         $this->load->view('templateuser/header');
+         $this->load->view('user/data_keranjang', $data);
+         $this->load->view('templateuser/footer');
+
+         if ($this->input->post('kirim')) {
+
+             $config['upload_path']          = './assets_user/bukti/';
+            $config['allowed_types']        = 'gif|jpg|png|jpeg';
+            $config['min_size']             = 0;
+            $config['min_width']            = 0;
+            $config['min_height']           = 0;
+
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('gambar')){
+                $error = array('error' => $this->upload->display_errors());
+                $this->session->set_flashdata('message', 'swal("Proses konfirmasi gagal", "", "warning" );');
+                redirect('user/keranjang_belanja');
+            }
+
+            $gambar = $_FILES['gambar']['name'];
+             
+             $data = [
+
+                'kode_user' => $this->input->post('kode_user'),
+                'kode_produk' => $this->input->post('kode_produk'),
+                'gambar' => $gambar,
+                'status' => 'baru'
+
+             ];
+             $input = $this->db->insert('tbl_bukti_transaksi', $data);
+            $this->session->set_flashdata('message', 'swal("Sukses!!", "Konfirmasi pembayaran berhasil dikirim", "success" );');
+            redirect('user/keranjang_belanja');
+         }
+
+    }
+
+    function keranjang_belanja_upgrade(){ 
+       $kode_user = $this->session->kode_user;
+        $data['keranjang'] = $this->db->query("SELECT * FROM tbl_keranjang_upgrade WHERE kode_user = '$kode_user'")->result_array();
+       
+        $data['jml'] = $this->db->get_where('tbl_keranjang_upgrade',['kode_user' => $this->session->kode_user])->num_rows();
+
+         $this->load->view('templateuser/header');
+         $this->load->view('user/data_keranjang_upgrade', $data);
+         $this->load->view('templateuser/footer');
+
+         if ($this->input->post('kirim')) {
+
+             $config['upload_path']          = './assets_user/bukti/';
+            $config['allowed_types']        = 'gif|jpg|png|jpeg';
+            $config['min_size']             = 0;
+            $config['min_width']            = 0;
+            $config['min_height']           = 0;
+
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('gambar')){
+                $error = array('error' => $this->upload->display_errors());
+                $this->session->set_flashdata('message', 'swal("Proses konfirmasi gagal", "", "warning" );');
+                redirect('user/keranjang_belanja');
+            }
+
+            $gambar = $_FILES['gambar']['name'];
+             
+             $data = [
+
+                'kode_user' => $this->input->post('kode_user'),
+                'kode_produk' => $this->input->post('kode_produk'),
+                'gambar' => $gambar,
+                'status' => 'upgrade'
+
+             ];
+             $input = $this->db->insert('tbl_bukti_transaksi', $data);
+            $this->session->set_flashdata('message', 'swal("Sukses!!", "Konfirmasi pembayaran berhasil dikirim", "success" );');
+            redirect('user/keranjang_belanja_upgrade');
+         }
+
+    }
+
+
+
+    function ubah_security_code(){
+        $data['sc'] = $this->db->get_where('tbl_register',['kode_user' => $this->session->kode_user])->row_array();
+
+         $this->load->view('templateuser/header');
+         $this->load->view('user/ubah_security_code', $data);
+         $this->load->view('templateuser/footer');
+
+         if ($this->input->post('ubah')) {
+             
+             $data = [
+                'sc_code' => $this->input->post('sc_code'),
+             ];
+             $this->db->where('kode_user', $this->session->kode_user);
+            $this->db->update('tbl_register', $data);
+
+            $this->session->set_flashdata('message', 'swal("Sukses!!", "Security code berhasil diubah", "success" );');
+            redirect('ptberkah/ubah-security-code');
+         }
+    }
+
+    function ubah_password(){
+        $data['pass'] = $this->db->get_where('tbl_register',['kode_user' => $this->session->kode_user])->row_array();
+
+        $this->form_validation->set_rules('pass_baru1', 'Password', 'required|min_length[6]');
+        $this->form_validation->set_rules('pass_baru2', 'Konfirmasi password', 'required|min_length[6]|matches[pass_baru1]');
+
+
+        if ($this->form_validation->run() == false) {
+        
+        
+
+         $this->load->view('templateuser/header');
+         $this->load->view('user/ubah_pass', $data);
+         $this->load->view('templateuser/footer');
+
+     }else{
+
+         if ($this->input->post('ubah')) {
+             
+             $pass_lama = $this->input->post('pass_lama');
+             $cek = $this->db->get_where('tbl_register',['kode_user' => $this->session->kode_user])->row_array();
+
+             if (password_verify($pass_lama, $cek['password'])) {
+                
+                $data = [
+
+                    'password' => password_hash($this->input->post('pass_baru2'), PASSWORD_DEFAULT),
+                ];
+
+                $this->db->where('kode_user', $this->session->kode_user);
+                $this->db->update('tbl_register', $data);
+
+                 $this->session->set_flashdata('message', 'swal("Sukses!!", "Password anda berhasil diubah", "success" );');
+               redirect('ptberkah/ubah-password');
+
+            
+             }else{
+
+                 $this->session->set_flashdata('message', 'swal("Gagal!!", "password lama anda tidak terdaftar", "error" );');
+            redirect('ptberkah/ubah-password');
+             }
+         }
+
+     }
+
+
 
     }
 

@@ -137,6 +137,13 @@ $route['ptberkah/detail-paket'] = 'user/detail_paket';
 $route['ptberkah/data-jaringan'] = 'user/data_jaringan';
 $route['ptberkah/voucher-anda'] = 'user/voucher_anda';
 
+// menu profil
+$route['ptberkah/ubah-password'] = 'user/ubah_password';
+$route['ptberkah/ubah-security-code'] = 'user/ubah_security_code';
+
+
+
+
 
 
 

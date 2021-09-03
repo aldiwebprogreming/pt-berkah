@@ -75,7 +75,9 @@
                         <div class="col-sm-6">
                           
                           <div class="row">
-                          <div class="col-sm-6">
+
+                            <!-- MITRANS -->
+                          <!-- <div class="col-sm-6">
                             <div class="card card-primary shadow" id="midtrans">
                               <div class="card-body">
                                 <i id="cekM" class="fas fa-check-circle" style="font-size: 30px; display: none"></i>
@@ -85,11 +87,11 @@
                                  
                               </div>
                             </div>
-                          </div>
+                          </div> -->
 
 
 
-                          <div class="col-sm-6">
+                          <div class="col-sm-12">
                             <div class="card card-success shadow" id="transfer">
                               <div class="card-body">
                                 <i id="cekT" class="fas fa-check-circle" style="font-size: 30px; display: none"></i>
@@ -137,7 +139,14 @@
                               <li style="list-style-type: disc;">Pesanan akan dibatalkan secara otomatis jika Anda tidak melakukan pembayaran.</li>
                             </ul>
 
-                            <button id="tranpser" @click="post_transper" type="submit" class="btn btn-warning btn-block btn-lg text-center bayarmanual m-t-30"><b>KONFIRMASI PEMBAYARAN</b> &nbsp;<i class="fa fa-chevron-circle-right"></i></button>
+                         <!--    <button id="tranpser" @click="post_transper" type="submit" class="btn btn-warning btn-block btn-lg text-center bayarmanual m-t-30"><b>MENYETUJUI PEMBAYARAN INI</b> &nbsp;</button>
+ -->
+                            <button type="button" class="btn btn-warning btn-block btn-lg text-center bayarmanual m-t-30" data-toggle="modal" data-target="#exampleModalCenter">
+                              <b>MENYETUJUI PEMBAYARAN INI <i class="fa fa-chevron-circle-right"></i></b>
+                            </button>
+
+                            <!-- Modal -->
+                            
                           </div>
 
 
@@ -259,20 +268,98 @@
               <hr>
               <div class="text-md-right">
                 <div class="float-lg-left mb-lg-0 mb-3">
-
-                  
-
-              <!-- <button type="button" id="pay-button" data-amount="800" class="btn btn-primary btn-lg btn-block">Pay!</button> -->
-
-                  
-               
-             
-              </div>
-              
-            </div>
           </div>
         </section>
       </div>
+
+      <div id="app">
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Masukan Security Code</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          <input type="text" name="sc_code" class="form-control" placeholder="Masukan security code anda" required="" v-model="cek_sc" v-on:keyup="cek">
+            <p>{{pesan}}</p>
+            <center>
+            <div class="spinner-border text-primary" v-if="loading == true" role="status">
+              <span class="sr-only">Loading...</span>
+              </center>
+            </div>
+              <form method="post" action="<?= base_url() ?>user/keranjang">
+                <input type="hidden" name="kode_user" value="<?= $this->session->kode_user ?>">
+                <input type="hidden" name="email" id="email" value="<?= $this->session->email  ?>">
+                <input type="hidden" name="kode_produk" value="<?= $detProduk['kode_produk'] ?>">
+                <input type="hidden" name="nama_produk" id="nama_produk" value="<?= $detProduk['judul_produk'] ?>">
+                <input type="hidden" name="jenis_voucher" id="jenis_voucher" value="<?= $detProduk['jenis_voucher'] ?>">
+                <input type="hidden" name="harga" id="harga" value="<?= $detProduk['harga'] ?>">
+                <input type="hidden" name="jenis_paket" id="cashback" value="<?= $detProduk['jenis_produk'] ?>">
+
+                <input type="hidden" name="cashback" id="cashback" value="<?= $detProduk['bonus_point'] ?>">
+
+                <input type="hidden" name="kode_user" id="kode_user" value="<?= $user['kode_user'] ?>">
+                <input type="hidden" name="jenis_paket" id="cashback" value="<?= $detProduk['jenis_produk'] ?>">
+
+                <input type="hidden" name="name2" id="name2" value="<?= $user['name'] ?>">
+                <input type="hidden" name="nohp" id="nohp"  value="<?= $user['nohp'] ?>">
+                <input type="hidden" name="username" id="username"  value="<?= $user['username'] ?>">
+                <input type="hidden" name="email2" id="email2"  value="<?= $user['email'] ?>">
+                <input type="hidden" name="kode_jaringan" id="kode_jaringan"  value="<?= $jr['kode_jaringan'] ?>">
+                <input type="hidden" name="jenis_voucher" id="jenis_voucher"  value="<?= $user['jenis_voucher'] ?>">
+                <input type="hidden" name="bonus_sponsor" id="bonus_sponsor"  value="<?= $user['bonus_sponsor'] ?>">
+
+                 <input type="hidden" name="bonus_point" id="bonus_point"  value="<?= $detProduk['bonus_point'] ?>">
+                <input id="but" type="submit" name="klik" value="Kirim" class="btn btn-danger" style="display: none;">
+
+              </form>
+
+           
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+       sc_code: "<?= $sc_code['sc_code'] ?>",
+       cek_sc : '',
+       pesan : '',
+       loading : false,
+      },
+
+      methods : {
+        cek : function(){
+            if (this.sc_code != this.cek_sc) {
+              this.pesan = "security code anda salah";
+            }else if (this.cek_sc == this.sc_code) {
+              this.pesan = 'security code benar';
+              this.loading = true;
+              setTimeout(function(){ 
+               $('#but').trigger('click');
+              }, 3000);
+              
+            }
+            else{
+              this.pesan = "mohon isi form security code";
+            }
+        }
+      }
+    })
+  </script>
+
 
   
      
@@ -374,4 +461,7 @@
     })
 
   </script>
+
+
+  
   

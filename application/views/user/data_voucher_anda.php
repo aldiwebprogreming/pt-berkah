@@ -38,7 +38,7 @@
                     <h4>Voucher Anda</h4>
                   </div>
                   <div class="card-body">
-                    <?= $vcr  ?> voucher
+                    <?= $vcr  ?> voucher / Total :  <?=  "Rp " . number_format($nilai_voucher['total_nilai_voucher'],2,',','.')?>
                   </div>
                 </div>
               </div>
