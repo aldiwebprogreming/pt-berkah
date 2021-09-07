@@ -46,7 +46,7 @@
 		                </div>
 		              </div>
 		              
-		              <div class="col-12 col-md-6 col-lg-3">
+		              <div class="col-12 col-md-6 col-lg-4">
 		                <div class="card card-danger shadow-danger">
 		                  <div class="card-header">
 		                    <h4 class="text-danger">Bonus Lider</h4>
@@ -57,7 +57,7 @@
 		                  </div>
 		                </div>
 		              </div>
-		               <div class="col-12 col-md-6 col-lg-3">
+		               <div class="col-12 col-md-6 col-lg-4">
 		                <div class="card card-info shadow-info">
 		                  <div class="card-header">
 		                    <h4 class="text-info">Bonus Point</h4>
@@ -68,10 +68,10 @@
 		                  </div>
 		                </div>
 		              </div>
-		              <div class="col-12 col-md-6 col-lg-3">
+		              <div class="col-12 col-md-6 col-lg-4">
 		                <div class="card card-warning shadow-warning">
 		                  <div class="card-header">
-		                    <h6 class="text-warning">Total Seluruh Bonus</h6>
+		                    <h6 class="text-warning">Total Escash</h6>
 		                  </div>
 		                  <div class="card-body">
 		                   <h5 class="text-warning">

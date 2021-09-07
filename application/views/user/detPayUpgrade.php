@@ -17,51 +17,7 @@
             <div class="invoice">
               <div class="invoice-print">
                 <div class="row">
-                  <!-- <div class="col-lg-12">
-                    <div class="invoice-title">
-                      <h2>Detail</h2>
-                      <div class="invoice-number">Order</div>
-                    </div>
-                    <hr> -->
-                    <div class="row">
-
-                      <!-- <table class="table table-bordered table-md">
-                        <tr>
-                          <td>Judul Produk</td>
-                          <td>:</td>
-                          <td><strong><?= $detProduk['judul_produk'] ?></strong></td>
-                        </tr>
-                        <tr>
-                          <td>Keterangan Produk</td>
-                          <td>:</td>
-                          <td><strong><?= $detProduk['keterangan_produk'] ?></strong></td>
-                        </tr>
-                        <tr>
-                          <td>Harga</td>
-                          <td>:</td>
-                          <td><strong><?= $detProduk['harga'] ?></strong></td>
-                        </tr>
-                        <tr>
-                          <td>Paket Voucher</td>
-                          <td>:</td>
-                          <td><strong><?= $detProduk['jenis_voucher'] ?></strong></td>
-                        </tr>
-                        <tr>
-                          <td>Paket Produk</td>
-                          <td>:</td>
-                          <td><strong><?= $detProduk['jenis_produk'] ?></strong></td>
-                        </tr>
-                        <tr>
-                          <td>Jumlah Voucher</td>
-                          <td>:</td>
-                          <td><strong><?= $detProduk['jumlah_voucher'] ?> Lembar</strong></td>
-                        </tr>
-                         <tr>
-                          <td>Nilai Pervocuher</td>
-                          <td>:</td>
-                          <td><strong>Rp.<?= $detProduk['nilai_voucher'] ?> /Lembar</strong></td>
-                        </tr>
-                      </table> -->
+                  
                     </div>
                   </div>
                 </div>
@@ -69,8 +25,6 @@
                 <div class="row mt-4">
                   <div class="col-md-12">
                     <div class="section-title"><h4 class="mb-3"><storong>Pilih Metode Pembayaran</storong></h4></div>
-                    <!-- <p class="section-lead">All items here cannot be deleted.</p> -->
-                   
                       <div class="row">
                         <div class="col-sm-6">
                           
@@ -211,22 +165,11 @@
                       </div>
                     </div>
                     <div class="row mt-4">
-                    <!--   <div class="col-lg-8">
-                        <div class="section-title">Payment Method</div>
-                        <p class="section-lead">The payment method that we provide is to make it easier for you to pay invoices.</p>
-                        <div class="d-flex">
-                          <div class="mr-2 bg-visa" data-width="61" data-height="38"></div>
-                          <div class="mr-2 bg-jcb" data-width="61" data-height="38"></div>
-                          <div class="mr-2 bg-mastercard" data-width="61" data-height="38"></div>
-                          <div class="bg-paypal" data-width="61" data-height="38"></div>
-                        </div>
-                      </div> -->
+                   
                       <div class="col-lg-4 text-right">
 
-                        <form id="payment-form" method="post" action="<?=site_url()?>/snap2/finish">
-                            <input type="hidden" name="result_type" id="result-type" value=""></div>
-                            <input type="hidden" name="result_data" id="result-data" value=""></div>
-                            <input type="hidden" name="name" id="name" value="<?= $this->session->username  ?>">
+                        <form>
+                           
                         </form>
                     
                       </div>
@@ -236,12 +179,12 @@
               </div>
               <hr>
               <div class="text-md-right">
-                <div class="float-lg-left mb-lg-0 mb-3">
+              <div class="float-lg-left mb-lg-0 mb-3">
           </div>
         </section>
       </div>
 
-      <div id="app">
+    <div id="app2">
       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -252,13 +195,14 @@
             </button>
           </div>
           <div class="modal-body">
-          <input type="text" name="sc_code" class="form-control" placeholder="Masukan security code anda" required="" v-model="cek_sc" v-on:keyup="cek">
+          <input type="text" name="sc_code" class="form-control" placeholder="Masukan security code anda" required="" v-model="cek_sc" v-on:keyup.enter="cek">
             <p>{{pesan}}</p>
             <center>
             <div class="spinner-border text-primary" v-if="loading == true" role="status">
               <span class="sr-only">Loading...</span>
               </center>
             </div>
+
               <form method="post" action="<?= base_url() ?>user/keranjang_upgrade">
                
                 <input type="hidden" name="kode_produk" value="<?= $detProduk['kode_produk'] ?>">
@@ -268,53 +212,15 @@
 
            
           </div>
-          <div class="modal-footer">
-            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button> -->
-          </div>
         </div>
       </div>
     </div>
     </div>
 
 
-  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-  <script>
-    var app = new Vue({
-      el: '#app',
-      data: {
-       sc_code: "<?= $sc_code['sc_code'] ?>",
-       cek_sc : '',
-       pesan : '',
-       loading : false,
-      },
 
-      methods : {
-        cek : function(){
-            if (this.sc_code != this.cek_sc) {
-              this.pesan = "security code anda salah";
-            }else if (this.cek_sc == this.sc_code) {
-              this.pesan = 'security code benar';
-              this.loading = true;
-              setTimeout(function(){ 
-               $('#but').trigger('click');
-              }, 3000);
-              
-            }
-            else{
-              this.pesan = "mohon isi form security code";
-            }
-        }
-      }
-    })
-  </script>
-
-
-  
-     
-
-    
-
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+         
   <script>
     
     $(document).ready(function(){
@@ -342,6 +248,40 @@
     })
 
   </script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script>
+    var app = new Vue({
+      el: '#app2',
+      data: {
+       sc_code: "<?= $sc_code['sc_code'] ?>",
+       cek_sc : '',
+       pesan : '',
+       loading : false,
+      },
+
+      methods : {
+        cek : function(){
+            if (this.sc_code != this.cek_sc) {
+              this.pesan = "security code anda salah";
+            }else if (this.cek_sc == this.sc_code) {
+              this.pesan = 'security code benar';
+              this.loading = true;
+              setTimeout(function(){ 
+              $('#but').trigger('click');
+              }, 500);
+              
+            }
+            else{
+              this.pesan = "mohon isi form security code";
+            }
+        }
+      }
+    })
+  </script>
+
 
 
   

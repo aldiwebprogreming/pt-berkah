@@ -136,6 +136,13 @@ $route['ptberkah/upgrade-paket-member/(:any)'] = 'user/upgrade_paketMember/$1';
 $route['ptberkah/detail-paket'] = 'user/detail_paket';
 $route['ptberkah/data-jaringan'] = 'user/data_jaringan';
 $route['ptberkah/voucher-anda'] = 'user/voucher_anda';
+$route['ptberkah/voucher-upgrade/(:any)'] = 'user/voucher_upgrade/$1';
+
+$route['ptberkah/keranjang-belanja'] = 'user/keranjang_belanja';
+$route['ptberkah/keranjang-belanja-upgrade'] = 'user/keranjang_belanja_upgrade';
+
+
+
 
 // menu profil
 $route['ptberkah/ubah-password'] = 'user/ubah_password';

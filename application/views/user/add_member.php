@@ -251,6 +251,12 @@
                             <small v-if = "!nohp" class="text-danger">Form no telp tidak boleh kosong</small>
                           </div>
                         </div>
+
+                        <?php 
+                         $data ="{{email}}";
+                          $slug = str_replace(" ", "-", $data);
+                          
+                         ?>
                        <!--  <div class="form-group row">
                           <label class="col-md-4 text-md-right text-left mt-2">Role</label> -->
                           <!-- <div class="col-lg-4 col-md-6">

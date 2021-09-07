@@ -113,22 +113,34 @@
                <li class=""><a class="nav-link" href="<?= base_url('ptberkah/voucher-anda') ?>"><i class="fas fa-id-card"></i> <span>Voucher Anda</span></a></li>
               </li>
 
+             <!--  <li class=""><a class="nav-link" href="<?= base_url('ptberkah/voucher-upgrade') ?>"><i class="fas fa-id-card"></i> <span>Voucher Upgrade</span></a></li>
+              </li>
+ -->
                <li class="menu-header">Paket Anda</li>
                 <li class=""><a class="nav-link" href="<?= base_url('ptberkah/paket') ?>"><i class="fas fa-credit-card"></i> <span>Paket Anda</span></a></li>
+
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-shopping-bag"></i> <span>Keranjang Belanja</span></a>
+                <ul class="dropdown-menu" style="display: none;">
+                  <li><a class="nav-link" href="<?= base_url('ptberkah/keranjang-belanja') ?>">Keranjang Anda </a></li>
+                  <li><a class="nav-link" href="<?= base_url('ptberkah/keranjang-belanja-upgrade') ?>">Keranjang Upgrade</a></li>
+                 
+                </ul>
+              </li>
 
                 <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-sync-alt"></i> <span>Upgrade</span></a>
                 <ul class="dropdown-menu" style="display: none;">
                   <li><a class="nav-link" href="<?= base_url('ptberkah/upgrade-paket') ?>">Paket Anda</a></li>
-                  <li><a class="nav-link" href="<?= base_url('produk/data-member') ?>">Paket Member</a></li>
+                 <!--  <li><a class="nav-link" href="<?= base_url('produk/data-member') ?>">Paket Member</a></li> -->
                  
                 </ul>
               </li>
                 
 
-                <li class=""><a class="nav-link" href="<?= base_url('ptberkah/invoice') ?>"><i class="fas fa-receipt"></i> <span>Invocie</span></a></li>
+              <!--   <li class=""><a class="nav-link" href="<?= base_url('ptberkah/invoice') ?>"><i class="fas fa-receipt"></i> <span>Invocie</span></a></li>
               </li>
-
+ -->
               <li class="menu-header">Profil</li>
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-sync-alt"></i> <span>Profil</span></a>

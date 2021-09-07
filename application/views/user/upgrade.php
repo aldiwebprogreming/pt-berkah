@@ -15,7 +15,7 @@
             
             <div class="card">
               <div class="card-header">
-                <h4>Upgrade Paket / <?= $paket['kode_user'] ?></h4>
+                <h4>Upgrade Paket / <?= $paket['jenis_paket'] ?></h4>
               </div>
               <div class="card-body">
                 <div class="row">
@@ -24,7 +24,8 @@
                         <h5 class="text-center">Pilih Jenis Paket</h5>
                         <div class="form-group row">
                           <!-- <label class="col-md-4 text-md-right text-left mt-2">Paket Voucher</label> -->
-                          <div class="col-lg-12 col-md-12">
+                          <div class="col-lg-12 col-md-12" id="data">
+
                             <div class="selectgroup w-100">
                               <?php foreach ($voucher as $data) { ?>
                               <label class="selectgroup-item">
@@ -44,6 +45,8 @@
 
                   </div>
 
+                  
+
 
                 </div>
               </div>
@@ -53,19 +56,16 @@
                 This is card footer
               </div>
             </div>
-          </div>
-            
-          
-          
+          </div>      
         </section>
       </div>
 
         <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
      <script>
         var app = new Vue({
-          el: '#app',
+          el: '#data',
           data: {
-  
+            
         
           },
           methods: {

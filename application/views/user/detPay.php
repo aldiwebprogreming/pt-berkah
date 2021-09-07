@@ -91,7 +91,7 @@
 
 
 
-                          <div class="col-sm-12">
+                          <div class="col-sm-6">
                             <div class="card card-success shadow" id="transfer">
                               <div class="card-body">
                                 <i id="cekT" class="fas fa-check-circle" style="font-size: 30px; display: none"></i>
@@ -104,16 +104,47 @@
                             </div>
                           </div>
 
-                          <!-- <div class="col-sm-6">
-                            <div class="card card-danger shadow" @click="ecash">
+                          <div class="col-sm-6">
+                            <div class="card card-danger shadow" id="ecash">
                               <div class="card-body" >
-                                 <i v-if="cek == 'ecash'" class="fas fa-check-circle" style="font-size: 30px;"></i>
+                                 <i id="cekCash" class="fas fa-check-circle" style="font-size: 30px; display: none;"></i>
                                 <center>
                                  <img class="mt-4 mb-4" src="<?= base_url() ?>assets_user/img/ecash.png" style="height: 60px;">
                                </center>
                               </div>
                             </div>
-                          </div> -->
+                          </div>
+                        </div>
+
+                        <div id="tombol-ecash" style="display: none;">
+
+                          <?php 
+
+                              $bonus_ecash = $this->db->get_where('tbl_total_bonus',['kode_member' => $this->session->kode_user])->row_array();
+
+                              if ($bonus_ecash == false) { ?>
+
+                                <button id="alert" onclick="return swal('Mohon maaf anda tidak ada ecash')" class="btn btn-warning btn-block btn-lg text-center bayarmanual m-t-30">
+                                  <b>BAYAR DENGAN ECASH  <i class="fa fa-chevron-circle-right"></i></b>
+                                </button>
+
+
+                              <?php }else{ 
+
+                              if ($bonus_ecash['total_bonus'] >= $detProduk['harga'] ) { ?>
+
+                          <button type="button" class="btn btn-warning btn-block btn-lg text-center bayarmanual m-t-30" data-toggle="modal" data-target="#exampleModalCenter2">
+                              <b>BAYAR DENGAN ECASH  <i class="fa fa-chevron-circle-right"></i></b>
+                            </button>
+
+                          <?php }else{ ?>
+
+                            <button id="alert" onclick="return swal('Mohon maaf ecash anda tidak mencukupi')" class="btn btn-warning btn-block btn-lg text-center bayarmanual m-t-30">
+                              <b>BAYAR DENGAN ECASH  <i class="fa fa-chevron-circle-right"></i></b>
+                            </button>
+
+                          <?php }} ?>
+
                         </div>
 
 
@@ -251,6 +282,9 @@
 
 
                   </form>
+
+
+
                         <!-- <div class="invoice-detail-item">
                           <div class="invoice-detail-name">Subtotal</div>
                           <div class="invoice-detail-value">$670.99</div>
@@ -283,7 +317,7 @@
             </button>
           </div>
           <div class="modal-body">
-          <input type="text" name="sc_code" class="form-control" placeholder="Masukan security code anda" required="" v-model="cek_sc" v-on:keyup="cek">
+          <input type="text" name="sc_code" class="form-control" placeholder="Masukan security code anda" required="" v-model="cek_sc" @keyup.enter="cek">
             <p>{{pesan}}</p>
             <center>
             <div class="spinner-border text-primary" v-if="loading == true" role="status">
@@ -326,6 +360,64 @@
         </div>
       </div>
     </div>
+
+
+    <!-- form pembayran ecash
+ -->
+<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Masukan Security Code ecash</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          <input type="text" name="sc_code" class="form-control" placeholder="Masukan security code anda" required="" v-model="cek_sc" @keyup.enter="cek2">
+            <p>{{pesan}}</p>
+            <center>
+            <div class="spinner-border text-primary" v-if="loading == true" role="status">
+              <span class="sr-only">Loading...</span>
+              </center>
+            </div>
+              <form method="post" action="<?= base_url() ?>user/action_ecash">
+                <input type="hidden" name="kode_user" value="<?= $this->session->kode_user ?>">
+                <input type="hidden" name="email" id="email" value="<?= $this->session->email  ?>">
+                <input type="hidden" name="kode_produk" value="<?= $detProduk['kode_produk'] ?>">
+                <input type="hidden" name="nama_produk" id="nama_produk" value="<?= $detProduk['judul_produk'] ?>">
+                <input type="hidden" name="jenis_voucher" id="jenis_voucher" value="<?= $detProduk['jenis_voucher'] ?>">
+                <input type="hidden" name="harga" id="harga" value="<?= $detProduk['harga'] ?>">
+                <input type="hidden" name="jenis_paket" id="cashback" value="<?= $detProduk['jenis_produk'] ?>">
+
+                <input type="hidden" name="cashback" id="cashback" value="<?= $detProduk['bonus_point'] ?>">
+
+                <input type="hidden" name="kode_user" id="kode_user" value="<?= $user['kode_user'] ?>">
+                <input type="hidden" name="jenis_paket" id="cashback" value="<?= $detProduk['jenis_produk'] ?>">
+
+                <input type="hidden" name="name2" id="name2" value="<?= $user['name'] ?>">
+                <input type="hidden" name="nohp" id="nohp"  value="<?= $user['nohp'] ?>">
+                <input type="hidden" name="username" id="username"  value="<?= $user['username'] ?>">
+                <input type="hidden" name="email2" id="email2"  value="<?= $user['email'] ?>">
+                <input type="hidden" name="kode_jaringan" id="kode_jaringan"  value="<?= $jr['kode_jaringan'] ?>">
+                <input type="hidden" name="jenis_voucher" id="jenis_voucher"  value="<?= $user['jenis_voucher'] ?>">
+                <input type="hidden" name="bonus_sponsor" id="bonus_sponsor"  value="<?= $user['bonus_sponsor'] ?>">
+
+                 <input type="hidden" name="bonus_point" id="bonus_point"  value="<?= $detProduk['bonus_point'] ?>">
+                <input id="but2" type="submit" name="klik" value="Kirim" class="btn btn-danger" style="display: none;">
+
+              </form>
+
+           
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
     </div>
 
 
@@ -345,10 +437,26 @@
             if (this.sc_code != this.cek_sc) {
               this.pesan = "security code anda salah";
             }else if (this.cek_sc == this.sc_code) {
-              this.pesan = 'security code benar';
+              this.pesan = '';
               this.loading = true;
               setTimeout(function(){ 
                $('#but').trigger('click');
+              }, 3000);
+              
+            }
+            else{
+              this.pesan = "mohon isi form security code";
+            }
+        },
+
+        cek2 : function(){
+            if (this.sc_code != this.cek_sc) {
+              this.pesan = "security code anda salah";
+            }else if (this.cek_sc == this.sc_code) {
+              this.pesan = '';
+              this.loading = true;
+              setTimeout(function(){ 
+               $('#but2').trigger('click');
               }, 3000);
               
             }
@@ -454,14 +562,31 @@
     $(document).ready(function(){
       $("#transfer").click(function(){
       $("#cekM").hide();
+      $("#cekCash").hide();
         $("#cekT").show();
          $("#btn-midtrans").hide();
         $("#det-transfer").show();
+        $("#tombol-ecash").hide();
       });
     })
 
   </script>
 
 
-  
-  
+   <script>
+    
+    $(document).ready(function(){
+      $("#ecash").click(function(){
+      $("#cekM").hide();
+        $("#cekT").hide();
+        $("#cekCash").show();
+        $("#tombol-ecash").show();
+        
+         $("#btn-midtrans").hide();
+         $("#det-transfer").hide();
+        
+      });
+    })
+
+  </script>
+

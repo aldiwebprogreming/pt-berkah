@@ -12,6 +12,11 @@
 
 <img class="card-img-top" src="<?= base_url('assets_user/img/gold.png') ?>" alt="Card image cap">
 
+<?php }elseif ($data['jenis_voucher'] == 'Brown') { ?>
+
+    <img class="card-img-top" src="<?= base_url('assets_user/img/bronze.png') ?>" alt="Card image cap">
+
+
 <?php } else{ ?>
 <img class="card-img-top" src="<?= base_url('assets_user/img/silver.png') ?>" alt="Card image cap">
  <?php } ?>

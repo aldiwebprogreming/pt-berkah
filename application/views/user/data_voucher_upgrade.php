@@ -35,11 +35,25 @@
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Voucher Anda</h4>
+
+                    <?php if ($voucher == false) {
+                        echo "";  
+                    }else{ ?>
+                    <?php 
+
+                      $jenis_voucher = $this->db->get_where('tbl_list_voucherproduk',['kode_member' => $this->session->kode_user, 'status_voucher' => $status_voucher])->row_array();
+
+                        $produk  = $this->db->get_where('tbl_produk',['kode_produk' =>$jenis_voucher['kode_produk']])->row_array();
+
+                     ?>
+                    <h4>Voucher anda sebelumya (<?= $produk['jenis_produk'] ?>)</h4>
+                    <?php } ?>
                   </div>
                   <div class="card-body">
                     <?= $vcr  ?> voucher / Total :  <?=  "Rp " . number_format($nilai_voucher['total_nilai_voucher'],2,',','.')?>
                   </div>
+
+
                 </div>
               </div>
             </div>
@@ -52,39 +66,23 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header">
-                  <h4>Data Voucher Anda</h4>
-
-                     <?php 
-                      $cek = $this->db->get_where('tbl_list_voucherproduk',['kode_member' => $this->session->kode_user, 'status_voucher' => 'upgrade_1'])->row_array();
-
-                      if ($cek) {
-                        
-                    
-
-                       $history_upgrade = $this->db->query('SELECT DISTINCT status_voucher FROM tbl_list_voucherproduk order by id DESC ')->result_array();
-                       $no = 0;
-                       foreach ($history_upgrade as $link){?>
-
-                        <a class="btn btn-primary" style="position: absolute; left: 800px;" href="<?= base_url() ?>ptberkah/voucher-upgrade/<?= $link['status_voucher'] ?>">Histroy upgrade <?= $no++ ?></a>
-
-                        <?php
-
-                      }
-
-                         }else{
-
-
-                        }?>
+                  <h4>Data Voucher Berlaku</h4>
 
                 </div>
-
-
 
 
 
                 <div class="card-body p-0">
 
                   <div class="container">
+
+                    <?php 
+                      if ($voucher == false) { ?>
+                        <center>
+                          <b><h1 style="font-size: 100px;">404</h1></b>
+                          <p class="text-primary">Tidak ada data voucher upgrade</p>
+                        </center>
+                      <?php }else{ ?>
                    <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -110,10 +108,10 @@
                         <tbody>
                           <?php
                           $no = 1;
-                          
+                          $date = date('Y-m-d');
                           $total = 0;
                            foreach ($voucher as $data) { 
-                            if (date('Y-m-d')  >= $data['tgl_terbit']) { ?>
+                            if ($date >= $data['tgl_terbit']) { ?>
 
                                 <tr>
                                   <td><?= $no++ ?></td>
@@ -137,13 +135,12 @@
                            
                           <?php } ?>
 
-                          
                             <h6>Total Nominal Voucher Berlaku <?=  "Rp " . number_format($total,2,',','.')?></h6>
                             
                         </tbody>
                     </table>
 
-
+                  <?php } ?>
 
 
                 </div>
@@ -153,10 +150,7 @@
               </div>
             </div>
 
-     
 
-
-   
 
 
            
@@ -164,7 +158,8 @@
         </section>
       </div>
 
-     
+
+   
                
 
       <script>
