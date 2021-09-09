@@ -13,6 +13,30 @@
               <div class="col-12">
                   <center>
                       <div class="tf-tree example">
+
+                        <?php foreach ($jaringan as $data) {
+                          
+                          $user = $this->db->get_where('tbl_register', ['kode_rule' => $data['kode_user']])->result_array();
+
+                          echo $data['kode_user']."<br>";
+                           
+                           foreach ($user as $mem) {
+                             echo $mem['kode_user'];
+                             $user2 = $this->db->get_where('tbl_register', ['kode_rule' => $mem['kode_user']])->result_array();
+                             foreach ($user2 as $mem2) {
+                               
+                             }
+                           }
+
+                           echo "<br>";
+
+                          
+                        } ?>
+
+                        <br>
+                        <hr style="margin-top: 50px;">
+
+
                       <ul>
                             <li>
                               <span class="tf-nc border border-primary" style="width: 100px; border: 2px red solid;">aldi</span>

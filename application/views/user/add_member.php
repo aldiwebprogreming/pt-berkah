@@ -3,7 +3,7 @@
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>Tambah Member</h1>
+            <h1><i class="fas fa-plus"></i> Tambah Member</h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
               <div class="breadcrumb-item"><a href="#">Data Member</a></div>
@@ -12,6 +12,14 @@
           </div>
           
             <div class="section-body">
+
+
+               <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <strong>Holy guacamole!</strong> Tambah Member anda disini, pastikan terisi dengan benar.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
 
 
             
@@ -210,16 +218,16 @@
 
                         
                         <div class="form-group row align-items-center">
-                          <label class="col-md-4 text-md-right text-left">Kode Vendor</label>
+                          <!-- <label class="col-md-4 text-md-right text-left">Kode Vendor</label> -->
                           <div class="col-lg-4 col-md-6">
-                            <input type="text" name="kd_vendor" class="form-control" readonly="" value="<?= $kode_vendor ?>">
+                            <input type="hidden" name="kd_vendor" class="form-control" readonly="" value="<?= $kode_vendor ?>">
                           </div>
                         </div>
 
                         <div class="form-group row align-items-center">
-                          <label class="col-md-4 text-md-right text-left">Kode Member</label>
+                         <!--  <label class="col-md-4 text-md-right text-left">Kode Member</label> -->
                           <div class="col-lg-4 col-md-6">
-                            <input type="text" name="kd_member" readonly="" class="form-control" value="<?= $kode_user ?>">
+                            <input type="hidden" name="kd_member" readonly="" class="form-control" value="<?= $kode_user ?>">
                           </div>
                         </div>
                         <div class="form-group row align-items-center">
@@ -319,9 +327,9 @@
                           <div class="col-md-4"></div>
                           <div class="col-lg-4 col-md-6 text-right">
                             <!-- <a href="#" class="btn btn-icon icon-right btn-primary">Next <i class="fas fa-arrow-right"></i></a> -->
-                            <button v-if="step == 1" type="submit" @click.prevent="nextStep" class="btn btn-primary">Next</button>
+                            <button v-if="step == 1" type="submit" @click.prevent="nextStep" class="btn btn-primary btn-lg btn-block">Next <i class="fas fa-arrow-right"></i></button>
 
-                            <button v-if="step != 1 " @click.prevent="prevtStep" class="btn btn-primary">Prev Next</button>
+                            <button v-if="step != 1 " @click.prevent="prevtStep" class="btn btn-primary btn-lg btn-block">Prev Next  <i class="fas fa-arrow-left"></i></button>
                     
                     
 <!-- 

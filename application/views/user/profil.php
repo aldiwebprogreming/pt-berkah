@@ -43,24 +43,28 @@
                         <?= $profil['kode_user'] ?>
                       </div>
                     </div>
+                    <hr>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Lengkap :</label>
                       <div class="col-sm-12 col-md-7">
                         <?= $profil['nama_lengkap'] ?>
                       </div>
                     </div>
+                    <hr>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alamat Lengkap :</label>
                       <div class="col-sm-12 col-md-7">
                        	<?= $profil['alamat_lengkap'] ?>
                       </div>
                     </div>
+                    <hr>
                      <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tgl Lahir : </label>
                       <div class="col-sm-12 col-md-7">
                        	<?= $profil['tgl_lahir'] ?>
                       </div>
                     </div>
+                    <hr>
 
                     
 
@@ -70,13 +74,14 @@
                         <?= $profil['jenis_kelamin'] ?>
                       </div>
                     </div>
-
+                      <hr>
                      <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">No KTP  : </label>
                       <div class="col-sm-12 col-md-7">
                         <?= $profil['no_ktp'] ?>
                       </div>
                     </div>
+                    <hr>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-6 col-md-3 col-lg-3">
                       	<button class="btn btn-primary">Edit Profil <i class="fas fa-arrow-right"></i> </button>

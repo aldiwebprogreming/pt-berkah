@@ -1,15 +1,48 @@
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+ 
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
 
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>Dashboard</h1>
+            <img src="<?= base_url('assets_crowsel/development.png') ?>" style="height: 50px;">
+            <h1 class="">Dashboard</h1>
           </div>
+
+
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+          <strong>Holy guacamole!</strong> Selamat datang di website kami, tanam saham anda dengan mudah dan terpercaya di PTB.
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+          <center>
+          <div class="owl-carousel owl-theme">
+            <div class="item"><img src="<?= base_url() ?>assets_crowsel/slid1.png" style="border-radius: 5px;" ></div>
+            <div class="item"><img src="<?= base_url() ?>assets_crowsel/slid2.png" style="border-radius: 5px;" ></div>
+            <div class="item"><img src="<?= base_url() ?>assets_crowsel/slid3.png" style="border-radius: 5px;"></div>
+            <div class="item"><img src="<?= base_url() ?>assets_crowsel/slid4.png" style="border-radius: 5px;"></div>
+            <div class="item"><img src="<?= base_url() ?>assets_crowsel/slid5.png" style="border-radius: 5px;"></div>
+            <div class="item"><img src="<?= base_url() ?>assets_crowsel/slid6.png" style="border-radius: 5px;"></div>
+            
+        </div>
+        </center>
+
+
+
+
+
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
                 <div class="card-icon bg-primary">
-                  <i class="far fa-user"></i>
+                 <img src="<?= base_url('assets_crowsel/sketch.png') ?>" style="height: 50px;">
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
@@ -23,8 +56,8 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
-                <div class="card-icon bg-danger">
-                  <i class="far fa-newspaper"></i>
+                <div class="card-icon bg-primary">
+                  <img src="<?= base_url('assets_crowsel/pencil.png') ?>" style="height: 50px;">
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
@@ -38,8 +71,8 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
-                <div class="card-icon bg-warning">
-                  <i class="far fa-file"></i>
+                <div class="card-icon bg-primary">
+                  <img src="<?= base_url('assets_crowsel/idea.png') ?>" style="height: 50px;">
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
@@ -53,8 +86,10 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
-                <div class="card-icon bg-success">
-                  <i class="fas fa-circle"></i>
+                <div class="card-icon bg-primary">
+                  <img src="<?= base_url('assets_crowsel/clipboard.png') ?>" style="height: 50px;">
+                  
+                  
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
@@ -73,8 +108,8 @@
 
           <div class="col-lg-6 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
-                <div class="card-icon bg-info">
-                  <i class="fas fa-hand-point-right"></i>
+                <div class="card-icon bg-primary">
+                  <img src="<?= base_url('assets_crowsel/wireframe.png') ?>" style="height: 50px;">
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
@@ -98,6 +133,8 @@
           </div>
         </section>
       </div>
+
+      
 
 
 <?php 
@@ -182,6 +219,28 @@
 
 
 
+
+<script>
+  $('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:3
+        }
+    }
+})
+</script>
+
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -220,3 +279,5 @@ methods : {
   }
 })
 </script>
+
+

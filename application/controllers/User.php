@@ -1,8 +1,18 @@
 <?php 
 
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 	/**
 	 * 
 	 */
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+
+    require_once 'vendor/autoload.php';
+
+
 	class User extends CI_Controller
 	{
 		
@@ -176,9 +186,9 @@
 
         $data['jml_sp'] = $this->db->get_where('tbl_register',['kode_rule' => $kode_user])->num_rows();
 
-         $this->load->view('templateuser/header');
+         $this->load->view('Templateuser/header');
          $this->load->view('user/invoice', $data);
-         $this->load->view('templateuser/footer');
+         $this->load->view('Templateuser/footer');
     }
 
     function detail_invo($kode_order){ 
@@ -190,9 +200,9 @@
 
      $data['user'] = $this->db->get_where('tbl_register',['kode_user' => $invo['kode_user_member']])->row_array();
 
-         $this->load->view('templateuser/header');
+         $this->load->view('Templateuser/header');
          $this->load->view('user/detInvoice', $data);
-         $this->load->view('templateuser/footer');
+         $this->load->view('Templateuser/footer');
     
     }
 
@@ -202,9 +212,9 @@
         $kode_user = $this->session->kode_user;
         $data['profil'] = $this->db->get_where('tbl_profil', ['kode_user' => $kode_user])->row_array();
 
-         $this->load->view('templateuser/header');
+         $this->load->view('Templateuser/header');
          $this->load->view('user/profil', $data);
-         $this->load->view('templateuser/footer');
+         $this->load->view('Templateuser/footer');
 
     }
 
@@ -221,9 +231,9 @@
         $data['point'] = $this->db->get_where('tbl_bonus_point',['kode_member' => $kode_user])->row_array();
 
 
-         $this->load->view('templateuser/header');
+         $this->load->view('Templateuser/header');
          $this->load->view('user/bonus', $data);
-         $this->load->view('templateuser/footer');
+         $this->load->view('Templateuser/footer');
     }
 
     function paket(){
@@ -233,9 +243,9 @@
 
        
        
-         $this->load->view('templateuser/header');
+         $this->load->view('Templateuser/header');
          $this->load->view('user/paket', $data);
-         $this->load->view('templateuser/footer');
+         $this->load->view('Templateuser/footer');
     }
 
     function detail_paket(){
@@ -243,9 +253,9 @@
         $kode_user = $this->session->kode_user;
         $user= $this->m_data->get_user('tbl_register', $kode_user);
         $data['produk_anda'] = $this->db->get_where('tbl_produk',['kode_produk' => $user['kode_produk']])->row_array();
-         $this->load->view('templateuser/header');
+         $this->load->view('Templateuser/header');
          $this->load->view('user/detail_paket', $data);
-         $this->load->view('templateuser/footer');
+         $this->load->view('Templateuser/footer');
     }
 
 
@@ -254,9 +264,9 @@
         $kode_user = $this->session->kode_user;
         $data['user'] = $this->db->get_where('tbl_register',['kode_user' => $kode_user])->row_array();
         $data['jaringan'] = $this->db->get_where('tbl_register',['kode_rule' => $kode_user])->result_array();
-         $this->load->view('templateuser/header');
+         $this->load->view('Templateuser/header');
          $this->load->view('user/data_jaringan', $data);
-         $this->load->view('templateuser/footer');
+         $this->load->view('Templateuser/footer');
     }
 
 
@@ -267,9 +277,9 @@
         $data['paket'] = $this->db->get_where('tbl_register', ['kode_user' => $kode_user])->row_array();  
         $data['voucher'] = $this->db->get('tbl_voucher')->result_array();
 
-         $this->load->view('templateuser/header');
+         $this->load->view('Templateuser/header');
          $this->load->view('user/upgrade', $data);
-         $this->load->view('templateuser/footer');
+         $this->load->view('Templateuser/footer');
 
     }
 
@@ -280,9 +290,9 @@
 
         $data['jml_member'] = $this->db->get_where('tbl_register',['kode_rule' => $kode_user])->num_rows();
         // var_dump($data);
-         $this->load->view('templateuser/header');
+         $this->load->view('Templateuser/header');
          $this->load->view('user/data_member', $data);
-         $this->load->view('templateuser/footer');
+         $this->load->view('Templateuser/footer');
 
     }
 
@@ -291,9 +301,9 @@
         $data['det'] = $this->db->get_where('tbl_register',['kode_user' => $kode_member])->row_array();
         $data['produk'] = $this->db->get_where('tbl_produk',['jenis_produk' => $data['det']['jenis_paket']])->row_array();
 
-         $this->load->view('templateuser/header');
+         $this->load->view('Templateuser/header');
          $this->load->view('user/detail_member', $data);
-         $this->load->view('templateuser/footer');
+         $this->load->view('Templateuser/footer');
 
     }
 
@@ -305,9 +315,9 @@
         $data['paket'] = $this->db->get_where('tbl_register', ['kode_user' => $kode_member])->row_array();  
         $data['voucher'] = $this->db->get('tbl_voucher')->result_array();
 
-         $this->load->view('templateuser/header');
+         $this->load->view('Templateuser/header');
          $this->load->view('user/upgrade_member', $data);
-         $this->load->view('templateuser/footer');
+         $this->load->view('Templateuser/footer');
 
     }
 
@@ -338,7 +348,7 @@
 
     function voucher_anda(){
         $kode_user = $this->session->kode_user;
-         $cek = $this->db->query('SELECT DISTINCT status_voucher FROM tbl_list_voucherproduk order by id DESC LIMIT 1;')->row_array();
+         $cek = $this->db->query('SELECT DISTINCT status_voucher FROM tbl_list_voucherproduk order by id DESC LIMIT 1')->row_array();
 
          $status_voucher = $cek['status_voucher'];
 
@@ -351,9 +361,9 @@
 
         // $data['voucher'] = $this->db->query("SELECT * FROM tbl_list_voucherproduk WHERE kode_member ='$kode_user' ORDER BY LIKE ")
 
-         $this->load->view('templateuser/header');
+         $this->load->view('Templateuser/header');
          $this->load->view('user/data_voucher_anda', $data);
-         $this->load->view('templateuser/footer');
+         $this->load->view('Templateuser/footer');
 
     }
 
@@ -369,9 +379,9 @@
 
         $data['status_voucher'] = $status_voucher;
 
-         $this->load->view('templateuser/header');
+         $this->load->view('Templateuser/header');
          $this->load->view('user/data_voucher_upgrade', $data);
-         $this->load->view('templateuser/footer');
+         $this->load->view('Templateuser/footer');
 
 
     }
@@ -409,14 +419,16 @@
 
         ];
 
-        $keranjang = $this->db->insert('tbl_keranjang', $data);
         $email = $this->input->post('email2');
         $paket = $this->input->post('jenis_paket');
         $bonus = $this->input->post('bonus_sponsor');
         $kode_user = $this->input->post('kode_user');
         $date_create = date('Y-m-d');
         $kode_produk = $this->input->post('kode_produk');
+
         $this->sendEmail($email, $paket, $bonus, $kode_produk, $kode_user,$date_create);
+        $keranjang = $this->db->insert('tbl_keranjang', $data);
+       
          $this->session->set_flashdata('message', 'swal("Sukses!!", "Produk berhasil di masukan dikeranjang", "success" );');
          redirect('user/keranjang_belanja');
     }
@@ -459,9 +471,9 @@
        
         $data['jml'] = $this->db->get_where('tbl_keranjang',['kode_rule' => $this->session->kode_user])->num_rows();
 
-         $this->load->view('templateuser/header');
+         $this->load->view('Templateuser/header');
          $this->load->view('user/data_keranjang', $data);
-         $this->load->view('templateuser/footer');
+         $this->load->view('Templateuser/footer');
 
          if ($this->input->post('kirim')) {
 
@@ -501,9 +513,9 @@
        
         $data['jml'] = $this->db->get_where('tbl_keranjang_upgrade',['kode_user' => $this->session->kode_user])->num_rows();
 
-         $this->load->view('templateuser/header');
+         $this->load->view('Templateuser/header');
          $this->load->view('user/data_keranjang_upgrade', $data);
-         $this->load->view('templateuser/footer');
+         $this->load->view('Templateuser/footer');
 
          if ($this->input->post('kirim')) {
 
@@ -542,9 +554,9 @@
     function ubah_security_code(){
         $data['sc'] = $this->db->get_where('tbl_register',['kode_user' => $this->session->kode_user])->row_array();
 
-         $this->load->view('templateuser/header');
+         $this->load->view('Templateuser/header');
          $this->load->view('user/ubah_security_code', $data);
-         $this->load->view('templateuser/footer');
+         $this->load->view('Templateuser/footer');
 
          if ($this->input->post('ubah')) {
              
@@ -570,9 +582,9 @@
         
         
 
-         $this->load->view('templateuser/header');
+         $this->load->view('Templateuser/header');
          $this->load->view('user/ubah_pass', $data);
-         $this->load->view('templateuser/footer');
+         $this->load->view('Templateuser/footer');
 
      }else{
 
@@ -615,9 +627,9 @@
         $data['jaringan'] = $this->db->get('tbl_register')->result_array();
         $data['user'] = $this->db->get_where('tbl_register',['kode_user' => $kode_user])->row_array();
 
-        $this->load->view('templateuser/header');
+        $this->load->view('Templateuser/header');
          $this->load->view('user/data_jaringan_baru', $data);
-         $this->load->view('templateuser/footer');
+         $this->load->view('Templateuser/footer');
 
 
     }
@@ -680,10 +692,12 @@
                     
             $this->email->message("$get1");
 
-            if (!$this->email->send())
-            show_error($this->email->print_debugger());
-            else
+            if (!$this->email->send()){
+           $this->session->set_flashdata('message', 'swal("Gagal!!", "Akun email yang ada masukan tidak valid", "error" );');
+            redirect('ptberkah/add-member');
+        }else{
             echo 'Your e-mail has been sent!';
+        }
     }
 
 
@@ -1207,6 +1221,54 @@
 
 
      }
+
+
+     function send(){
+
+    $mail = new PHPMailer(true);
+ 
+    // $no_invoice         = $_POST['no_invoice'];
+    // $nama_pengirim      = $_POST['nama_pengirim'];
+    // $email              = $_POST['email'];
+ 
+    //Server settings
+    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+    $mail->isSMTP();                                            // Send using SMTP
+    $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+    $mail->Username   = 'aldiiit593@gmail.com';                     // SMTP username
+    $mail->Password   = 'aldimantap1234';                               // SMTP password
+    // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+    $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+ 
+    //Recipients
+    $mail->setFrom('aldiiit593@gmail.com', 'Percobaan');
+    $mail->addAddress('alldii1956@gmail.com', 'Hay');     // Add a recipient
+   
+    $mail->addReplyTo('aldiiit593@gmail.com', 'Percobaan');
+    // $mail->addCC('cc@example.com');
+    // $mail->addBCC('bcc@example.com');
+ 
+    // Attachments
+    // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+ 
+    // Content
+    $mail->isHTML(true);                                  // Set email format to HTML
+    $mail->Subject = 'Konfirmasi Pembayaran dari Localhost';
+    $mail->Body    = '<h1>Halo, Admin.</h1>';    
+ 
+    if($mail->send())
+    {
+        echo 'Konfirmasi pembayaran telah berhasil';
+    }
+    else{
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+
+
+}
+
 
     
 

@@ -1,13 +1,32 @@
- <footer class="main-footer">
-      <center>
-        <div class="footer-left">
-          Copyright &copy; 2021<div class="bullet"></div>PT.<a href="#">Berkah</a>
-        </div>
-        </center>
-       
-      </footer>
+ 
     </div>
   </div>
+  <br>
+  <br>
+
+  <ul id="footerapp" class="nav justify-content-center fixed-bottom bg-success d-md-none d-lg-none d-xl-none">
+  <li class="nav-item">
+    <a class="nav-link " href="<?= base_url('ptberkah/home') ?>"><i class="fas fa-home" style="font-size: 20px; color: white;"></i></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="<?= base_url('ptberkah/add-member') ?>"><i class="fas fa-user-plus" style="font-size: 20px; color: white;"></i></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="<?= base_url('ptberkah/bonus') ?>"><i class="fas fa-hand-holding-usd" style="font-size: 20px; color: white;"></i></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="<?php base_url('ptberkah/data-jaringan') ?>" tabindex="-1" aria-disabled="true"><i class="fas fa-users" style="font-size: 20px; color: white;"></i></a>
+  </li>
+</ul>
+
+
+
+<!-- <nav class="nav nav-pills nav-justified fixed-bottom shadow" style="background-color: silver;">
+  <a class="nav-link" href="#"><i class="fas fa-home" style="font-size: 20px;"></i></a>
+  <a class="nav-link" href="#"><i class="fas fa-user-plus" style="font-size: 20px; margin-left: 100px;"></i></a>
+  <a class="nav-link" href="#"><i class="fas fa-user-plus" style="font-size: 20px; margin-left: 100px;"></i></a>
+  
+</nav> -->
 
   <!-- General JS Scripts -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

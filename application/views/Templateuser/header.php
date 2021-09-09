@@ -7,7 +7,7 @@
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+ 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
   <script type="text/javascript"
@@ -25,6 +25,8 @@
   <link rel="stylesheet" href="<?= base_url() ?>assets_user/css/components.css">
 
   <link href="https://unpkg.com/treeflex/dist/css/treeflex.css" rel="stylesheet">
+
+ 
 </head>
 
 <body>
@@ -156,6 +158,30 @@
                 </ul>
               </li>
 
+
+            <?php 
+
+                $cek = $this->db->get_where('tbl_register', ['kode_user' => $this->session->kode_user])->row_array();
+
+                $paket = $cek['jenis_paket'];
+
+                if ($paket == 'Paket Reseller Brown') {
+                  
+                }elseif ($paket == 'Paket Reseller Silver') {
+                  
+                }elseif ($paket == 'Paket Reseller Gold') {
+                  # code.
+                }elseif ($paket == 'Paket Reseller Platinum') {
+                  
+                }else{
+
+
+             ?>
+
+              <li class=""><a class="nav-link" href="<?= base_url('ptberkah/voucher-anda') ?>"><i class="fas fa-download"></i> <span>Download Sertifikat</span></a></li>
+              </li>
+
+                <?php } ?>
 
               <!-- <li class="active"><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li> -->
 

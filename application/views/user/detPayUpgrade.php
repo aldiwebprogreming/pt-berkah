@@ -14,19 +14,70 @@
           </div>
 
           <div class="section-body">
-            <div class="invoice">
-              <div class="invoice-print">
-                <div class="row">
-                  
-                    </div>
-                  </div>
-                </div>
+            
 
                 <div class="row mt-4">
                   <div class="col-md-12">
-                    <div class="section-title"><h4 class="mb-3"><storong>Pilih Metode Pembayaran</storong></h4></div>
+                    
                       <div class="row">
                         <div class="col-sm-6">
+                          <div class="card shadow">
+                            <div class="card-header">
+                              <h4>Informasi Produk</h4>
+                            </div>
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <h5 class="text-black p-b-10">Jenis Voucher</h5>
+                                  <p class="color1"><?= $detProduk['jenis_voucher'] ?></p>
+                                </div>
+
+                                 <div class="col-md-6">
+                                  <h5 class="text-black p-b-10">Jenis Paket</h5>
+                                  <p class="color1"><?= $detProduk['jenis_produk'] ?></p>
+                                </div>
+
+                                 <div class="col-md-6">
+                                  <h5 class="text-black p-b-10">Bonus Sponsor</h5>
+                                  <p class="color1"><?= $detProduk['bonus_sponsor'] ?>%</p>
+                                </div>
+
+                                 <div class="col-md-6">
+                                  <h5 class="text-black p-b-10">Bonus Point</h5>
+                                  <p class="color1"><?= $detProduk['bonus_point'] ?></p>
+                                </div>
+
+                                <div class="col-md-6">
+                                  <h5 class="text-black p-b-10">Jumlah Voucher</h5>
+                                  <p class="color1"><?= $detProduk['jumlah_voucher'] ?> voucher</p>
+                                </div>
+
+                                 <div class="col-md-6">
+                                  <h5 class="text-black p-b-10">Nilai Voucher</h5>
+                                  <p class="color1">Rp. <?= $detProduk['nilai_voucher']  ?> /voucher</p>
+                                </div>
+
+                                 <div class="col-md-6">
+                                  <h5 class="text-black p-b-10">Harga Voucher</h5>
+                                  <p class="color1">Rp. <?= $detProduk['harga']  ?></p>
+                                </div>
+                              </div>
+                             
+
+
+                            </div>
+                            <div class="card-footer">
+                             <label><strong>Total : </strong></label> Rp.<?= $detProduk['harga'] ?>
+                            </div>
+                          </div>
+                        </div>
+
+                          
+
+
+                        <div class="col-sm-6">
+
+
                           
                           <div class="row">
 
@@ -46,6 +97,7 @@
 
 
                           <div class="col-sm-12">
+                            <div class="section-title"><h4 class="mb-3"><storong>Pilih Metode Pembayaran</storong></h4></div>
                             <div class="card card-success shadow" id="transfer">
                               <div class="card-body">
                                 <i id="cekT" class="fas fa-check-circle" style="font-size: 30px; display: none"></i>
@@ -107,57 +159,7 @@
 
                           
                         </div>
-                        <div class="col-sm-6">
-
-                          <div class="card shadow">
-                            <div class="card-header">
-                              <h4>Informasi Produk</h4>
-                            </div>
-                            <div class="card-body">
-                              <div class="row">
-                                <div class="col-md-6">
-                                  <h5 class="text-black p-b-10">Jenis Voucher</h5>
-                                  <p class="color1"><?= $detProduk['jenis_voucher'] ?></p>
-                                </div>
-
-                                 <div class="col-md-6">
-                                  <h5 class="text-black p-b-10">Jenis Paket</h5>
-                                  <p class="color1"><?= $detProduk['jenis_produk'] ?></p>
-                                </div>
-
-                                 <div class="col-md-6">
-                                  <h5 class="text-black p-b-10">Bonus Sponsor</h5>
-                                  <p class="color1"><?= $detProduk['bonus_sponsor'] ?>%</p>
-                                </div>
-
-                                 <div class="col-md-6">
-                                  <h5 class="text-black p-b-10">Bonus Point</h5>
-                                  <p class="color1"><?= $detProduk['bonus_point'] ?></p>
-                                </div>
-
-                                <div class="col-md-6">
-                                  <h5 class="text-black p-b-10">Jumlah Voucher</h5>
-                                  <p class="color1"><?= $detProduk['jumlah_voucher'] ?> voucher</p>
-                                </div>
-
-                                 <div class="col-md-6">
-                                  <h5 class="text-black p-b-10">Nilai Voucher</h5>
-                                  <p class="color1">Rp. <?= $detProduk['nilai_voucher']  ?> /voucher</p>
-                                </div>
-
-                                 <div class="col-md-6">
-                                  <h5 class="text-black p-b-10">Harga Voucher</h5>
-                                  <p class="color1">Rp. <?= $detProduk['harga']  ?></p>
-                                </div>
-                              </div>
-                             
-
-
-                            </div>
-                            <div class="card-footer">
-                             <label><strong>Total : </strong></label> Rp.<?= $detProduk['harga'] ?>
-                            </div>
-                          </div>
+                        
 
 
 

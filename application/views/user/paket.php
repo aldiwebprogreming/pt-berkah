@@ -18,7 +18,7 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="text-primary"><?= $produk_anda['jenis_produk'] ?></h3>
+                    <h6 class="text-primary3"><?= $produk_anda['jenis_produk'] ?></h6>
                   </div>
                   <div class="card-body">
                     
@@ -55,7 +55,7 @@
 		                   <hr>
 		                   <a href="<?= base_url() ?>ptberkah/detail-paket" class="btn btn-primary float-">Detail Paket Voucher <i class="fas fa-arrow-right"> </i> </a>
 
-		                   <a href="<?= base_url() ?>/ptberkah/upgrade-paket" class="btn btn-primary float-">Upgrade Paket Voucher Anda <i class="fas fa-sync-alt"> </i> </a>
+		                   <a href="<?= base_url() ?>/ptberkah/upgrade-paket" class="btn btn-primary mt-2">Upgrade Voucher Anda<i class="fas fa-sync-alt"> </i> </a>
 		                  </div>
 		                </div>
 		              </div>
@@ -74,4 +74,19 @@
 
   </section>
 </div>
+
+<style>
+    @media (max-width: 577px) {
+        .detail{
+            margin-top: 270px;
+        }
+        .like{
+            font-size: 8px;
+        }
+
+        .text-primary{
+        	font-size: 20px;
+        }
+    }
+</style>
 

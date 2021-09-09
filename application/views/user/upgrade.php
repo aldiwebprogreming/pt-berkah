@@ -36,6 +36,7 @@
                               <?php } ?>
                             </div>
                           </div>
+                        </div>
 
                           <div id="vc" class="mt-3">
                               
