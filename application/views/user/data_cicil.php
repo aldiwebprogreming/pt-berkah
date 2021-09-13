@@ -35,25 +35,11 @@
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-
-                    <?php if ($voucher == false) {
-                        echo "";  
-                    }else{ ?>
-                    <?php 
-
-                      $jenis_voucher = $this->db->get_where('tbl_list_voucherproduk',['kode_member' => $this->session->kode_user, 'status_voucher' => $status_voucher])->row_array();
-
-                        $produk  = $this->db->get_where('tbl_produk',['kode_produk' =>$jenis_voucher['kode_produk']])->row_array();
-
-                     ?>
-                    <h4>Voucher anda sebelumya (<?= $produk['jenis_produk'] ?>)</h4>
-                    <?php } ?>
+                    <h4>Cicilan Prdouk Anda</h4>
                   </div>
                   <div class="card-body">
-                    <?= $vcr  ?> voucher / Total :  <?=  "Rp " . number_format($nilai_voucher['total_nilai_voucher'],2,',','.')?>
+                    <?= $jm ?>
                   </div>
-
-
                 </div>
               </div>
             </div>
@@ -66,81 +52,74 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header">
-                  <h4>Data Voucher Berlaku</h4>
+                  <h4>Data Cicilan Produk</h4>
 
+                     
                 </div>
+
+
 
 
 
                 <div class="card-body p-0">
 
                   <div class="container">
-
-                    <?php 
-                      if ($voucher == false) { ?>
-                        <center>
-                          <b><h1 style="font-size: 100px;">404</h1></b>
-                          <p class="text-primary">Tidak ada data voucher upgrade</p>
-                        </center>
-                      <?php }else{ ?>
                    <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>NO</th>
-                                <th>Kode voucher</th>
-                                <th>Nilai voucher</th>
-                                <th>Tgl Mulai</th>
-                                <th>Tgl Berakhir</th>
+                                <th>No</th>
+                                <th>Nominail Cicilan</th>
+                                <th>Tanggal</th>
                                 <th>Status</th>
+                                
                                 
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>NO</th>
-                                <th>Kode voucher</th>
-                                <th>Nilai voucher</th>
-                                <th>Tgl Mulai</th>
-                                <th>Tgl Berakhir</th>
+                                <th>Nominail Cicilan</th>
+                                <th>Tanggal</th>
                                 <th>Status</th>
                             </tr>
                         </tfoot>
                         <tbody>
                           <?php
                           $no = 1;
-                          $date = date('Y-m-d');
+                          
                           $total = 0;
-                           foreach ($voucher as $data) { 
-                            if ($date >= $data['tgl_terbit']) { ?>
+                           foreach ($cicil as $data) { ?>
+                           
 
                                 <tr>
                                   <td><?= $no++ ?></td>
-                                  <td><?= $data['kode_voucher'] ?></td>
-                                  <td><?= $data['nilai_voucher'] ?></td>
-                                  <td><?= $data['tgl_terbit'] ?></td>
-                                  <td><?= $data['tgl_batasterbit'] ?></td>
-                                  <td><span class="badge badge-success">Berlaku</span></td>
+                                  <td><?= $data['cicilan'] ?></td>
+                                  <td><?= $data['date'] ?></td>
+                                  <td><small class="badge badge-success">Terbayar</small></td>
+                                 
                                 
-                                <?php 
-                                  $total = $data['nilai_voucher'] + $total;
-
-                                 ?>
-                              
-                                <?php } ?>
-
-
 
                               </tr>
         
                            
                           <?php } ?>
 
-                            <h6>Total Nominal Voucher Berlaku <?=  "Rp " . number_format($total,2,',','.')?></h6>
+                          
+                            <h6>Total Nominal Yang Anda Cicil <?=  "Rp " . number_format($jm_cicil['jm_cicilan'],2,',','.')?></h6> 
+
+
+                            <?php 
+
+                              $sisa = $set['harga'] - $jm_cicil['jm_cicilan'];
+
+                             ?>
+                             <hr>
+                            <h6>Total Sisa Yang Anda Harus Bayar <?=  "Rp " . number_format($sisa,2,',','.')?></h6> 
                             
                         </tbody>
                     </table>
 
-                  <?php } ?>
+
 
 
                 </div>
@@ -150,7 +129,10 @@
               </div>
             </div>
 
+     
 
+
+   
 
 
            
@@ -158,12 +140,11 @@
         </section>
       </div>
 
-
-   
+     
                
 
       <script>
     $(document).ready(function(){
         $('#tabel-data').DataTable();
     });
-</script>sss
+</script>

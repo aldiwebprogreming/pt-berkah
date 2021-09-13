@@ -126,6 +126,7 @@
                 <ul class="dropdown-menu" style="display: none;">
                   <li><a class="nav-link" href="<?= base_url('ptberkah/keranjang-belanja') ?>">Keranjang Anda </a></li>
                   <li><a class="nav-link" href="<?= base_url('ptberkah/keranjang-belanja-upgrade') ?>">Keranjang Upgrade</a></li>
+                  <li><a class="nav-link" href="<?= base_url('ptberkah/user/keranjang_cicil2') ?>">Keranjang Upgrade Cicil</a></li>
                  
                 </ul>
               </li>
@@ -135,6 +136,16 @@
                 <ul class="dropdown-menu" style="display: none;">
                   <li><a class="nav-link" href="<?= base_url('ptberkah/upgrade-paket') ?>">Paket Anda</a></li>
                  <!--  <li><a class="nav-link" href="<?= base_url('produk/data-member') ?>">Paket Member</a></li> -->
+                 
+                </ul>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-sync-alt"></i> <span>Upgrade Cicil</span></a>
+                <ul class="dropdown-menu" style="display: none;">
+                  <li><a class="nav-link" href="<?= base_url('ptberkah/set-upgrade-cicil') ?>">Set Upgrade Cicil</a></li>
+
+               <li><a class="nav-link" href="<?= base_url('produk/detail-upgrade-cicil') ?>">Data Cicilan</a></li> 
                  
                 </ul>
               </li>

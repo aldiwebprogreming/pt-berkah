@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 |	https://codeigniter.com/user_guide/general/routing.html
 |
-| -------------------------------------------------------------------------
+| --------------------------------W-----------------------------------------
 | RESERVED ROUTES
 | -------------------------------------------------------------------------
 |
@@ -147,6 +147,12 @@ $route['ptberkah/keranjang-belanja-upgrade'] = 'user/keranjang_belanja_upgrade';
 // menu profil
 $route['ptberkah/ubah-password'] = 'user/ubah_password';
 $route['ptberkah/ubah-security-code'] = 'user/ubah_security_code';
+
+// menu upgrade cicil
+$route['ptberkah/set-upgrade-cicil'] = 'user/set_upgrade_cicil';
+$route['ptberkah/detail-upgrade-cicil'] = 'user/detail_upgrade_cicil';
+$route['ptberkah/detcicil/(:any)'] = 'user/detcicil/$1';
+
 
 
 

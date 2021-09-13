@@ -40,7 +40,7 @@
                                 <i class="fas fa-user"></i>
                               </div>
                             </div>
-                            <input type="password"  class="form-control daterange-cus" required="" value="" minlength="8" name="pass_lama" placeholder="Masukan password lama anda">
+                            <input type="password"  class="form-control daterange-cus" required="" value="" minlength="5" name="pass_lama" placeholder="Masukan password lama anda">
                             
                           </div>
                         </div>
@@ -53,7 +53,7 @@
                                 <i class="fas fa-user"></i>
                               </div>
                             </div>
-                            <input type="password"  class="form-control daterange-cus" required="" value="" minlength="8" name="pass_baru1" placeholder="Masukan password baru anda">
+                            <input type="password"  class="form-control daterange-cus" required="" value="" minlength="5" name="pass_baru1" placeholder="Masukan password baru anda">
                             
                           </div>
                         </div>
@@ -65,7 +65,7 @@
                                 <i class="fas fa-user"></i>
                               </div>
                             </div>
-                            <input type="password"  class="form-control daterange-cus" required="" value="" minlength="8" name="pass_baru2" placeholder="Konfirmasi password baru anda">
+                            <input type="password"  class="form-control daterange-cus" required="" value="" minlength="5" name="pass_baru2" placeholder="Konfirmasi password baru anda">
                             
                           </div>
                         </div>

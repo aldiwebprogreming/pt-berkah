@@ -22,6 +22,20 @@
           </button>
         </div>
 
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="card card-statistic-1">
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <div class="section-title"><h4 class="mb-3"><storong>Filter</storong></h4>
+                      
+                    </div>
+
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+
           <center>
           <div class="owl-carousel owl-theme">
             <div class="item"><img src="<?= base_url() ?>assets_crowsel/slid1.png" style="border-radius: 5px;" ></div>

@@ -477,7 +477,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
          if ($this->input->post('kirim')) {
 
-             $config['upload_path']          = './assets_user/bukti/';
+            $config['upload_path']          = './assets_user/bukti/';
             $config['allowed_types']        = 'gif|jpg|png|jpeg';
             $config['min_size']             = 0;
             $config['min_width']            = 0;
@@ -668,8 +668,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
          $config = [
             'protocol'  => 'smtp',
             'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_user' => 'aldiiit593@@gmail.com',
-            'smtp_pass' => 'aldimantap1234',
+            'smtp_user' => 'aldiiit593@gmail.com',
+            'smtp_pass' => 'jmgtfhyvdxqqiuyy',
             'smtp_port' => 465,
             'mailtype'  => 'html',
             'charset'   => 'utf-8',
@@ -1223,51 +1223,227 @@ defined('BASEPATH') OR exit('No direct script access allowed');
      }
 
 
-     function send(){
-
-    $mail = new PHPMailer(true);
- 
-    // $no_invoice         = $_POST['no_invoice'];
-    // $nama_pengirim      = $_POST['nama_pengirim'];
-    // $email              = $_POST['email'];
- 
-    //Server settings
-    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
-    $mail->isSMTP();                                            // Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-    $mail->Username   = 'aldiiit593@gmail.com';                     // SMTP username
-    $mail->Password   = 'aldimantap1234';                               // SMTP password
-    // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-    $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
- 
-    //Recipients
-    $mail->setFrom('aldiiit593@gmail.com', 'Percobaan');
-    $mail->addAddress('alldii1956@gmail.com', 'Hay');     // Add a recipient
+    function upgrade_cicil(){
+       
+        $data['cek'] = $this->db->get_where('tbl_setupgrade_cicil',['kode_member' => $this->session->kode_user])->row_array();
+        // if ($data['cek']['produk_tujuan'] == 'Paket Reseller Silver') {
+        //      $data['produk'] = $this->db->get_where('tbl_produk',['jenis_produk' => 'Paket Reseller Brown'])->result_array();
+        // }elseif ($data['cek']['produk_tujuan'] == 'Paket Reseller Gold') {
+            // $this->db->where('jenis_produk','Paket Reseller Silver');
+            // $this->db->where('jenis_produk','Paket Reseller Gold');
+             $data['produk'] = $this->db->get('tbl_produk')->result_array();
    
-    $mail->addReplyTo('aldiiit593@gmail.com', 'Percobaan');
-    // $mail->addCC('cc@example.com');
-    // $mail->addBCC('bcc@example.com');
- 
-    // Attachments
-    // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
- 
-    // Content
-    $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'Konfirmasi Pembayaran dari Localhost';
-    $mail->Body    = '<h1>Halo, Admin.</h1>';    
- 
-    if($mail->send())
-    {
-        echo 'Konfirmasi pembayaran telah berhasil';
+        $data['member'] = $this->db->get_where('tbl_register',['kode_user' => $this->session->kode_user])->row_array();
+        $this->load->view('Templateuser/header');
+        $this->load->view('user/upgrade_cicil', $data);
+        $this->load->view('Templateuser/footer');
+        $kirim = $this->input->post('kirim');
+    if (isset($kirim)) {
+        
+        $data = [
+            'kode_member' => $this->session->kode_user,
+            'produk_anda' => $this->input->post('produk_anda'),
+            'produk_tujuan' => $this->input->post('produk_tujuan'),
+            'harga' => $this->input->post('harga'),
+
+        ];
+        $input = $this->db->insert('tbl_setupgrade_cicil', $data);
+        $this->session->set_flashdata('message', 'swal("Sukses!!", "upgrade cicil anda berhasil di seting", "success" );');
+            redirect('user/upgrade_cicil');
+
     }
-    else{
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+
+    }
+
+    function detcicil($kode_produk){
+        $data['produk'] = $this->db->get_where('tbl_produk',['kode_produk' => $kode_produk])->row_array();
+        $data['sc_code'] = $this->db->get_where('tbl_register',['kode_user' => $this->session->kode_user])->row_array();
+        $this->load->view('Templateuser/header');
+        $this->load->view('user/detcicil', $data);
+        $this->load->view('Templateuser/footer');
+
+    }
+
+    function act_keranjang_cicil(){
+        
+        $user= $this->db->get_where('tbl_register',['kode_user' => $this->session->kode_user])->row_array();
+
+        $data = [
+            'kode_member' => $this->session->kode_user,
+            'produk_anda' => $user['jenis_paket'],
+            'produk_tujuan' => $this->input->post('produk_tujuan'),
+            'kode_produk' => $this->input->post('kode_produk'),
+            'harga' => $this->input->post('harga'),
+            'bonus_sponsor' => $this->input->post('bonus_sponsor')
+        ];
+
+        $input = $this->db->insert('tbl_dataupgrade_cicil', $data);
+        $this->session->set_flashdata('message', 'swal("Sukses!!", "upgrade cicil anda berhasil di masukan ke karenjang", "success" );');
+            redirect('user/keranjang_cicil');
+        
+
+    }
+
+    function keranjang_cicil(){
+        $data['keranjang'] = $this->db->get_where('tbl_dataupgrade_cicil',['kode_member' => $this->session->kode_user])->row_array();
+        $this->load->view('Templateuser/header');
+        $this->load->view('user/keranjang_cicil', $data);
+        $this->load->view('Templateuser/footer');
     }
 
 
-}
+    function set_upgrade_cicil(){
+
+        $data['user'] = $this->db->get_where('tbl_register',['kode_user' => $this->session->kode_user])->row_array();
+
+        $data['cek'] = $this->db->get_where('tbl_setupgrade_cicil',['kode_member' => $this->session->kode_user])->row_array();
+
+       
+
+
+        $this->db->like('jenis_produk', 'Reseller');
+        $data['prd'] = $this->db->get('tbl_produk')->result_array();
+        $this->load->view('Templateuser/header');
+        $this->load->view('user/set_cicil', $data);
+        $this->load->view('Templateuser/footer');
+
+        if ($this->input->post('kirim')) {
+            
+            $data = [
+            'kode_member' => $this->session->kode_user,
+            'produk_anda' => $this->input->post('produk_anda'),
+            'produk_tujuan' => $this->input->post('produk_tujuan'),
+            'harga' => $this->input->post('harga'),
+
+        ];
+        $input = $this->db->insert('tbl_setupgrade_cicil', $data);
+        $this->session->set_flashdata('message', 'swal("Sukses!!", "upgrade cicil anda berhasil di seting", "success" );');
+            redirect('user/set_upgrade_cicil');
+        }
+    
+
+    }
+
+    function get_harga(){
+
+        $user = $this->db->get_where('tbl_register',['kode_user' => $this->session->kode_user])->row_array();
+        $pdk = $this->db->get_where('tbl_produk',['kode_produk' => $user['kode_produk']])->row_array();
+
+        $kode = $this->input->get('kode_produk');
+        $get = $this->db->get_where('tbl_produk',['kode_produk' => $kode])->row_array();
+        $harga = $get['harga'] - $pdk['harga'];
+        ?>
+        <input type="text" name="harga" class="form-control" value="<?= $harga ?>">
+
+    <?php }
+
+
+    function upgrade_cicil2(){
+        $kode_user = $this->session->kode_user;
+        $data['user'] = $this->db->get_where('tbl_register',['kode_user' => $this->session->kode_user])->row_array();
+
+        $data['set'] = $this->db->get_where('tbl_setupgrade_cicil',['kode_member' => $this->session->kode_user])->row_array();
+        $data['datacicil'] = $this->db->get_where('tbl_dataupgrade_cicil',['kode_member' => $this->session->kode_user])->row_array();
+
+        $data['jm_cicil'] = $this->db->query("SELECT SUM(cicilan) AS jm_cicilan FROM tbl_dataupgrade_cicil WHERE kode_member = '$kode_user' AND  status = 1")->row_array();
+
+        $data['set']  = $this->db->get_where('tbl_setupgrade_cicil',['kode_member' => $this->session->kode_user])->row_array();
+
+        $this->load->view('Templateuser/header');
+        $this->load->view('user/upgrade_cicil2', $data);
+        $this->load->view('Templateuser/footer');
+
+        
+
+     
+       
+    }
+
+    function action_cicil(){
+        $produk = $this->db->get_where('tbl_produk',['kode_produk' => $this->input->post('paket_tujuan')])->row_array();
+
+        $data = [
+
+            'kode_member' => $this->session->kode_user,
+            'produk_anda' => $this->input->post('paket_anda'),
+            'produk_tujuan' => $this->input->post('paket_tujuan'),
+            'kode_produk' => $produk['kode_produk'],
+            'harga' => $produk['harga'],
+            'cicilan' => $this->input->post('cicil'),
+            'status' => 0,
+
+        ];
+
+        $input = $this->db->insert('tbl_dataupgrade_cicil', $data);
+        $this->session->set_flashdata('message', 'swal("Sukses!!", "upgrade cicil anda berhasil di masukan ke karenjang", "success" );');
+            redirect('user/keranjang_cicil2');
+    }
+
+    function keranjang_cicil2(){
+        $data['keranjang'] = $this->db->get_where('tbl_dataupgrade_cicil',['kode_member' => $this->session->kode_user, 'status' => 0])->result_array();
+
+    //   $this->db->select('*');
+    //   $this->db->from('tbl_bukti_transaksi_cicil');
+    //   $this->db->where('id_keranjang', 2);
+    //   $this->db->join('tbl_dataupgrade_cicil','tbl_dataupgrade_cicil.id = tbl_bukti_transaksi_cicil.id_keranjang');      
+    //   $query = $this->db->get()->result_array();
+    // var_dump($query);
+    // die();
+        $this->load->view('Templateuser/header');
+        $this->load->view('user/keranjang_cicil2', $data);
+        $this->load->view('Templateuser/footer');
+
+        if ($this->input->post('kirim')) {
+            $config['upload_path']          = './assets_user/bukti_cicil/';
+            $config['allowed_types']        = 'gif|jpg|png|jpeg';
+            $config['min_size']             = 0;
+            $config['min_width']            = 0;
+            $config['min_height']           = 0;
+
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('gambar')){
+                $error = array('error' => $this->upload->display_errors());
+                $this->session->set_flashdata('message', 'swal("Proses konfirmasi gagal", "", "warning" );');
+                redirect('user/keranjang_cicil2');
+            }
+
+            $gambar = $_FILES['gambar']['name'];
+             
+             $data = [
+
+                'kode_user' => $this->session->kode_user,
+                'kode_produk' => $this->input->post('kode_produk'),
+                'gambar' => $gambar,
+                'id_keranjang' => $this->input->post('id'),
+
+             ];
+             $input = $this->db->insert('tbl_bukti_transaksi_cicil', $data);
+             
+                 $this->session->set_flashdata('message', 'swal("Sukses!!", "Konfirmasi pembayaran berhasil dikirim", "success" );');
+            redirect('user/keranjang_cicil2');
+            
+            
+
+
+        }
+
+    }
+
+
+    function data_cicil(){
+        $kode_user = $this->session->kode_user;
+        $data['cicil'] = $this->db->get_where('tbl_dataupgrade_cicil',['kode_member' => $this->session->kode_user, 'status' => 1])->result_array();
+
+        $data['jm'] = $this->db->get_where('tbl_dataupgrade_cicil',['kode_member' => $this->session->kode_user, 'status' => 1])->num_rows();
+        $data['jm_cicil'] = $this->db->query("SELECT SUM(cicilan) AS jm_cicilan FROM tbl_dataupgrade_cicil WHERE kode_member = '$kode_user'")->row_array();
+
+        $data['set']  = $this->db->get_where('tbl_setupgrade_cicil',['kode_member' => $this->session->kode_user])->row_array();
+       
+        $this->load->view('Templateuser/header');
+        $this->load->view('user/data_cicil', $data);
+        $this->load->view('Templateuser/footer');
+
+    }
 
 
     
