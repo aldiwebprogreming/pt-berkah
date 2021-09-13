@@ -8,6 +8,7 @@
 
       <!-- Main Content -->
       <div class="main-content">
+
         <section class="section">
           <div class="section-header">
             <img src="<?= base_url('assets_crowsel/development.png') ?>" style="height: 50px;">
@@ -15,14 +16,16 @@
           </div>
 
 
-        <div class="alert alert-primary alert-dismissible fade show" role="alert">
-          <strong>Holy guacamole!</strong> Selamat datang di website kami, tanam saham anda dengan mudah dan terpercaya di PTB.
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <h6>Menu</h6>
+                <img alt="image" src="<?= base_url('assets_user/menu/add_user.png') ?>" class="img-fluid" data-toggle="tooltip" title="" data-original-title="Tambah User" style="height: 20px;">
 
-            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <img alt="image" src="<?= base_url('assets_user/menu/bonus.png') ?>" class="img-fluid" data-toggle="tooltip" title="" data-original-title="Bonus" style="height: 20px;">
+            </div>
+          </div>
+
+           <!--  <div class="col-lg-12 col-md-12 col-sm-12 col-12">
               <div class="card card-statistic-1">
                 <div class="card-wrap">
                   <div class="card-header">
@@ -34,7 +37,7 @@
                   
                 </div>
               </div>
-            </div>
+            </div> -->
 
           <center>
           <div class="owl-carousel owl-theme">

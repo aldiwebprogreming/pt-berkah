@@ -4,7 +4,7 @@
   <br>
   <br>
 
-  <ul id="footerapp" class="nav justify-content-center fixed-bottom bg-success d-md-none d-lg-none d-xl-none">
+  <ul id="footerapp" class="nav justify-content-center fixed-bottom bg-primary d-md-none d-lg-none d-xl-none">
   <li class="nav-item">
     <a class="nav-link " href="<?= base_url('ptberkah/home') ?>"><i class="fas fa-home" style="font-size: 20px; color: white;"></i></a>
   </li>
