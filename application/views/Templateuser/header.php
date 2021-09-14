@@ -106,8 +106,8 @@
               <li class=""><a class="nav-link" href="<?= base_url('ptberkah/data-jaringan') ?>"><i class="fas fa-users"></i> <span>Data Jaringan</span></a></li>
               </li>
 
-               <li class=""><a class="nav-link" href="<?= base_url('ptberkah/data-member') ?>"><i class="fas fa-list"></i> <span>Data Member Ada</span></a></li>
-              </li>
+            <!--    <li class=""><a class="nav-link" href="<?= base_url('ptberkah/data-member') ?>"><i class="fas fa-list"></i> <span>Data Member Ada</span></a></li>
+              </li> -->
 
               <li class="menu-header">Bonus</li>
                 <li class=""><a class="nav-link" href="<?= base_url('ptberkah/bonus') ?>"><i class="fas fa-credit-card"></i> <span>Bonus</span></a></li>
@@ -141,7 +141,7 @@
               </li>
 
               <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-sync-alt"></i> <span>Upgrade Cicil</span></a>
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-user-edit"></i> <span>Upgrade Cicil</span></a>
                 <ul class="dropdown-menu" style="display: none;">
                   <li><a class="nav-link" href="<?= base_url('ptberkah/set-upgrade-cicil') ?>">Set Upgrade Cicil</a></li>
 
@@ -156,7 +156,7 @@
  -->
               <li class="menu-header">Profil</li>
               <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-sync-alt"></i> <span>Profil</span></a>
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-user"></i> <span>Profil</span></a>
                 <ul class="dropdown-menu" style="display: none;">
                    <li class=""><a class="nav-link" href="<?= base_url('ptberkah/profil') ?>"> <span>Data Profil</span></a></li>
 

@@ -19,12 +19,12 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Data Produk</h4>
+                    
                   </div>
                   <div class="card-body">
 
                   	<div class="alert alert-success alert-dismissible fade show" role="alert">
-			          <strong>Holy guacamole!</strong> apakah anda ingin upgrade paket anda ke paket lebih tinggi lagi?.
+			          <strong>Hello <?= $this->session->name ?></strong> apakah anda ingin upgrade paket anda ke paket lebih tinggi lagi?.
 			          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			            <span aria-hidden="true">&times;</span>
 			          </button>

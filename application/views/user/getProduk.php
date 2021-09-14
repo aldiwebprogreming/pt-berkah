@@ -22,7 +22,7 @@
 
     <img class="card-img-top" src="<?= base_url('assets_user/voucher/reseller_s.png') ?>" alt="Card image cap">
 
-<?php }elseif ($data['jenis_produk'] == 'Paket Reseller Brown') { ?>
+<?php }elseif ($data['jenis_produk'] == 'Paket Reseller Bronze') { ?>
 
     <img class="card-img-top" src="<?= base_url('assets_user/voucher/reseller_b.png') ?>" alt="Card image cap">
 
@@ -37,7 +37,7 @@
 
  <img class="card-img-top" src="<?= base_url('assets_user/voucher/stockist_s.png') ?>" alt="Card image cap">
 
- <?php } elseif ($data['jenis_produk'] == 'Paket Stockist Brown') { ?>
+ <?php } elseif ($data['jenis_produk'] == 'Paket Stockist Bronze') { ?>
 
      <img class="card-img-top" src="<?= base_url('assets_user/voucher/stockist_b.png') ?>" alt="Card image cap">
 

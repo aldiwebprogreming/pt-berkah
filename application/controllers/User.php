@@ -99,6 +99,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
          $id = $this->input->get('id');
         $data['getProduk'] = $this->db->get_where('tbl_produk', ['jenis_voucher' => $id])->result_array();
+
         $data['produk_anda'] = $this->db->get_where('tbl_register',['kode_user' => $this->session->kode_user])->row_array();
 
 
@@ -701,11 +702,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     }
 
 
+
+
+
+
     function action_ecash(){
 
 
         $karakter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789';
          $sec_code  = substr(str_shuffle($karakter), 0, 8);
+
+        $karakter_pass = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789';
+         $pass  = substr(str_shuffle($karakter_pass), 0, 5);
                 
     
         $data = [
@@ -714,7 +722,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             'username' => $this->input->post('username'),
             'email' => $this->input->post('email2'),
             'no_telp' => $this->input->post('nohp'),
-            'password' => password_hash('aldi123', PASSWORD_DEFAULT),
+            'password' => password_hash($pass, PASSWORD_DEFAULT),
+            'pass2' => $pass,
             'status' => 0,
             'kode_jaringan' => $this->session->kode_user." ".$this->input->post('kode_jaringan') ,
             'kode_rule' => $this->session->kode_user,
@@ -803,7 +812,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     $input_voucher = $this->db->insert('tbl_list_voucherproduk', $data);    
                 }   
                 
-             }elseif ($this->input->post('jenis_paket') == 'Paket Reseller Brown') {
+             }elseif ($this->input->post('jenis_paket') == 'Paket Reseller Bronze') {
                 for ($i=1; $i <= $prdk['jumlah_voucher']  ; $i++) { 
                     $kode = rand(1, 100000);
                     $kode_vc = "VCR-".$kode;
@@ -954,7 +963,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             $this->bonus_baru($this->input->post('kode_user'));
 
-            // $this->sendEmail($this->input->post('email2'), $sc_code, 'aldi123');
+            $this->sendEmailPass($this->input->post('email2'), $sc_code, $pass);
+               // $this->sendEmail($data_user['email'], $data_user['sc_code'], $data_user['pass2']);
+
 
             $this->totalBonus_upgrade($this->session->kode_user, $prdk['harga']);
 
@@ -963,6 +974,43 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             redirect('ptberkah/bonus');
         }
     }
+
+    function sendEmailPass($email, $sc, $pass){
+
+      
+         $config = [
+            'protocol'  => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'aldiiit593@gmail.com',
+            'smtp_pass' => 'jmgtfhyvdxqqiuyy',
+            'smtp_port' => 465,
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8',
+            'newline'   => "\r\n"
+        ];
+
+
+            $this->load->library('email', $config);
+            $this->email->initialize($config);
+            $this->email->set_newline("\r\n");
+
+            $this->email->from('aldiiit593@gmail.com', 'PTB');
+            $this->email->to($email);
+
+            $this->email->subject('PTB');
+
+            
+            
+            $get1 = file_get_contents(base_url("email/email2.php?sc=$sc&&pass=$pass"));
+                    
+            $this->email->message("$get1");
+
+            if (!$this->email->send())
+            show_error($this->email->print_debugger());
+            else
+            echo 'Your e-mail has been sent!';
+    }
+
 
 
 
@@ -1353,7 +1401,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         $this->load->view('user/upgrade_cicil2', $data);
         $this->load->view('Templateuser/footer');
 
-        
 
      
        
@@ -1444,6 +1491,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         $this->load->view('Templateuser/footer');
 
     }
+
+
 
 
     

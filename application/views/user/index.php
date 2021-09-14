@@ -16,14 +16,37 @@
           </div>
 
 
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-sm-12">
               <h6>Menu</h6>
-                <img alt="image" src="<?= base_url('assets_user/menu/add_user.png') ?>" class="img-fluid" data-toggle="tooltip" title="" data-original-title="Tambah User" style="height: 20px;">
+                <img alt="image" class="rounded-circle" src="<?= base_url('assets_user/menu/groom.png') ?>" class="img-fluid" data-toggle="tooltip" title="" data-original-title="Tambah User" style="height: 30px;">
 
-                <img alt="image" src="<?= base_url('assets_user/menu/bonus.png') ?>" class="img-fluid" data-toggle="tooltip" title="" data-original-title="Bonus" style="height: 20px;">
+                <img alt="image" class="rounded-circle" src="<?= base_url('assets_user/menu/bonus.png') ?>" class="img-fluid" data-toggle="tooltip" title="" data-original-title="Bonus" style="height: 30px;">
+
+                <img alt="image" class="rounded-circle" src="<?= base_url('assets_user/menu/paket_anda.png') ?>" class="img-fluid" data-toggle="tooltip" title="" data-original-title="Bonus" style="height: 30px;">
+
+                  <img alt="image" class="rounded-circle" src="<?= base_url('assets_user/menu/voucher.png') ?>" class="img-fluid" data-toggle="tooltip" title="" data-original-title="Bonus" style="height: 30px;">
+
+                  <img alt="image" class="rounded-circle" src="<?= base_url('assets_user/menu/paint.png') ?>" class="img-fluid" data-toggle="tooltip" title="" data-original-title="Bonus" style="height: 30px;">
+
+                  <img alt="image" class="rounded-circle" src="<?= base_url('assets_user/menu/solution.png') ?>" class="img-fluid" data-toggle="tooltip" title="" data-original-title="Bonus" style="height: 30px;">
+
+
+                  <img alt="image" class="rounded-circle" src="<?= base_url('assets_user/menu/organization.png') ?>" class="img-fluid" data-toggle="tooltip" title="" data-original-title="Bonus" style="height: 30px;">
+
+                  <img alt="image" class="rounded-circle" src="<?= base_url('assets_user/menu/organization.png') ?>" class="img-fluid" data-toggle="tooltip" title="" data-original-title="Bonus" style="height: 30px;">
+
+                  <img alt="image" class="rounded-circle" src="<?= base_url('assets_user/menu/blood-transfusion.png') ?>" class="img-fluid" data-toggle="tooltip" title="" data-original-title="Bonus" style="height: 30px;">
+
+                  <img alt="image" class="rounded-circle" src="<?= base_url('assets_user/menu/subscribe.png') ?>" class="img-fluid" data-toggle="tooltip" title="" data-original-title="Bonus" style="height: 30px;">
+
+
+
+
             </div>
           </div>
+
+          <hr> -->
 
            <!--  <div class="col-lg-12 col-md-12 col-sm-12 col-12">
               <div class="card card-statistic-1">

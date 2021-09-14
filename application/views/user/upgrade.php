@@ -18,6 +18,16 @@
                 <h4>Upgrade Paket / <?= $paket['jenis_paket'] ?></h4>
               </div>
               <div class="card-body">
+
+                <?php 
+
+                  if ($paket['jenis_paket'] == 'Paket Stockist Platinum') {?>
+                    <center>
+                    <img src="<?= base_url('assets_user/img/warning.png') ?>" style="height: 200px;">
+                    <p class="text-primary"><strong>Anda tidak bisa melakukan upgrade</strong></p>
+                    </center>
+                  <?php }else{ ?>
+            
                 <div class="row">
                   <div class="col-12 col-sm-12 col-lg-12">
                     <div class="card-body">
@@ -45,6 +55,10 @@
                         </div>
 
                   </div>
+
+                <?php } ?>
+
+               
 
                   
 

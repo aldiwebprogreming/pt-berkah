@@ -8,18 +8,89 @@
   
  ?> -->
 
+ <?php 
+ $jenis = $produk_anda['jenis_paket'];
+  ?>
+
 <div class="row" id="app">
+<div class="col-sm-2"></div>
+
 <?php foreach ($getProduk as $data) { ?>
+  <?php 
+    
+    if ($jenis == 'Paket Reseller Silver') {
+        if ($data['jenis_produk'] == 'Paket Reseller Silver' || $data['jenis_produk'] == 'Paket Reseller Brown') {
+          continue;
+        }
+    }elseif ($jenis == 'Paket Reseller Gold') {
+      if ($data['jenis_produk'] == 'Paket Reseller Silver' || $data['jenis_produk'] == 'Paket Reseller Brown' ||$data['jenis_produk'] == 'Paket Reseller Gold' ) {
+          continue;
+        }
+    }elseif ($jenis == 'Paket Reseller Platinum') {
+     if ($data['jenis_produk'] == 'Paket Reseller Silver' || $data['jenis_produk'] == 'Paket Reseller Brown' ||$data['jenis_produk'] == 'Paket Reseller Gold' ||$data['jenis_produk'] == 'Paket Reseller Platinum' ) {
+          continue;
+        }
+    }elseif ($jenis == 'Paket Stockist Brown') {
+     if ($data['jenis_produk'] == 'Paket Reseller Silver' || $data['jenis_produk'] == 'Paket Reseller Brown' ||$data['jenis_produk'] == 'Paket Reseller Gold' ||$data['jenis_produk'] == 'Paket Reseller Platinum' |$data['jenis_produk'] == 'Paket Stockist Brown' ) {
+          continue;
+
+        }
+    }elseif ($jenis == 'Paket Stockist Silver') {
+     if ($data['jenis_produk'] == 'Paket Reseller Silver' || $data['jenis_produk'] == 'Paket Reseller Brown' ||$data['jenis_produk'] == 'Paket Reseller Gold' ||$data['jenis_produk'] == 'Paket Reseller Platinum' || $data['jenis_produk'] == 'Paket Stockist Brown' || $data['jenis_produk'] == 'Paket Stockist Silver' ) {
+          continue;
+        }
+    }elseif ($jenis == 'Paket Stockist Gold') {
+     if ($data['jenis_produk'] == 'Paket Reseller Silver' || $data['jenis_produk'] == 'Paket Reseller Brown' ||$data['jenis_produk'] == 'Paket Reseller Gold' ||$data['jenis_produk'] == 'Paket Reseller Platinum' || $data['jenis_produk'] == 'Paket Stockist Brown' || $data['jenis_produk'] == 'Paket Stockist Silver' || $data['jenis_produk'] == 'Paket Stockist Gold' ) {
+          continue;
+        }
+    }
+    elseif ($jenis == 'Paket Stockist Platinum') {
+     if ($data['jenis_produk'] == 'Paket Reseller Silver' || $data['jenis_produk'] == 'Paket Reseller Brown' ||$data['jenis_produk'] == 'Paket Reseller Gold' ||$data['jenis_produk'] == 'Paket Reseller Platinum' || $data['jenis_produk'] == 'Paket Stockist Brown' || $data['jenis_produk'] == 'Paket Stockist Silver' || $data['jenis_produk'] == 'Paket Stockist Gold' || $data['jenis_produk'] == 'Paket Stockist Platinum' ) {
+          continue;
+        }
+    }
+
+ ?>
+
+  <?php if ($data['jenis_produk'] == 'Paket Agen Silver' || $data['jenis_produk'] == 'Paket Agen Gold' || $data['jenis_produk'] == 'Paket Agen Platinum'|| $data['jenis_produk'] == 'Paket Agen Brown') {
+    continue;
+} ?>
+
+
+
+
+
 <div class="col-sm-4">
 <div class="card shadow" style="">
-  <?php if ($data['jenis_voucher'] == 'Platinum') { ?>
-  <img class="card-img-top" src="<?= base_url('assets_user/img/platinum.png') ?>" alt="Card image cap">
-<?php }elseif ($data['jenis_voucher'] == 'Gold') { ?>
+  <?php if ($data['jenis_produk'] == 'Paket Reseller Platinum') { ?>
+  <img class="card-img-top" src="<?= base_url('assets_user/voucher/reseller_p.png') ?>" alt="Card image cap">
+<?php }elseif ($data['jenis_produk'] == 'Paket Reseller Gold'){ ?>
 
-<img class="card-img-top" src="<?= base_url('assets_user/img/gold.png') ?>" alt="Card image cap">
+<img class="card-img-top" src="<?= base_url('assets_user/voucher/reseller_g.png') ?>" alt="Card image cap">
 
-<?php }elseif ($data['jenis_voucher'] == 'Brown') { ?>
-  <img class="card-img-top" src="<?= base_url('assets_user/img/bronze.png') ?>" alt="Card image cap">
+<?php }elseif ($data['jenis_produk'] == 'Paket Reseller Silver') { ?>
+
+    <img class="card-img-top" src="<?= base_url('assets_user/voucher/reseller_s.png') ?>" alt="Card image cap">
+
+<?php }elseif ($data['jenis_produk'] == 'Paket Reseller Bronze') { ?>
+
+    <img class="card-img-top" src="<?= base_url('assets_user/voucher/reseller_b.png') ?>" alt="Card image cap">
+
+<?php } elseif ($data['jenis_produk'] == 'Paket Stockist Platinum') { ?> 
+
+     <img class="card-img-top" src="<?= base_url('assets_user/voucher/stockist_p.png') ?>" alt="Card image cap">
+<?php } elseif ($data['jenis_produk'] == 'Paket Stockist Gold') { ?>
+
+     <img class="card-img-top" src="<?= base_url('assets_user/voucher/stockist_g.png') ?>" alt="Card image cap">
+<?php } elseif ($data['jenis_produk'] == 'Paket Stockist Silver') { ?>
+
+
+ <img class="card-img-top" src="<?= base_url('assets_user/voucher/stockist_s.png') ?>" alt="Card image cap">
+
+ <?php } elseif ($data['jenis_produk'] == 'Paket Stockist Bronze') { ?>
+
+     <img class="card-img-top" src="<?= base_url('assets_user/voucher/stockist_b.png') ?>" alt="Card image cap">
+
 
 <?php } else{ ?>
 <img class="card-img-top" src="<?= base_url('assets_user/img/silver.png') ?>" alt="Card image cap">
@@ -52,6 +123,8 @@
 <?php } ?>
 
 </div>
+
+<div class="col-sm-2"></div>
 
 
 
